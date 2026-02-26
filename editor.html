@@ -2,181 +2,535 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Story Editor PRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Story Editor PRO - Sceglitu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#0f172a;
-  --card:#1e293b;
-  --accent:#6366f1;
-  --accent2:#22d3ee;
-  --danger:#ef4444;
-  --warning:#f59e0b;
-  --ok:#22c55e;
-  --text:#f8fafc;
-}
+  :root {
+    --cream: #f5f0e8;
+    --paper: #faf7f2;
+    --ink: #1a1208;
+    --ink-soft: #4a3f2f;
+    --ink-faint: #9a8e7e;
+    --amber: #c8832a;
+    --amber-dark: #a06820;
+    --amber-pale: #f5e6cc;
+    --rust: #a84632;
+    --sage: #4a7c59;
+    --shadow: rgba(26,18,8,0.12);
+    --border: rgba(26,18,8,0.12);
+  }
 
-*{box-sizing:border-box}
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-body{
-  margin:0;
-  font-family:system-ui;
-  background:var(--bg);
-  color:var(--text);
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+  }
 
-header{
-  padding:18px;
-  text-align:center;
-  font-size:20px;
-  font-weight:bold;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 80% 10%, rgba(200,131,42,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 90%, rgba(74,124,89,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
 
-.container{
-  padding:15px;
-  padding-bottom:140px;
-}
+  /* HEADER */
+  .editor-header {
+    padding: 28px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(245,240,232,0.9);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
 
-.card{
-  background:var(--card);
-  border-radius:18px;
-  padding:15px;
-  margin-bottom:15px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.4);
-}
+  .back-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--ink);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
 
-.card.warning{
-  border:2px solid var(--warning);
-}
+  .back-btn:active { background: rgba(26,18,8,0.07); }
 
-.card.ok{
-  border:2px solid var(--ok);
-}
+  .editor-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    flex: 1;
+  }
 
-input,textarea{
-  width:100%;
-  border:none;
-  border-radius:12px;
-  padding:12px;
-  margin-top:6px;
-  margin-bottom:12px;
-  background:#0b1220;
-  color:var(--text);
-  font-size:14px;
-}
+  .container {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 100px;
+    position: relative;
+    z-index: 1;
+  }
 
-button{
-  border:none;
-  border-radius:12px;
-  padding:10px 14px;
-  margin:4px 2px;
-  font-size:14px;
-  cursor:pointer;
-}
+  /* CARD & INPUTS */
+  .card {
+    background: var(--paper);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px var(--shadow);
+    border: 1px solid var(--border);
+  }
 
-.primary{background:var(--accent);color:white}
-.secondary{background:var(--accent2);color:black}
-.danger{background:var(--danger);color:white}
-.warningBtn{background:var(--warning);color:black}
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: var(--amber-dark);
+  }
 
-.add-page-btn{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:92%;
-  max-width:500px;
-  padding:16px;
-  font-size:16px;
-  border-radius:18px;
-  background:var(--accent);
-  color:white;
-  font-weight:bold;
-}
+  .card p {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
 
-.choice{
-  background:#0b1220;
-  padding:10px;
-  border-radius:14px;
-  margin-bottom:10px;
-}
+  .card p:last-child { margin-bottom: 0; }
 
-.drag-handle{
-  font-size:12px;
-  opacity:0.6;
-  margin-bottom:6px;
-  cursor:grab;
-}
+  .card a {
+    color: var(--amber);
+    text-decoration: none;
+    font-weight: 600;
+  }
 
-#jsonModal,#mapModal{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:80%;
-  background:var(--card);
-  border-top-left-radius:25px;
-  border-top-right-radius:25px;
-  padding:20px;
-  overflow:auto;
-  display:none;
-}
+  .card code {
+    font-family: monospace;
+    background: var(--cream);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
 
-#jsonOutput{
-  white-space:pre-wrap;
-  font-size:12px;
-}
+  .json-example {
+    background: #1a1208;
+    color: #e8d5b0;
+    border-radius: 10px;
+    padding: 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+    margin-top: 12px;
+  }
 
-canvas{
-  width:100%;
-  background:#0b1220;
-  border-radius:12px;
-}
+  .jk { color: #f4a261; }
+  .js { color: #a8e6cf; }
+  .jn { color: #c8e6ff; }
 
-.top-actions{
-  display:flex;
-  flex-wrap:wrap;
-}
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--amber);
+    box-shadow: 0 0 0 3px rgba(200,131,42,0.1);
+  }
+
+  textarea {
+    resize: vertical;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  label:first-of-type { margin-top: 0; }
+
+  /* BUTTONS */
+  .top-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  button {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 1.5px solid transparent;
+  }
+
+  .primary {
+    background: var(--amber);
+    color: white;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .primary:active {
+    background: var(--amber-dark);
+    transform: scale(0.97);
+  }
+
+  .secondary {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--ink);
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .secondary:active {
+    background: var(--cream);
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  .warningBtn {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--ink);
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .warningBtn:active {
+    background: var(--cream);
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  .danger {
+    background: var(--rust);
+    color: white;
+  }
+
+  .danger:active {
+    background: #8a3527;
+    transform: scale(0.97);
+  }
+
+  /* PAGES SECTION */
+  .pages-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .page-card {
+    background: var(--paper);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 2px 8px var(--shadow);
+    border: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+
+  .page-card.invalid {
+    border-color: var(--rust);
+  }
+
+  .page-card.valid {
+    border-color: var(--sage);
+  }
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .drag-handle {
+    font-size: 16px;
+    opacity: 0.5;
+    cursor: grab;
+    flex-shrink: 0;
+  }
+
+  .page-header b {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    flex: 1;
+  }
+
+  .page-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .page-actions button {
+    padding: 8px 12px;
+    font-size: 13px;
+    min-width: auto;
+  }
+
+  .choice {
+    background: rgba(26,18,8,0.04);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .choice input {
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+
+  .choice input:last-of-type {
+    margin-bottom: 8px;
+  }
+
+  .choice-actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  .choice-actions button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  /* ADD PAGE BUTTON */
+  .add-page-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 500px;
+    padding: 16px;
+    font-size: 15px;
+    border-radius: 14px;
+    background: var(--amber);
+    color: white;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 4px 16px rgba(200,131,42,0.35);
+    z-index: 20;
+  }
+
+  .add-page-btn:active {
+    background: var(--amber-dark);
+    transform: translateX(-50%) scale(0.97);
+  }
+
+  /* MODAL */
+  #jsonModal,
+  #mapModal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80%;
+    background: var(--paper);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 20px;
+    overflow: auto;
+    display: none;
+    z-index: 100;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  #jsonModal.visible,
+  #mapModal.visible {
+    display: flex;
+  }
+
+  .modal-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 0 auto -4px;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    text-align: center;
+    color: var(--ink);
+  }
+
+  #jsonOutput {
+    white-space: pre-wrap;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    color: var(--ink);
+    background: var(--cream);
+    padding: 12px;
+    border-radius: 10px;
+    flex: 1;
+    overflow: auto;
+  }
+
+  canvas {
+    width: 100%;
+    background: var(--cream);
+    border-radius: 12px;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .modal-actions button {
+    flex: 1;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  #jsonModal,
+  #mapModal {
+    animation: slideUp 0.3s ease both;
+  }
+
+  .page-card {
+    animation: fadeSlide 0.35s ease both;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 4px 0;
+    margin-top: 16px;
+  }
+
+  /* FOOTER */
+  .app-footer {
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 11px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--border);
+    background: var(--cream);
+    letter-spacing: 0.3px;
+  }
+
+  .app-footer a {
+    color: var(--amber);
+    text-decoration: none;
+  }
 </style>
 </head>
 <body>
 
-<header>📖 Story Editor PRO</header>
+<div class="editor-header">
+  <button class="back-btn" onclick="goHome()">&#8592;</button>
+  <h2>📖 Story Editor PRO</h2>
+</div>
 
 <div class="container">
 
-<div class="card">
-<label>Titolo</label>
-<input id="title">
+  <div class="card">
+    <label>Titolo</label>
+    <input id="title" placeholder="Nome della storia">
 
-<label>Nome file</label>
-<input id="filename">
+    <label>Nome file</label>
+    <input id="filename" placeholder="storia">
 
-<div class="top-actions">
-<button class="secondary" onclick="openJSON()">Anteprima</button>
-<button class="primary" onclick="downloadJSON()">Salva</button>
-<button class="warningBtn" onclick="importJSON()">Importa</button>
-</div>
-</div>
+    <div class="top-actions">
+      <button class="secondary" onclick="openJSON()">Anteprima</button>
+      <button class="primary" onclick="downloadJSON()">Salva</button>
+      <button class="warningBtn" onclick="importJSON()">Importa</button>
+    </div>
+  </div>
 
-<div id="pages"></div>
+  <div class="section-title">Le tue pagine</div>
+  <div id="pages" class="pages-section"></div>
+
 </div>
 
 <button class="add-page-btn" onclick="addPage()">➕ Aggiungi Pagina</button>
 
 <div id="jsonModal">
-<button class="danger" onclick="closeJSON()">Chiudi</button>
-<pre id="jsonOutput"></pre>
+  <div class="modal-handle"></div>
+  <div class="modal-title">Anteprima JSON</div>
+  <pre id="jsonOutput"></pre>
+  <div class="modal-actions">
+    <button class="secondary" onclick="closeJSON()">Chiudi</button>
+    <button class="primary" onclick="copyJSON()">📋 Copia</button>
+  </div>
 </div>
 
 <div id="mapModal">
-<button class="danger" onclick="closeMap()">Chiudi</button>
-<canvas id="mapCanvas" height="500"></canvas>
+  <button class="danger" onclick="closeMap()">Chiudi</button>
+  <canvas id="mapCanvas" height="500"></canvas>
 </div>
+
+<footer class="app-footer">
+  Sceglitu &mdash; <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub</a> &mdash; Licenza GPL 3.0 © Qc-17
+</footer>
 
 <script>
 let pages = JSON.parse(localStorage.getItem("story_pages")||"[]");
@@ -192,6 +546,7 @@ function addPage(){
 }
 
 function deletePage(i){
+  if(!confirm(`Eliminare pagina ${pages[i].numeroPagina}?`)) return;
   pages.splice(i,1);
   renumber();
 }
@@ -220,8 +575,9 @@ function render(){
 
   pages.forEach((page,i)=>{
     const div=document.createElement("div");
-    div.className="card";
+    div.className="page-card";
     div.draggable=true;
+    div.style.animationDelay=(i*0.05)+"s";
 
     div.ondragstart=e=>e.dataTransfer.setData("text",i);
     div.ondragover=e=>e.preventDefault();
@@ -233,38 +589,54 @@ function render(){
       renumber();
     };
 
-    const broken = page.scelte.some(c=>c.vaiAllaPagina>pages.length);
-    if(broken || page.scelte.length===0){
-      div.classList.add("warning");
-    }else{
-      div.classList.add("ok");
+    const broken = page.scelte.some(c=>c.vaiAllaPagina>pages.length || c.vaiAllaPagina<1);
+    const valid = page.scelte.length > 0 && !broken;
+    
+    if(valid){
+      div.classList.add("valid");
+    } else if(page.scelte.length===0 || broken){
+      div.classList.add("invalid");
     }
 
     div.innerHTML=`
-      <b>Pagina ${page.numeroPagina}</b>
-      <textarea rows="3"
+      <div class="page-header">
+        <span class="drag-handle">☰</span>
+        <b>Pagina ${page.numeroPagina}</b>
+        <div class="page-actions">
+          <button class="danger" onclick="deletePage(${i})">🗑</button>
+        </div>
+      </div>
+      <textarea 
+        placeholder="Scrivi il testo della pagina..."
         onchange="pages[${i}].testo=this.value;saveLocal()">${page.testo}</textarea>
       <div id="choices-${i}"></div>
-      <button class="primary" onclick="addChoice(${i})">➕ Scelta</button>
-      <button class="danger" onclick="deletePage(${i})">🗑 Elimina</button>
+      <button class="primary" style="width:100%" onclick="addChoice(${i})">➕ Aggiungi Scelta</button>
     `;
 
     container.appendChild(div);
 
     const choiceDiv=document.getElementById(`choices-${i}`);
+    if(page.scelte.length > 0){
+      const label=document.createElement("div");
+      label.className="section-title";
+      label.textContent="Scelte";
+      choiceDiv.appendChild(label);
+    }
+    
     page.scelte.forEach((c,ci)=>{
       const cdiv=document.createElement("div");
       cdiv.className="choice";
       cdiv.innerHTML=`
         <input value="${c.testo}"
-          placeholder="Testo scelta"
+          placeholder="Testo della scelta"
           onchange="pages[${i}].scelte[${ci}].testo=this.value;saveLocal()">
-        <input type="number"
+        <input type="number" min="1"
           value="${c.vaiAllaPagina}"
-          placeholder="Vai a pagina"
-          onchange="pages[${i}].scelte[${ci}].vaiAllaPagina=parseInt(this.value);saveLocal()">
-        <button class="danger"
-          onclick="deleteChoice(${i},${ci})">Rimuovi</button>
+          placeholder="Vai a pagina n°"
+          onchange="pages[${i}].scelte[${ci}].vaiAllaPagina=parseInt(this.value)||0;saveLocal()">
+        <div class="choice-actions">
+          <button class="danger" style="flex:1" onclick="deleteChoice(${i},${ci})">Rimuovi</button>
+        </div>
       `;
       choiceDiv.appendChild(cdiv);
     });
@@ -277,10 +649,31 @@ function generateJSON(){
 
 function openJSON(){
   jsonOutput.textContent=JSON.stringify(generateJSON(),null,2);
-  jsonModal.style.display="block";
+  document.getElementById("jsonModal").classList.add("visible");
 }
 
-function closeJSON(){jsonModal.style.display="none"}
+function closeJSON(){
+  document.getElementById("jsonModal").classList.remove("visible");
+}
+
+function copyJSON(){
+  const text=document.getElementById("jsonOutput").textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      alert("JSON copiato!");
+      closeJSON();
+    });
+  }else{
+    const ta=document.createElement("textarea");
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    alert("JSON copiato!");
+    closeJSON();
+  }
+}
 
 function downloadJSON(){
   const name=filename.value||"storia";
@@ -301,17 +694,30 @@ function importJSON(){
     const file=e.target.files[0];
     const reader=new FileReader();
     reader.onload=()=>{
-      const data=JSON.parse(reader.result);
-      pages=data.pagine||[];
-      renumber();
+      try{
+        const data=JSON.parse(reader.result);
+        title.value=data.titolo||"";
+        pages=data.pagine||[];
+        renumber();
+        alert("Importazione completata!");
+      }catch(err){
+        alert("Errore nel file JSON: "+err.message);
+      }
     };
     reader.readAsText(file);
   };
   input.click();
 }
 
-function closeMap(){mapModal.style.display="none"}
+function closeMap(){
+  document.getElementById("mapModal").classList.remove("visible");
+}
 
+function goHome(){
+  if(confirm("Tornare alla home? Le modifiche non salvate andranno perse.")){
+    window.location.href="index.html";
+  }
+}
 
 render();
 </script>
