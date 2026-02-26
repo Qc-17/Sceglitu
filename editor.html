@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story Editor PRO</title>
+
+<style>
+:root{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --accent:#6366f1;
+  --accent2:#22d3ee;
+  --danger:#ef4444;
+  --warning:#f59e0b;
+  --ok:#22c55e;
+  --text:#f8fafc;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  padding:18px;
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.container{
+  padding:15px;
+  padding-bottom:140px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:15px;
+  margin-bottom:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+.card.warning{
+  border:2px solid var(--warning);
+}
+
+.card.ok{
+  border:2px solid var(--ok);
+}
+
+input,textarea{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:12px;
+  background:#0b1220;
+  color:var(--text);
+  font-size:14px;
+}
+
+button{
+  border:none;
+  border-radius:12px;
+  padding:10px 14px;
+  margin:4px 2px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.primary{background:var(--accent);color:white}
+.secondary{background:var(--accent2);color:black}
+.danger{background:var(--danger);color:white}
+.warningBtn{background:var(--warning);color:black}
+
+.add-page-btn{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  max-width:500px;
+  padding:16px;
+  font-size:16px;
+  border-radius:18px;
+  background:var(--accent);
+  color:white;
+  font-weight:bold;
+}
+
+.choice{
+  background:#0b1220;
+  padding:10px;
+  border-radius:14px;
+  margin-bottom:10px;
+}
+
+.drag-handle{
+  font-size:12px;
+  opacity:0.6;
+  margin-bottom:6px;
+  cursor:grab;
+}
+
+#jsonModal,#mapModal{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:80%;
+  background:var(--card);
+  border-top-left-radius:25px;
+  border-top-right-radius:25px;
+  padding:20px;
+  overflow:auto;
+  display:none;
+}
+
+#jsonOutput{
+  white-space:pre-wrap;
+  font-size:12px;
+}
+
+canvas{
+  width:100%;
+  background:#0b1220;
+  border-radius:12px;
+}
+
+.top-actions{
+  display:flex;
+  flex-wrap:wrap;
+}
+</style>
+</head>
+<body>
+
+<header>📖 Story Editor PRO</header>
+
+<div class="container">
+
+<div class="card">
+<label>Titolo</label>
+<input id="title">
+
+<label>Nome file</label>
+<input id="filename">
+
+<div class="top-actions">
+<button class="secondary" onclick="openJSON()">Anteprima</button>
+<button class="primary" onclick="downloadJSON()">Salva</button>
+<button class="warningBtn" onclick="importJSON()">Importa</button>
+</div>
+</div>
+
+<div id="pages"></div>
+</div>
+
+<button class="add-page-btn" onclick="addPage()">➕ Aggiungi Pagina</button>
+
+<div id="jsonModal">
+<button class="danger" onclick="closeJSON()">Chiudi</button>
+<pre id="jsonOutput"></pre>
+</div>
+
+<div id="mapModal">
+<button class="danger" onclick="closeMap()">Chiudi</button>
+<canvas id="mapCanvas" height="500"></canvas>
+</div>
+
+<script>
+let pages = JSON.parse(localStorage.getItem("story_pages")||"[]");
+
+function saveLocal(){
+  localStorage.setItem("story_pages",JSON.stringify(pages));
+}
+
+function addPage(){
+  pages.push({numeroPagina:pages.length+1,testo:"",scelte:[]});
+  saveLocal();
+  render();
+}
+
+function deletePage(i){
+  pages.splice(i,1);
+  renumber();
+}
+
+function renumber(){
+  pages.forEach((p,i)=>p.numeroPagina=i+1);
+  saveLocal();
+  render();
+}
+
+function addChoice(i){
+  pages[i].scelte.push({testo:"",vaiAllaPagina:""});
+  saveLocal();
+  render();
+}
+
+function deleteChoice(p,c){
+  pages[p].scelte.splice(c,1);
+  saveLocal();
+  render();
+}
+
+function render(){
+  const container=document.getElementById("pages");
+  container.innerHTML="";
+
+  pages.forEach((page,i)=>{
+    const div=document.createElement("div");
+    div.className="card";
+    div.draggable=true;
+
+    div.ondragstart=e=>e.dataTransfer.setData("text",i);
+    div.ondragover=e=>e.preventDefault();
+    div.ondrop=e=>{
+      const from=e.dataTransfer.getData("text");
+      const temp=pages[from];
+      pages.splice(from,1);
+      pages.splice(i,0,temp);
+      renumber();
+    };
+
+    const broken = page.scelte.some(c=>c.vaiAllaPagina>pages.length);
+    if(broken || page.scelte.length===0){
+      div.classList.add("warning");
+    }else{
+      div.classList.add("ok");
+    }
+
+    div.innerHTML=`
+      <b>Pagina ${page.numeroPagina}</b>
+      <textarea rows="3"
+        onchange="pages[${i}].testo=this.value;saveLocal()">${page.testo}</textarea>
+      <div id="choices-${i}"></div>
+      <button class="primary" onclick="addChoice(${i})">➕ Scelta</button>
+      <button class="danger" onclick="deletePage(${i})">🗑 Elimina</button>
+    `;
+
+    container.appendChild(div);
+
+    const choiceDiv=document.getElementById(`choices-${i}`);
+    page.scelte.forEach((c,ci)=>{
+      const cdiv=document.createElement("div");
+      cdiv.className="choice";
+      cdiv.innerHTML=`
+        <input value="${c.testo}"
+          placeholder="Testo scelta"
+          onchange="pages[${i}].scelte[${ci}].testo=this.value;saveLocal()">
+        <input type="number"
+          value="${c.vaiAllaPagina}"
+          placeholder="Vai a pagina"
+          onchange="pages[${i}].scelte[${ci}].vaiAllaPagina=parseInt(this.value);saveLocal()">
+        <button class="danger"
+          onclick="deleteChoice(${i},${ci})">Rimuovi</button>
+      `;
+      choiceDiv.appendChild(cdiv);
+    });
+  });
+}
+
+function generateJSON(){
+  return {titolo:title.value,pagine:pages};
+}
+
+function openJSON(){
+  jsonOutput.textContent=JSON.stringify(generateJSON(),null,2);
+  jsonModal.style.display="block";
+}
+
+function closeJSON(){jsonModal.style.display="none"}
+
+function downloadJSON(){
+  const name=filename.value||"storia";
+  const blob=new Blob([JSON.stringify(generateJSON(),null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=name+".json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importJSON(){
+  const input=document.createElement("input");
+  input.type="file";
+  input.accept=".json";
+  input.onchange=e=>{
+    const file=e.target.files[0];
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const data=JSON.parse(reader.result);
+      pages=data.pagine||[];
+      renumber();
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+function closeMap(){mapModal.style.display="none"}
+
+
+render();
+</script>
+</body>
+</html>
