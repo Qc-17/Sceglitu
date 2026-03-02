@@ -11,7 +11,8 @@ const translations = {
       emptyDescFiltered: 'Nessuna storia in italiano. Importa nuove storie o cambia lingua.',
       deleteConfirm: 'Eliminare',
       metaPages: 'pagine',
-      metaReading: 'In lettura (p.'
+      metaReading: 'In lettura (p.',
+      tutorialBtn: 'Apri tutorial'
     },
     editor: {
       title: 'Nuova storia',
@@ -67,7 +68,8 @@ const translations = {
       emptyDescFiltered: 'No stories in English. Import new stories or switch language.',
       deleteConfirm: 'Delete',
       metaPages: 'pages',
-      metaReading: 'Reading (p.'
+      metaReading: 'Reading (p.',
+      tutorialBtn: 'Open tutorial'
     },
     editor: {
       title: 'New story',

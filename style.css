@@ -54,6 +54,8 @@ body::before {
 .logo { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: var(--ink); letter-spacing: -0.5px; }
 .logo span { color: var(--amber); }
 .header-controls { display: flex; align-items: center; gap: 12px; }
+.help-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: var(--paper); color: var(--ink-soft); font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+.help-btn:active { background: var(--amber-pale); border-color: var(--amber); color: var(--amber-dark); }
 .lang-switch { display: flex; gap: 4px; background: var(--paper); border-radius: 8px; padding: 4px; border: 1px solid var(--border); }
 .lang-btn { background: none; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.15s; color: var(--ink-faint); }
 .lang-btn.active { background: var(--amber); color: white; }
@@ -212,3 +214,15 @@ textarea.json-input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rg
 /* ── TOAST ── */
 .toast { position: fixed; bottom: 84px; left: 50%; transform: translateX(-50%) translateY(16px); background: var(--ink); color: white; padding: 10px 22px; border-radius: 30px; font-size: 13px; font-weight: 500; opacity: 0; transition: all 0.3s ease; z-index: 200; white-space: nowrap; pointer-events: none; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/* ── TUTORIAL ── */
+.tutorial-page { min-height: 100vh; display: flex; flex-direction: column; position: relative; z-index: 1; }
+.tutorial-header { padding: 26px 24px 14px; border-bottom: 1px solid var(--border); }
+.tutorial-header h1 { font-family: 'Playfair Display', serif; font-size: 30px; }
+.tutorial-header p { margin-top: 6px; color: var(--ink-faint); font-size: 13px; }
+.tutorial-content { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.tutorial-step { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: 0 2px 8px var(--shadow); }
+.tutorial-step h3 { font-size: 15px; margin-bottom: 8px; color: var(--amber-dark); }
+.tutorial-step p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+.tutorial-actions { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
