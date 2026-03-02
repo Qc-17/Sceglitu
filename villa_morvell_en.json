@@ -1,0 +1,1324 @@
+{
+  "titolo": "The Labyrinth of Villa Morvell",
+  "autore": "Claude Sonnet 4.6",
+  "anno": "2026",
+  "genere": "Thriller",
+  "lingua": "english",
+  "pagine": [
+    {
+      "numeroPagina": 1,
+      "testo": "Ti svegli sul pavimento di marmo freddo come il fondo di un lago. L'aria sa di cera, legno antico e qualcosa di metallico che non riesci a identificare. Sopra di te un lampadario di cristallo oscilla lentamente, sebbene non ci sia vento. Ti siedi, la testa che pulsa, e ti accorgi di trovarti nel grande atrio di Villa Morvell — almeno così recita la targa di ottone arrugginita appesa alla parete più vicina.\n\nNon ricordi come sei arrivato qui. Non ricordi nemmeno com'è fuori. C'è solo questa villa, questi muri di pietra color avorio, e due porte davanti a te: una rossa, una nera. Tra le due porte, un orologio a pendolo batte lentamente, come un cuore stanco. Sul pavimento, accanto alla tua mano, c'è un foglietto ripiegato. Lo apri: \"Scegli con cura. La villa ricorda ogni passo.\"\n\nMetti il foglietto in tasca e ti alzi.",
+      "scelte": [
+        {
+          "testo": "Open la door RED",
+          "vaiAllaPagina": 2
+        },
+        {
+          "testo": "Open la door BLACK",
+          "vaiAllaPagina": 3
+        }
+      ]
+    },
+    {
+      "numeroPagina": 2,
+      "testo": "La porta rossa cede con un lamento lungo e basso, come se la villa stesse sospirando. Oltre la soglia c'è una sala circolare tappezzata di specchi. In ogni specchio vedi la tua immagine riflessa, ma con un ritardo di qualche secondo — e in almeno uno di essi il tuo riflesso ti sorride quando tu non stai sorridendo.\n\nCammini verso il centro della stanza. Il pavimento è fatto di piastrelle ottagonali dipinte con simboli che non riconosci. Al centro, un piedistallo di alabastro sorregge una sfera di vetro opaco. Dentro la sfera si muove qualcosa — un'ombra, un respiro, forse una parola mai pronunciata.\n\nTocchi la sfera con un dito. Un brivido risale il tuo braccio fino alla nuca. Improvvisamente tutte le luci si spengono. Quando si riaccendono, sei di nuovo nell'atrio. Sul pavimento dove ti trovavi prima c'è ora l'impronta di un piede — ma non la tua scarpa. Qualcuno — o qualcosa — era lì con te.",
+      "scelte": [
+        {
+          "testo": "Riprendere fiato e tornare alle porte",
+          "vaiAllaPagina": 1
+        },
+        {
+          "testo": "Esaminare l'impronta sul pavimento",
+          "vaiAllaPagina": 4
+        }
+      ]
+    },
+    {
+      "numeroPagina": 3,
+      "testo": "La porta nera non ha maniglia. La spingi con il palmo e si apre verso l'interno, silenziosa come se i cardini fossero stati oliati stamattina. Oltre c'è un corridoio lungo e stretto, illuminato da applique a gas lungo le pareti. Le fiamme bruciano di un azzurro tenue che proietta ombre lunghissime sul soffitto.\n\nMentre cammini, le tue scarpe non fanno rumore sul pavimento di pietra. Il corridoio curva leggermente verso destra, poi ancora, e ti ritrovi davanti a una scala di pietra che scende verso il basso e una di legno che sale. Da quella di pietra sale un odore di terra e umidità. Da quella di legno arriva — e ci vogliono diversi secondi prima che tu lo riconosca — il profumo del caffè appena fatto.\n\nEsiti sul bordo del primo gradino.",
+      "scelte": [
+        {
+          "testo": "Go down per la scala di pietra",
+          "vaiAllaPagina": 5
+        },
+        {
+          "testo": "Go up per la scala di legno",
+          "vaiAllaPagina": 7
+        }
+      ]
+    },
+    {
+      "numeroPagina": 4,
+      "testo": "Ti inginocchi accanto all'impronta. È piccola — troppo piccola per un adulto — e ha sei dita. Il contorno è perfetto, come se qualcuno avesse premuto un timbro di carne sul marmo. Intorno all'impronta noti altri dettagli che prima non avevi visto: una serie di cerchi concentrici incisi nel pavimento, così sottili da sembrare graffi casuali, ma in realtà perfettamente regolari.\n\nStai per alzarti quando l'orologio a pendolo suona tre colpi. Al terzo colpo il pavimento trema appena, e senti uno scatto meccanico provenire da sotto i tuoi piedi. Un pannello del pavimento si solleva di un centimetro. Trovi uno scompartimento segreto. Dentro c'è un vecchio libro con la copertina di pelle nera, senza titolo.\n\nLo apri a caso. Tutte le pagine sono bianche tranne una, a metà del volume, su cui c'è scritto in inchiostro rosso: \"La terza finestra del piano superiore. Guardala quando la luna è alta.\"\n\nFuori non c'è luna. Non c'è nemmeno una finestra nell'atrio. Ma la villa potrebbe avere piani superiori che non hai ancora esplorato.",
+      "scelte": [
+        {
+          "testo": "Cercare una scala per il piano superiore",
+          "vaiAllaPagina": 6
+        },
+        {
+          "testo": "Ignorare il libro e tornare alle porte",
+          "vaiAllaPagina": 1
+        }
+      ]
+    },
+    {
+      "numeroPagina": 5,
+      "testo": "La scala di pietra scende per molti gradini — ne conti trentasette prima di perdere il conto — e poi si apre in una cantina enorme. Le pareti sono coperte di bottiglie di vino disposte in rastrelliere di ferro arrugginito. Il soffitto è così basso che devi camminare leggermente piegato. In fondo alla cantina c'è una luce fioca.\n\nTi avvicini. La luce viene da un lume a olio appeso a un gancio. Sotto il lume, seduto su una sedia rotta, c'è un manichino di legno vestito da maggiordomo. Ha gli occhi di vetro dipinto e sulla giacca un cartellino: \"JEEVES. SERVITORE FEDELE. NON TOCCARE.\"\n\nNonostante l'avviso, noti che la mano destra del manichino stringe qualcosa: una chiave dorata. Quando ti avvicini di più, la testa del manichino ruota verso di te di quarantacinque gradi esatti, con uno scricchiolio lento e deliberato.\n\nTi geli. La cantina puzza improvvisamente di bruciato.",
+      "scelte": [
+        {
+          "testo": "Prendere la chiave dalla mano del manichino",
+          "vaiAllaPagina": 8
+        },
+        {
+          "testo": "Scappare di corsa su per la scala",
+          "vaiAllaPagina": 3
+        }
+      ]
+    },
+    {
+      "numeroPagina": 6,
+      "testo": "Cerchi una scala nell'atrio ma non ne trovi. Giri intorno all'orologio a pendolo, esplori ogni angolo, spingi le pareti alla ricerca di passaggi segreti. Niente. Poi noti qualcosa di strano: uno dei pannelli di legno della parete di destra ha una venatura che forma la sagoma di una porta. Non c'è maniglia, non c'è serratura visibile.\n\nPremi nel punto in cui dovrebbe essere il centro del pannello. Nulla. Premi nell'angolo in alto a sinistra. Nulla. Poi ricordi il libro — \"la terza finestra\" — e conti mentalmente. Il pannello è il terzo da sinistra. Premi nell'angolo in alto a destra. Con uno scatto soddisfatto, il pannello si apre verso di te rivelando una scala a chiocciola di ferro.\n\nSali. Il ferro gemono sotto i tuoi piedi a ogni gradino. Arrivi a un piccolo pianerottolo con tre porte. Tutte identiche — legno scuro, maniglia di ottone — tranne per un numero inciso in basso: 1, 2, 3.",
+      "scelte": [
+        {
+          "testo": "Open la door numero 1",
+          "vaiAllaPagina": 9
+        },
+        {
+          "testo": "Open la door numero 2",
+          "vaiAllaPagina": 10
+        },
+        {
+          "testo": "Open la door numero 3",
+          "vaiAllaPagina": 11
+        }
+      ]
+    },
+    {
+      "numeroPagina": 7,
+      "testo": "La scala di legno sale per due piani — le assi scricchiolano, una cede leggermente sotto il tuo piede sinistro ma regge — e sbuca in una cucina enorme. Rame e ottone dappertutto: pentole, padelle, mestoli, tutte appese a ganci dal soffitto come un esercito sospeso. Sul grande tavolo di quercia al centro c'è una moka accesa e una tazza già pronta.\n\nIl caffè fuma. Qualcuno era qui pochi minuti fa. Guardi intorno ma non c'è nessuno. Sul tavolo, accanto alla tazza, c'è un foglio scritto a mano con una calligrafia sottilissima: \"Se stai leggendo questo, hai scelto bene. La cucina è il cuore della villa. Cerca il cassetto che non apre.\"\n\nEsplori i cassetti. Ce ne sono dozzine, lungo tutte le pareti. La maggior parte contiene posate, utensili, spezie. Ma uno — il quinto cassetto della fila in basso sotto il lavandino — ha un pomello ma non si apre. Per niente. Come se fosse murato dall'interno.",
+      "scelte": [
+        {
+          "testo": "Cercare qualcosa con cui forzare il cassetto",
+          "vaiAllaPagina": 12
+        },
+        {
+          "testo": "Bere il caffè e esplorare oltre la cucina",
+          "vaiAllaPagina": 14
+        }
+      ]
+    },
+    {
+      "numeroPagina": 8,
+      "testo": "Allunghi la mano verso la chiave con movimenti lenti, come faresti con un cane che non conosci. Le dita del manichino sembrano strette sulla chiave con una forza impossibile per del legno. Tiri. La mano del manichino cede, ma nel momento stesso in cui la chiave lascia le sue dita artigliose, tutta la cantina si riempie di un suono meccanico — un ticchettio forsennato, come di mille orologi tutti accelerati insieme.\n\nLe luci di tutte le bottiglie di vino si riflettono in modo strano. Il manichino ruota completamente la testa verso di te. La bocca dipinta sorride — ma era un sorriso anche prima? Non sei sicuro.\n\nStringi la chiave e corri. Su per la scala di pietra, attraverso il corridoio, nell'atrio. Solo nell'atrio riesci a fermarti a guardare la chiave. È dorata, incisa con un motivo di serpi intrecciate, e sul codice c'è incisa una parola: SOPRA.\n\nForse apre qualcosa al piano superiore.",
+      "scelte": [
+        {
+          "testo": "Cercare una scala per il piano di sopra",
+          "vaiAllaPagina": 6
+        },
+        {
+          "testo": "Return nel corridoio nero per esplorare",
+          "vaiAllaPagina": 3
+        }
+      ]
+    },
+    {
+      "numeroPagina": 9,
+      "testo": "La porta numero 1 si apre su una biblioteca. Non una piccola biblioteca — una biblioteca che sembra impossibile esistere in questo spazio: scaffali che si alzano fino a un soffitto altissimo, scale di legno scorrevoli lungo le rotaie di ottone, e libri. Migliaia di libri. Tutti rilegati in pelle, tutti senza titolo sul dorso.\n\nEstrai a caso un volume. Apri la prima pagina. Dentro c'è la tua storia — questa storia, scritta in terzo singolare, con te come protagonista. Ci sono dettagli che non hai detto a nessuno — pensieri, esitazioni, persino il modo in cui hai inciampato sul secondo gradino della scala. Scorri le pagine. La storia continua fino a questo momento preciso: \"...aprì la porta numero 1 e trovò la biblioteca.\" Poi le pagine sono bianche.\n\nBianche tranne l'ultima, su cui c'è solo una freccia che punta verso il basso.",
+      "scelte": [
+        {
+          "testo": "Seguire l'indicazione e tornare al piano di sotto",
+          "vaiAllaPagina": 6
+        },
+        {
+          "testo": "Continuare ad esplorare la biblioteca",
+          "vaiAllaPagina": 13
+        }
+      ]
+    },
+    {
+      "numeroPagina": 10,
+      "testo": "La porta numero 2 non rivela una stanza. Rivela il vuoto — o almeno, così sembra all'inizio. Poi i tuoi occhi si adattano e capisci: è una stanza completamente buia, e dal soffitto pendono centinaia di specchi di diverse forme e dimensioni, tutti rivolti verso l'alto.\n\nNel pavimento al centro della stanza c'è un buco circolare da cui proviene una luce bianca intensa. Ti avvicini con cautela, toccando il bordo con la punta della scarpa. Il buco ha un diametro di circa un metro. Ci guardi dentro: è un pozzo, e scendendo per forse dieci metri c'è acqua — un'acqua che brilla di luce propria.\n\nNoti che intorno al bordo del pozzo ci sono incise dodici lettere in ordine casuale. Alcune sono sbiancate, altre sono macchiate di qualcosa di scuro. Stai cercando di decifrarle quando senti un rumore alle tue spalle — la porta si sta chiudendo.",
+      "scelte": [
+        {
+          "testo": "Cercare di bloccare la door prima che si chiuda",
+          "vaiAllaPagina": 10
+        },
+        {
+          "testo": "Lasciare che la door si chiuda e studiare il pozzo",
+          "vaiAllaPagina": 15
+        }
+      ]
+    },
+    {
+      "numeroPagina": 11,
+      "testo": "La porta numero 3. Oltre c'è un ufficio — scrivania massiccia di mogano, sedie di cuoio verde, una libreria piena di raccoglitori e documenti, un camino spento con le ceneri ancora tiepide. Sulla scrivania, sotto un fermacarte di vetro verde, c'è un documento. Lo leggi.\n\nÈ un contratto. Un contratto di vendita. Il venditore è \"Ettore Morvell, ultimo discendente.\" Il compratore sei tu — o almeno c'è il tuo nome, scritto in un corsivo perfetto che non è la tua calligrafia. Hai comprato Villa Morvell. La data è di tre settimane fa. Il prezzo è: \"il ricordo più prezioso che possiedi.\"\n\nIn quel momento capisci perché non ricordi nulla di prima della villa. Stai leggendo la clausola finale — \"il contraente accetta che la villa diventi la sua unica realtà\" — quando il camino si accende da solo. Dalle ceneri, come se qualcuno avesse pigiato un interruttore, le fiamme guizzano alte e blu.",
+      "scelte": [
+        {
+          "testo": "Cercare qualcosa tra le ceneri del camino",
+          "vaiAllaPagina": 16
+        },
+        {
+          "testo": "Frugare nella scrivania alla ricerca di altro",
+          "vaiAllaPagina": 17
+        }
+      ]
+    },
+    {
+      "numeroPagina": 12,
+      "testo": "Cerchi qualcosa con cui forzare il cassetto. In un armadietto a muro trovi un coltello da cucina grande e pesante. Ci infili la lama nell'interstizio del cassetto e fai leva. Il legno scricchiola, protesta, si piega — e poi il cassetto si apre con uno schiocco.\n\nDentro non c'è niente. Assolutamente niente. Non un chiodo, non un granello di polvere, non una ragnatela. Il fondo del cassetto è perfettamente pulito e di un bianco chirurgico che stona con tutto il resto della cucina.\n\nPoi ti accorgi che il fondo non è di legno. È di carta. Premi con un dito e la carta cede, rivelando un'intercapedine. Dentro l'intercapedine c'è una busta sigillata con ceralacca rossa a forma di occhio. Sul fronte della busta, scritto con quella stessa calligrafia sottilissima del foglio sul tavolo: \"Apri solo quando sei pronto a sapere.\"\n\nNon sei sicuro di essere pronto. Ma la apri comunque.",
+      "scelte": [
+        {
+          "testo": "Leggere il contenuto della busta",
+          "vaiAllaPagina": 18
+        },
+        {
+          "testo": "Rimettere la busta nel cassetto e go avanti",
+          "vaiAllaPagina": 14
+        }
+      ]
+    },
+    {
+      "numeroPagina": 13,
+      "testo": "Ti addentri nella biblioteca. Ogni libro che estrai racconta la tua storia fino al momento in cui l'hai aperto — poi pagine bianche. È come se la villa stesse scrivendo in tempo reale, usando te come inchiostro.\n\nTrovi libri che raccontano vite che avresti potuto vivere. In uno sei un marinaio. In un altro un pittore. In un terzo una persona qualunque, felice, che non è mai entrata in una villa maledetta. Quel libro lo stringi un po' più forte prima di rimetterlo al suo posto.\n\nIn fondo alla biblioteca c'è una scala a pioli che sale a un soppalco. Su il soppalco c'è un unico leggio, e sul leggio un unico libro — più grande degli altri, rilegato in qualcosa che preferisci non identificare. Il titolo sul dorso, l'unico titolo visibile in tutta la biblioteca, recita: \"COME USCIRE DA VILLA MORVELL.\" Sotto, in caratteri più piccoli: \"Prima edizione. Unica copia.\"\n\nSalendo la scala, un gradino si rompe sotto il tuo piede e tu cadi, per fortuna senza farti nulla di grave. Quando ti rialzi sei di nuovo al piano di sotto, nell'atrio.",
+      "scelte": [
+        {
+          "testo": "Return alle porte dell'atrio",
+          "vaiAllaPagina": 1
+        },
+        {
+          "testo": "Cercare la scala per il piano superiore",
+          "vaiAllaPagina": 6
+        }
+      ]
+    },
+    {
+      "numeroPagina": 14,
+      "testo": "Bevi il caffè. È perfetto — la temperatura giusta, amaro quanto basta, con un retrogusto di cardamomo che non ti aspettavi. Per un attimo ti senti quasi normale, quasi umano, quasi fuori da questa storia.\n\nPoi noti una porta sul lato opposto della cucina, semiaperta. La spingi. Oltre c'è una dispensa — scaffali di barattoli, sacchi di farina, cataste di bottiglie — e sul fondo, nascosta parzialmente da un sacco di riso, una botola nel pavimento. La botola ha un anello di ferro arrugginito al posto della maniglia.\n\nLa sollevi. Emana un cigolio lungo e melanconico. Sotto c'è una scala, e sotto la scala c'è una luce — non la luce fioca della cantina del vino, ma una luce calda e arancione, come di un fuoco vivo.\n\nScendi. La scala porta a un tunnel stretto, rivestito di mattoni rossi, che termina dopo una trentina di metri in una porta di legno grezzo con una piccola finestra a grata.",
+      "scelte": [
+        {
+          "testo": "Spiare attraverso la finestra a grata prima di aprire",
+          "vaiAllaPagina": 22
+        },
+        {
+          "testo": "Open la door senza guardare",
+          "vaiAllaPagina": 19
+        }
+      ]
+    },
+    {
+      "numeroPagina": 15,
+      "testo": "La porta si chiude con un colpo secco. Sei al buio completo, con solo la luce del pozzo. Ti inginocchi al bordo e guardi l'acqua luminosa. Le lettere incise intorno al bordo, le vedi meglio ora: V, I, T, A, M, O, R, T, E, L, U, X.\n\nStai cercando di comporle in qualcosa di sensato quando l'acqua nel pozzo comincia a muoversi. Sale. Lentamente ma inesorabilmente, l'acqua luminosa sale su per le pareti del pozzo. In pochi minuti sarà a bordo pavimento. In pochi minuti dopo sarà alla tua caviglia.\n\nCerchi disperatamente un modo per aprire la porta. Non c'è maniglia dall'interno. Spingi, batti, urli. La porta non cede. L'acqua tocca la suola delle tue scarpe — è calda, quasi piacevolmente, e non è acqua comune: dove tocca il pavimento lascia un disegno di luce come fosforo.\n\nPoi l'acqua si ferma. Esattamente al bordo del pozzo, l'acqua si stabilizza. E nel riflesso luminoso dell'acqua sul soffitto di specchi, appare per un secondo una parola: SOPRA.",
+      "scelte": [
+        {
+          "testo": "Guardare di nuovo nel pozzo",
+          "vaiAllaPagina": 20
+        },
+        {
+          "testo": "Cercare qualcosa sul soffitto di specchi",
+          "vaiAllaPagina": 21
+        }
+      ]
+    },
+    {
+      "numeroPagina": 16,
+      "testo": "Ti avvicini al camino con le fiamme blu. Il calore è reale ma non brucia — o almeno, non come dovresti aspettarti. Metti la mano dentro e le fiamme la avvolgono senza consumarla. Frughi tra le ceneri calde.\n\nTrovi qualcosa di duro. Lo estrai: è un medaglione di metallo scuro, tondo, con una catena. Sul fronte c'è incisa una villa — Villa Morvell, inconfondibile, vista dall'alto. Sul retro c'è una data: la data di oggi.\n\nCome fa a esserci la data di oggi? Come fai a sapere quale è la data di oggi, visto che non ricordi nient'altro?\n\nImprovvisamente ricordi. Solo per un istante — un lampo — vedi te stesso all'esterno della villa, in un pomeriggio normale, con un giornale in mano. La data sul giornale. La data sul medaglione. Identiche.\n\nIl ricordo svanisce. Sei di nuovo nell'ufficio, con il medaglione in mano e le fiamme blu che lentamente diventano gialle, poi arancioni, poi si spengono del tutto. Il camino è di nuovo pieno di cenere fredda.",
+      "scelte": [
+        {
+          "testo": "Tenere il medaglione e tornare al corridoio",
+          "vaiAllaPagina": 3
+        },
+        {
+          "testo": "Rimettere il medaglione nelle ceneri e esaminare la stanza",
+          "vaiAllaPagina": 11
+        }
+      ]
+    },
+    {
+      "numeroPagina": 17,
+      "testo": "Frughi nella scrivania. Primo cassetto: penne, timbri, ceralacca rossa. Secondo cassetto: lettere — decine di lettere, tutte indirizzate a \"Ettore Morvell\", tutte aperte, tutte scritte in lingue diverse che non riconosci tranne una: l'ultima, in italiano, con la calligrafia sottilissima che comincia ad essere familiare.\n\n\"Caro Ettore, il meccanismo è pronto. Troveranno sempre la porta rossa prima della nera — è nella natura degli uomini scegliere il pericolo visibile. Ma tu hai costruito bene i percorsi. Solo il caffè li porterà avanti. Solo il caffè. Non dimenticare: la cucina è il cuore. — V.\"\n\nTerzo cassetto: un revolver carico. Non sai sparare, ma lo metti in tasca lo stesso. Quarto cassetto, il più basso: vuoto, tranne che sul fondo c'è scritto a matita, con calligrafia frettolosa e nervosa completamente diversa dalle altre: \"SE LA TROVI, SCAPPA PER IL TUNNEL. NON FERMARTI. NON GUARDARE INDIETRO.\"\n\nIl quinto cassetto è chiuso a chiave.",
+      "scelte": [
+        {
+          "testo": "Usare qualcosa per aprire il quinto cassetto",
+          "vaiAllaPagina": 11
+        },
+        {
+          "testo": "Prendere la lettera e tornare al corridoio",
+          "vaiAllaPagina": 3
+        }
+      ]
+    },
+    {
+      "numeroPagina": 18,
+      "testo": "Dentro la busta c'è un unico foglio. Scritto su entrambi i lati, fitto fitto, in caratteri microscopici. Lo porti alla finestra per leggerlo meglio — ma la cucina non ha finestre. Lo porti sotto la luce della moka che stranamente proietta più luce del normale.\n\nLa lettera è la storia di Villa Morvell. Una villa costruita nel 1847 da un architetto il cui nome è cancellato. Una villa progettata come un labirinto — non per tenere fuori le persone, ma per tenerle dentro. \"Ogni ospite,\" dice la lettera, \"alimenta la villa con la propria confusione. Più si perde, più la villa cresce. Ho contato sessantadue ospiti prima di me. Non ho contato me stesso.\"\n\nPoi, nella parte finale, in caratteri un po' più grandi: \"C'è un solo modo per uscire. Non si esce dalle porte. Non si esce dalle finestre. Si esce quando si smette di cercare di uscire, e si trova invece il cuore della villa — e lo si spegne.\"\n\nPoi: \"Il cuore batte nel tunnel.\"\n\nRimetti la lettera nella busta.",
+      "scelte": [
+        {
+          "testo": "Cercare il tunnel menzionato nella lettera",
+          "vaiAllaPagina": 14
+        },
+        {
+          "testo": "Ignorare le istruzioni e esplorare più la cucina",
+          "vaiAllaPagina": 12
+        }
+      ]
+    },
+    {
+      "numeroPagina": 19,
+      "testo": "Apri la porta di scatto. Oltre c'è una stanza circolare con un focolare al centro — un focolare a cielo aperto, con una fiamma altissima che brucia senza consumare legna, perché non c'è legna. Solo fuoco su pietra nuda.\n\nIntorno al focolare, disposte su piedistalli di pietra, ci sono sei maschere. Maschere di carnevale — alcune belle, alcune grottesche. Ognuna ha un numero inciso sulla fronte. Cammini intorno al focolare studiandole.\n\nPoi ti accorgi che una maschera manca. Il piedistallo numero 4 è vuoto, ma porta ancora i segni dove la maschera poggiava. E sul piedistallo vuoto c'è incisa una freccia che punta verso il basso.\n\nSenti il calore del fuoco sul viso. È piacevole — troppo piacevole. Cominci a sentire le palpebre pesanti. Il calore della fiamma senza combustibile ha qualcosa di ipnotico.",
+      "scelte": [
+        {
+          "testo": "Resistere all'ipnosi e tornare nel tunnel",
+          "vaiAllaPagina": 14
+        },
+        {
+          "testo": "Cedere al sonno davanti al fuoco",
+          "vaiAllaPagina": 1
+        }
+      ]
+    },
+    {
+      "numeroPagina": 20,
+      "testo": "Guardi di nuovo nel pozzo. L'acqua luminosa riflette il tuo viso — ma riflette anche qualcosa dietro di te. Ti giri di scatto: non c'è nulla. Torni a guardare il riflesso. Nell'acqua, chiaramente, c'è una figura in piedi alle tue spalle. Alta, sottile, con qualcosa in mano che brilla.\n\nTi giri di nuovo. Nulla.\n\nGuardi il riflesso. La figura ha fatto un passo verso di te.\n\nQuesta volta non ti giri. Guardi il riflesso mentre la figura si avvicina sempre di più. Quando è vicinissima — abbastanza da toccarti — vedi cosa ha in mano: una chiave. La stessa chiave dorata con le serpi intrecciate che potrebbe trovarsi nella cantina del vino.\n\nIl riflesso della figura allunga la mano verso il tuo riflesso. Nel riflesso, il tuo riflesso prende la chiave. Poi senti qualcosa di freddo nella tua mano vera. Chiudi il pugno. Quando lo apri, hai la chiave.",
+      "scelte": [
+        {
+          "testo": "Go a cercare cosa apre questa chiave",
+          "vaiAllaPagina": 6
+        },
+        {
+          "testo": "Buttare la chiave nel pozzo",
+          "vaiAllaPagina": 15
+        }
+      ]
+    },
+    {
+      "numeroPagina": 21,
+      "testo": "Guardi il soffitto di specchi. La parola è scomparsa, ma i mille frammenti riflessi del tuo viso ti fissano tutti da angolazioni diverse. Poi ne noti uno che non ti somiglia — un riflesso con i capelli diversi, una cicatrice sulla guancia che tu non hai, un sorriso che non stai facendo.\n\nIl riflesso ti fa cenno con un dito. Indica qualcosa verso il basso. Poi scompare, lasciando solo il tuo viso normale riflesso al posto suo.\n\nGuardi dove indicava. Sul pavimento, in quel punto preciso, una delle piastrelle è leggermente rialzata. La sollevi. Sotto c'è un tasto — un semplice tasto di legno rotondo, come quelli dei vecchi campanelli. Premi.\n\nCon un ronzio meccanico, la porta che pensavi fosse murata riapre. Esci dalla stanza del pozzo e ti trovi di nuovo sul pianerottolo con le tre porte. Ma ora c'è una quarta porta, che prima non c'era, con inciso sopra una sola parola: SOTTO.",
+      "scelte": [
+        {
+          "testo": "Open la door con scritto SOTTO",
+          "vaiAllaPagina": 22
+        },
+        {
+          "testo": "Ignorare la nuova door e tornare all'atrio",
+          "vaiAllaPagina": 6
+        }
+      ]
+    },
+    {
+      "numeroPagina": 22,
+      "testo": "Spii attraverso la grata. Oltre la porta c'è una stanza bassa e lunga — come una cripta, ma invece di loculi ci sono ripiani di legno grezzo, e sui ripiani ci sono oggetti: orologi, bussole, microscopi, sestanti, strumenti che non riconosci. Al centro della stanza c'è un tavolo di pietra su cui è aperto un libro enorme, le pagine tenute aperte da due sassi.\n\nE seduta al tavolo, di spalle, c'è una persona.\n\nUna persona vera. O almeno, sembra vera — respira, si muove lentamente, sfoglia le pagine del libro enorme con dita lunghe e sottili.\n\nButti il respiro e apri la porta il più silenziosamente possibile. Il cardine cigola. La persona si ferma. Si gira lentamente. È una donna anziana — molto anziana, con gli occhi chiari e i capelli bianchi raccolti — e non sembra sorpresa di vederti. Anzi, sembra che ti stesse aspettando.\n\n\"Sei più lento degli altri,\" dice. \"Di solito ci vogliono tre ore. Tu ci hai messo...\" controlla un orologio da taschino, \"...molto di più. Siediti.\"\n\nEsiti sulla soglia.",
+      "scelte": [
+        {
+          "testo": "Enter e sedersi",
+          "vaiAllaPagina": 33
+        },
+        {
+          "testo": "Chiedere chi è prima di avvicinarti",
+          "vaiAllaPagina": 23
+        }
+      ]
+    },
+    {
+      "numeroPagina": 23,
+      "testo": "«Chi sei?» chiedi. La tua voce suona strana nell'aria secca della cripta — un po' rauca, come se non parlassi da ore. Forse non parli da ore.\n\nLa donna alza le mani — un gesto di resa pacifica — e sorride. Il sorriso è autentico, ma c'è qualcosa di stanco dietro di esso, come chi ha spiegato la stessa cosa infinite volte e sa già come andrà a finire.\n\n«Sono la custode,» dice. «Ettore mi ha lasciata qui quando ha venduto la villa. O forse c'ero prima di lui — a questo punto non lo ricordo più nemmeno io. La villa ha questo effetto sul tempo.» Indica la sedia di fronte a lei. «Siediti. Se non ti siedi, la villa ti rimanderà indietro.»\n\nCome per confermare le sue parole, il tunnel alle tue spalle emette un suono — una specie di risucchio, di chiamata meccanica. Senti i tuoi piedi spostarsi indietro di un passo nonostante non tu li abbia mossi intenzionalmente.",
+      "scelte": [
+        {
+          "testo": "Resistere e sedersi dalla custode",
+          "vaiAllaPagina": 33
+        },
+        {
+          "testo": "Lasciarsi trascinare dal tunnel",
+          "vaiAllaPagina": 3
+        }
+      ]
+    },
+    {
+      "numeroPagina": 24,
+      "testo": "Torni nell'atrio per la terza volta. O la quarta. Hai perso il conto. L'orologio a pendolo ti guarda — o almeno, così ti sembra — con qualcosa che potrebbe essere derisione.\n\nSul pavimento c'è qualcosa di nuovo: una lettera. Non c'era prima. La raccogli. Il busta è bianca, il tuo nome scritto sopra in caratteri che non riconosci. Dentro, un biglietto con tre parole: «Bevi il caffè.»\n\nNon ricordavi il caffè. Ora lo ricordi.\n\nLa porta nera è ancora lì, silenziosa e paziente.",
+      "scelte": [
+        {
+          "testo": "Go di nuovo dalla door nera",
+          "vaiAllaPagina": 3
+        },
+        {
+          "testo": "Sederti nell'atrio e aspettare che succeda qualcosa",
+          "vaiAllaPagina": 25
+        }
+      ]
+    },
+    {
+      "numeroPagina": 25,
+      "testo": "Ti siedi sul freddo pavimento di marmo, schiena contro il muro, e aspetti. L'orologio a pendolo dondola. Le fiamme delle candele (quando sono comparse le candele? non c'erano prima) vacillano. Il soffitto della stanza è altissimo e nell'oscurità sopra di te non riesci a vedere niente.\n\nAspetti cinque minuti. Dieci. Venti.\n\nPoi l'orologio a pendolo si ferma. Il pendolo smette di oscillare a metà corsa, sospeso nell'aria come un peso dimenticato. Nel silenzio assoluto che ne segue senti — lontano, attraverso le pareti, come se venisse dalle fondamenta stesse della villa — una voce. Non parole. Un suono. Un tono lungo e regolare.\n\nIl pendolo riparte. L'orologio segna un'ora diversa da prima. Sei stato seduto qui cinque minuti. L'orologio ha perso — o guadagnato — tre ore.\n\n«Il tempo non funziona qui,» dice una voce vicina. Ti giri di scatto. Non c'è nessuno. Ma accanto a te, dove un secondo fa c'era solo pavimento, c'è una tazza di caffè fumante.",
+      "scelte": [
+        {
+          "testo": "Bere il caffè",
+          "vaiAllaPagina": 7
+        },
+        {
+          "testo": "Lasciare il caffè e tornare alle porte",
+          "vaiAllaPagina": 1
+        }
+      ]
+    },
+    {
+      "numeroPagina": 26,
+      "testo": "Cammini lungo il perimetro della stanza della custode toccando gli oggetti sui ripiani. Ogni oggetto che tocchi emette un suono diverso — non il suono che ti aspetteresti, ma qualcosa di più profondo, come se ogni oggetto contenesse un frammento di una conversazione dimenticata.\n\nUn sestante: il suono del vento su un mare che non esiste.\nUn orologio da polso: il suono di un pianto soffocato.\nUna bussola: il suono di una porta che si chiude.\nUno strano strumento con lenti multiple che non sai identificare: nessun suono — silenzio assoluto, come se avesse assorbito tutti i rumori.\n\nLa custode ti guarda fare senza interromperti. Poi: «Quello che stai cercando non è in questi oggetti. Questi sono residui — cose lasciate dagli altri. Tu hai bisogno di andare avanti.»\n\n«Avanti dove?»\n\nTi indica il libro sul tavolo.",
+      "scelte": [
+        {
+          "testo": "Leggere il libro sul tavolo",
+          "vaiAllaPagina": 27
+        },
+        {
+          "testo": "Return a sederti e ascoltare la custode",
+          "vaiAllaPagina": 33
+        }
+      ]
+    },
+    {
+      "numeroPagina": 27,
+      "testo": "Il libro è una pianta. Non un disegno architettonico normale, ma qualcosa di più vivo — le linee sembrano muoversi leggermente, i corridoi cambiano forma mentre li guardi, come se stessi guardando un organismo che respira.\n\nLa custode si avvicina e punta il dito su un punto della pianta. «Sei qui,» dice. «E lì,» sposta il dito, «c'è il cuore.» Il punto che indica è al centro geometrico di tutta la pianta, segnato con una piccola spirale rossa.\n\n«Come ci arrivo?»\n\n«C'è un solo percorso. Tutti gli altri ti riportano all'inizio. Il percorso passa per questa stanza, poi per il corridoio di destra, poi per la stanza degli ingranaggi, poi giù e poi su. Non è complicato se sai dove andare.»\n\n«E se non so dove andare?»\n\n«Allora la villa ti insegnerà dove non andare, finché non ti resta che la strada giusta.» Si stringe nelle spalle. «È il suo metodo pedagogico preferito.»",
+      "scelte": [
+        {
+          "testo": "Chiedere del corridoio di destra",
+          "vaiAllaPagina": 28
+        },
+        {
+          "testo": "Chiedere della stanza degli ingranaggi",
+          "vaiAllaPagina": 29
+        }
+      ]
+    },
+    {
+      "numeroPagina": 28,
+      "testo": "«Il corridoio di destra,» spiega la custode, «parte dal fondo di questa stanza. Sembra un vicolo cieco ma non lo è — devi tenere la mano sinistra sempre a contatto con la parete sinistra. Non smettere mai. Se smetti, il corridoio cambia e ti perdi.»\n\n«Per quanto tempo?»\n\n«Dipende. C'è chi ci ha messo anni.» Detto con assoluta normalità, come se stesse commentando il traffico. «Ma se mantieni il contatto con la parete sinistra, arrivi alla stanza degli ingranaggi in pochi minuti.»\n\nTi alzi, pronto ad andare. La custode ti trattiene con una mano sul braccio — la sua presa è sorprendentemente ferma per una mano così anziana.\n\n«Una cosa,» dice. «Nella stanza degli ingranaggi troverai una scelta. Sembrerà ovvia. Fai il contrario di quello che ti sembra ovvio.»\n\nPrima che tu possa chiederle di spiegarsi meglio, fa un cenno verso il fondo della stanza. C'è effettivamente un corridoio che pensavi fosse solo un'ombra.",
+      "scelte": [
+        {
+          "testo": "Seguire il corridoio tenendo la mano sinistra alla parete",
+          "vaiAllaPagina": 30
+        },
+        {
+          "testo": "Return dalla custode con altre domande",
+          "vaiAllaPagina": 26
+        }
+      ]
+    },
+    {
+      "numeroPagina": 29,
+      "testo": "«La stanza degli ingranaggi,» dice la custode, e per la prima volta nella conversazione qualcosa cambia nel suo tono — non paura, esattamente, ma rispetto cauto, «è il meccanismo della villa. Tutti quei corridoi che cambiano, tutte le porte che appaiono e scompaiono, tutti quegli orologi — vengono da lì.»\n\n«Quindi se spenga gli ingranaggi...»\n\n«La villa si ferma. Sì.» Pausa. «Ma gli ingranaggi non si possono spegnere così semplicemente. C'è un ordine preciso. Se sbagli l'ordine, gli ingranaggi accelerano invece di rallentare, e allora...» si ferma.\n\n«E allora?»\n\n«E allora la villa va in un posto dove tu non puoi seguirla. E tu rimani.»\n\nSilenzio.\n\n«Ma l'ordine corretto?»\n\n«Non lo so. Nessun custode lo ha mai saputo. Lo scopri dentro.» Indica il corridoio. «Vai. E ricorda quello che ti ho detto prima: fai il contrario di quello che ti sembra ovvio.",
+      "scelte": [
+        {
+          "testo": "Go verso il corridoio di destra",
+          "vaiAllaPagina": 30
+        },
+        {
+          "testo": "Ringraziare la custode e chiedere ancora",
+          "vaiAllaPagina": 33
+        }
+      ]
+    },
+    {
+      "numeroPagina": 30,
+      "testo": "Entri nel corridoio. È stretto — le spalle quasi toccano le pareti su entrambi i lati. Metti immediatamente la mano sinistra sulla parete sinistra e cominci a camminare. La parete è di pietra fredda e umida, come la parete di una grotta.\n\nIl corridoio svolta. Di nuovo. Di nuovo. Sali qualche gradino, scendi qualche gradino. Ogni tanto la luce cambia — da arancione a bianca a verde a quasi nulla. Ma la tua mano sinistra non lascia mai la parete.\n\nA un certo punto il corridoio diventa così stretto che devi andare di fianco. Poi si allarga di nuovo. Poi il pavimento sale con un'inclinazione ripida. La tua mano sinistra non lascia la parete. La tua mano sinistra è l'unica cosa reale in questo corridoio che non smette di cambiare.\n\nPoi, improvvisamente, la parete sinistra finisce. Ti trovi in piedi sull'orlo di uno spazio enorme. L'hai trovata. La stanza degli ingranaggi.",
+      "scelte": [
+        {
+          "testo": "Enter nella stanza degli ingranaggi",
+          "vaiAllaPagina": 44
+        },
+        {
+          "testo": "Fermarti sulla soglia a osservare prima di entrare",
+          "vaiAllaPagina": 31
+        }
+      ]
+    },
+    {
+      "numeroPagina": 31,
+      "testo": "Ti fermi sulla soglia e osservi. La stanza è enorme — alta come una cattedrale, larga come una piazza. E piena di ingranaggi. Ingranaggi di ogni dimensione, dal più piccolo (grande quanto un'unghia) al più grande (alto quanto un palazzo di tre piani, una ruota dentata di ferro scuro che gira così lentamente che potresti quasi non vederla muoversi).\n\nGli ingranaggi sono collegati tra loro in una rete tridimensionale incomprensibile. Alcuni girano in senso orario, altri in senso antiorario. Alcuni sono di ferro, alcuni di ottone, alcuni di qualcosa di traslucido che non riconosci. Emettono tutti insieme un ronzio costante — non fastidioso, quasi musicale — che senti nelle ossa più che nelle orecchie.\n\nAl centro della stanza c'è qualcosa che da qui non riesci a vedere bene. Una struttura, forse. Un altare? Una macchina dentro la macchina?\n\nDue percorsi portano al centro: uno diretto, attraverso una passerella di ferro sospesa tra gli ingranaggi. L'altro tortuoso, seguendo un sentiero sul pavimento tra le basi degli ingranaggi più grandi.",
+      "scelte": [
+        {
+          "testo": "Prendere la passerella sopraelevata",
+          "vaiAllaPagina": 32
+        },
+        {
+          "testo": "Seguire il sentiero sul pavimento",
+          "vaiAllaPagina": 44
+        }
+      ]
+    },
+    {
+      "numeroPagina": 32,
+      "testo": "Sali sulla passerella. Dall'alto la stanza è ancora più impressionante — puoi vedere come tutti gli ingranaggi si connettono, come il movimento di uno trasferisce energia a decine di altri in una cascata meccanica perfetta. È quasi bello.\n\nPoi la passerella comincia a tremare. Un ingranaggio grande quanto un autobus passa a pochi centimetri dalla tua testa — non ti aveva visto prima, o forse la passerella si è spostata. Rimani immobile finché non passa.\n\nPoi un altro. Poi un altro.\n\nSei a metà passerella quando un ingranaggio colpisce il supporto principale della struttura. La passerella si piega, un bullone cede, e prima che tu possa fare qualcosa voli giù. Caduta di quattro metri, atterraggio sul pavimento di pietra — doloroso ma non mortale.\n\nQuando ti rialzi, sei sul sentiero del pavimento, vicino al centro. Il tuo corpo ha deciso per te.",
+      "scelte": [
+        {
+          "testo": "Continuare verso il centro della stanza",
+          "vaiAllaPagina": 44
+        },
+        {
+          "testo": "Return indietro nel corridoio",
+          "vaiAllaPagina": 30
+        }
+      ]
+    },
+    {
+      "numeroPagina": 33,
+      "testo": "Ti siedi. La custode si siede di fronte a te. Per un lungo momento nessuno parla. Poi lei apre un cassetto del tavolo e tira fuori due tazze di porcellana e un thermos da cui versa qualcosa di scuro e fumante. Non è caffè — sa di erbe e legno bruciato, amaro ma non spiacevole.\n\n«Gli altri,» dice alla fine, «di solito arrivano qui con più domande.»\n\n«Ho molte domande.»\n\n«Lo so. Ma le domande nella villa sono pericolose. Ogni domanda è un bivio, e ogni bivio è un'opportunità di perdersi.» Beve dalla sua tazza. «Meglio le risposte.»\n\n«Allora dimmi come uscire.»\n\nLei annuisce, come se questa fosse la risposta giusta. «Troverai la stanza degli ingranaggi. Al centro della stanza c'è il cuore della villa. Si ferma con una chiave — ma non una chiave qualsiasi. La chiave giusta è quella che hai trovato, o che troverai, o che ti è stata data. Hai una chiave?»",
+      "scelte": [
+        {
+          "testo": "Mostrare la chiave dorata con le serpi (se ce l'hai)",
+          "vaiAllaPagina": 35
+        },
+        {
+          "testo": "Ammettere di non avere nessuna chiave",
+          "vaiAllaPagina": 34
+        }
+      ]
+    },
+    {
+      "numeroPagina": 34,
+      "testo": "«Non ho nessuna chiave.»\n\nLa custode annuisce lentamente. «Allora devi trovarne una. Ce ne sono tre nella villa. Una è nella cantina, nelle mani di Jeeves. Una è nella stanza degli specchi, nel fondo del pozzo — devi riceverla da qualcuno. E una...» esita.\n\n«E una?»\n\n«Una ce l'ho io.» Tira fuori dalla tasca del grembiule una chiave dorata, identica a quella che hai visto — o che vedrai — nelle mani del manichino. Le serpi intrecciate scintillano alla luce fioca della cripta. «Devo darti qualcosa in cambio.»\n\n«Cosa?»\n\n«Un ricordo. Uno vero. Di prima della villa.»\n\nCi pensi. Hai ricordi? Sì — uno, recuperato davanti al camino blu: te stesso con un giornale, all'esterno della villa, in un pomeriggio normale. Lo condividi con lei, a parole.\n\nLei ascolta con gli occhi chiusi. Poi annuisce e ti porge la chiave.\n\n«Vai alla stanza degli ingranaggi. Conosci la strada?»",
+      "scelte": [
+        {
+          "testo": "Chiedere della strada per la stanza degli ingranaggi",
+          "vaiAllaPagina": 28
+        },
+        {
+          "testo": "Dire che conosci già la strada",
+          "vaiAllaPagina": 30
+        }
+      ]
+    },
+    {
+      "numeroPagina": 35,
+      "testo": "Tiri fuori la chiave. La custode la esamina — la gira tra le dita, la avvicina alla luce, legge la parola incisa sul codice.\n\n«Bene,» dice semplicemente. Come se l'avesse saputo. «Questa è quella giusta. Sai già come usarla?»\n\n«No.»\n\n«Al centro della stanza degli ingranaggi c'è un meccanismo centrale. Sembra un orologio ma non lo è. Ha una serratura — non visibile subito, devi cercarla sul lato sinistro, al di sotto della terza ruota. Inserisci la chiave. Girala tre volte in senso antiorario, poi una in senso orario. Non il contrario — molti fanno il contrario.»\n\n«E poi?»\n\n«E poi la villa si ferma. E tu puoi andartene.»\n\n«È così semplice?»\n\nFa una smorfia. «Ci sono arrivati in sette, in tutti questi anni. Semplice dipende.» Si rialza, raccoglie le tazze. «Il corridoio di destra porta alla stanza degli ingranaggi. Tieni la mano sinistra sulla parete sinistra per tutta la durata del percorso.»\n\nSi volta verso un ripiano e comincia a sistemare oggetti come se tu fossi già andato.",
+      "scelte": [
+        {
+          "testo": "Seguire le istruzioni e go nel corridoio di destra",
+          "vaiAllaPagina": 30
+        },
+        {
+          "testo": "Fare un'ultima domanda alla custode",
+          "vaiAllaPagina": 36
+        }
+      ]
+    },
+    {
+      "numeroPagina": 36,
+      "testo": "«Un'ultima cosa,» dici. La custode si ferma senza girarsi. «Ettore Morvell. Chi era?»\n\nUn lungo silenzio. Poi: «Era qualcuno come te. Entrato nella villa per sbaglio — o così credeva. Rimasto per capire. Rimasto troppo a lungo. La villa lo ha assorbito.»\n\n«Assorbito come?»\n\nSi gira finalmente. «La villa si nutre di persone che ci rimangono. Non le uccide. Le integra. Diventano parte dell'architettura. Diventano corridoi, stanze, meccanismi.» Pausa. «Ettore è quella scala di pietra che scende in cantina. Ogni volta che qualcuno la percorre, è lui.»\n\nNon sai cosa dire. La custode aggiunge, molto più sottovoce: «Sono qui da prima che arrivassi. Sarò qui dopo. Ma tu puoi ancora andartene. Non sprecare l'occasione a fare domande.»\n\nTi indica il corridoio.",
+      "scelte": [
+        {
+          "testo": "Go nel corridoio di destra",
+          "vaiAllaPagina": 30
+        },
+        {
+          "testo": "Chiedere cosa sono diventate le altre persone assorbite",
+          "vaiAllaPagina": 37
+        }
+      ]
+    },
+    {
+      "numeroPagina": 37,
+      "testo": "«Gli altri? Quelli che sono rimasti?»\n\nLa custode sospira. Si siede di nuovo. Capisce che non te ne andrai finché non avrai questa risposta.\n\n«Il manichino in cantina — Jeeves — era il maggiordomo reale della villa. È rimasto volontariamente. Pensava che proteggere la chiave fosse il suo dovere anche dopo.» Pausa. «La donna nel pozzo degli specchi è arrivata qui cinquant'anni fa. Era una ricercatrice. Pensava di poter studiare la villa dall'interno. Ora è il riflesso.»\n\n«E tu? Cosa sei diventata?»\n\n«Io sono la memoria.» Detto semplicemente. «Ogni villa ha bisogno di qualcosa che la ricordi dall'interno. Altrimenti la villa dimentica se stessa e collassa.» Alza una mano. «Non chiedermi se sono felice. Non è una categoria applicabile.»\n\nSilenzio. Poi: «Ora vai. Se rimani qui a parlare con me, la villa concluderà che ti sei integrato volontariamente e comincerai a diventare qualcosa. Probabilmente quella finestra che non c'è nell'atrio.»",
+      "scelte": [
+        {
+          "testo": "Go senza indugio nel corridoio di destra",
+          "vaiAllaPagina": 30
+        },
+        {
+          "testo": "Return nell'atrio per riflettere",
+          "vaiAllaPagina": 24
+        }
+      ]
+    },
+    {
+      "numeroPagina": 38,
+      "testo": "Il manichino Jeeves ha la testa ancora girata verso di te. La sua espressione dipinta è neutra — né ostile né benevola — ma quella testa ruotata di quarantacinque gradi dà all'insieme un'aria di attenzione inquietante.\n\nTi siedi sul pavimento di fronte a lui. Hai deciso di studiarlo prima di prendere la chiave. Dopo un po', noti che la chiave nella sua mano non è solo appoggiata — è avvolta dalle dita di legno con troppa precisione per essere casuale. Come se la stesse porgendo. Non trattenendo.\n\n«La stai porgendo?» chiedi ad alta voce, senza aspettarti risposta.\n\nLa testa del manichino ruota di altri quarantacinque gradi — ora guarda in una direzione diversa. E la mano si apre leggermente. La chiave è ora chiaramente offerta, non trattenuta.\n\nLa prendi senza resistenza. Sul palmo di legno del manichino, dove era la chiave, è incisa una parola minuscola che non c'era prima — o che non avevi visto: ASPETTA.",
+      "scelte": [
+        {
+          "testo": "Aspettare nella cantina per vedere cosa succede",
+          "vaiAllaPagina": 39
+        },
+        {
+          "testo": "Prendere la chiave e tornare su",
+          "vaiAllaPagina": 8
+        }
+      ]
+    },
+    {
+      "numeroPagina": 39,
+      "testo": "Aspetti. La cantina è silenziosa tranne per il gocciolamento lontano di acqua. Il manichino Jeeves non si muove più. Le bottiglie di vino sembrano occhi nel buio.\n\nDopo qualche minuto — o qualche ora, è impossibile dirlo — una bottiglia cade da sola da uno scaffale e si rompe sul pavimento. Dal liquido scuro che si spande sul pavimento emerge, galleggiando, un foglio di carta arrotolato e legato con uno spago.\n\nLo apri. È una mappa — rozza, disegnata a mano, ma chiaramente della villa. Ci sono annotazioni in una calligrafia che riconosci come quella del foglietto trovato all'inizio. Il percorso verso \"il cuore\" è segnato con una linea rossa. La linea parte dalla cucina.\n\nIn fondo alla mappa, una nota: \"Non entrare dalla porta della sala delle maschere. Non cedere al fuoco. Il caffè è il cuore di tutto.\"\n\nPieghi la mappa e la metti in tasca insieme al foglietto. Ora hai due mappe e una chiave. Comincia ad essere un inventario rispettabile.",
+      "scelte": [
+        {
+          "testo": "Return su e go alla cucina",
+          "vaiAllaPagina": 7
+        },
+        {
+          "testo": "Esplorare ancora la cantina",
+          "vaiAllaPagina": 40
+        }
+      ]
+    },
+    {
+      "numeroPagina": 40,
+      "testo": "Continui ad esplorare la cantina. Tra le rastrelliere più remote trovi un passaggio nascosto — una porta di legno marcio che quasi cade quando la spingi. Oltre c'è un'altra cantina, più piccola, con un solo scaffale e una sola bottiglia. La bottiglia è di vetro blu scuro e non ha etichetta.\n\nAccanto alla bottiglia c'è un calice. Ci versi dentro un dito del liquido. Non è vino — è troppo scuro, quasi nero, e non ha odore. Lo tieni in mano per un lungo momento.\n\nPoi lo butti via senza bere.\n\nNon si beve roba di colore nero in bottiglie senza etichetta in case maledette. Questa è una regola di vita.\n\nNella parete di fondo della cantinetta c'è un'iscrizione incisa nel mattone: \"CHI BEVE VEDE. CHI VEDE RESTA. CHI RESTA DIVENTA.\"\n\nEsci velocemente dalla cantinetta e torni nella cantina principale.",
+      "scelte": [
+        {
+          "testo": "Return su per la scala di pietra",
+          "vaiAllaPagina": 3
+        },
+        {
+          "testo": "Go da Jeeves a prendere la chiave",
+          "vaiAllaPagina": 8
+        }
+      ]
+    },
+    {
+      "numeroPagina": 41,
+      "testo": "Torni alla stanza degli specchi. Questa volta sai cosa aspettarti — o almeno, così pensi. Le luci sono ancora presenti, il pozzo è ancora al centro, la figura nei riflessi è probabilmente ancora lì.\n\nMa quando entri, la stanza è cambiata. Il pozzo è ancora al centro, ma il livello dell'acqua è molto più alto — quasi a filo del pavimento. E gli specchi sul soffitto non riflettono più la tua immagine. Riflettono scene — immagini di altri posti, come finestre su mondi paralleli.\n\nIn uno specchio vedi la custode nella sua cripta, che ti guarda come se ti stesse guardando attraverso lo specchio. Ti fa cenno. Nella sua mano c'è qualcosa che tiene alzato verso di te — un foglio su cui è scritto qualcosa di troppo piccolo per leggere da questa distanza.\n\nL'acqua del pozzo ti tocca le scarpe.",
+      "scelte": [
+        {
+          "testo": "Cercare di avvicinarti allo specchio per leggere il foglio",
+          "vaiAllaPagina": 42
+        },
+        {
+          "testo": "Exit velocemente dalla stanza",
+          "vaiAllaPagina": 6
+        }
+      ]
+    },
+    {
+      "numeroPagina": 42,
+      "testo": "Ti avvicini allo specchio specifico dove la custode ti sta guardando. L'acqua ora ti arriva alla caviglia — calda, luminosa, indifferente. Lo specchio è in alto, sul soffitto, quindi devi guardare su.\n\nLa custode sposta il foglio più vicino alla superficie dello specchio. Riesci a leggere — con fatica, alcune lettere al contrario — le parole: \"NON LA PASSERELLA. IL PAVIMENTO.\"\n\nPoi l'acqua sale di colpo fino alle ginocchia e la custode nello specchio scuote la testa con urgenza. Indicando il basso — il pavimento sotto di te.\n\nGuardi giù. L'acqua luminosa che ora ti circonda le gambe rivela qualcosa nel pavimento che non avevi visto: una targa, incisa nei mattoni, con la stessa spirale rossa che hai visto sulla pianta della villa nella cripta. Il cuore.\n\nNon è nella stanza degli ingranaggi. O almeno — non solo lì.",
+      "scelte": [
+        {
+          "testo": "Cercare di sollevare la targa",
+          "vaiAllaPagina": 43
+        },
+        {
+          "testo": "Ignorare la targa e uscire prima che l'acqua salga",
+          "vaiAllaPagina": 6
+        }
+      ]
+    },
+    {
+      "numeroPagina": 43,
+      "testo": "Metti le dita sotto il bordo della targa e tiri. È pesante — troppo pesante per te da solo. L'acqua sale ancora: ora alla vita. Hai meno tempo di quanto pensassi.\n\nProvi con tutta la forza che hai. La targa si muove — un centimetro, due — poi ricade. L'acqua è al petto. Se sale ancora fino alla bocca del pozzo che ora è al livello del pavimento, verrai travolto.\n\nPoi senti qualcosa di inaspettato: qualcun altro sta tirando la targa dall'altra parte. Dall'interno. Con una forza molto maggiore della tua. La targa si solleva di scatto e l'acqua comincia a scorrere giù, nel buco — come se avesse trovato un drenaggio.\n\nGuardi nel buco. C'è una mano — la mano della figura che vedi nei riflessi — che ti porge qualcosa. Una chiave dorata con le serpi intrecciate.\n\nPoi la targa si richiude da sola, l'acqua è scomparsa, e tu sei in piedi nella stanza asciutta con la chiave in mano e il cuore che batte fortissimo.",
+      "scelte": [
+        {
+          "testo": "Go alla stanza degli ingranaggi con la chiave",
+          "vaiAllaPagina": 44
+        },
+        {
+          "testo": "Return dalla custode a riferire",
+          "vaiAllaPagina": 33
+        }
+      ]
+    },
+    {
+      "numeroPagina": 44,
+      "testo": "La stanza degli ingranaggi ti accoglie con il suo ronzio costante. Da vicino, gli ingranaggi sono ancora più impressionanti: puoi vedere la texture del metallo, le striature del tempo, le macchie di ruggine che formano pattern quasi decorativi. Alcuni ingranaggi sono così grandi che il loro bordo superiore si perde nel buio in alto. Alcuni sono così piccoli che li senti solo come un tintinnio sottile.\n\nCammini verso il centro, stando attento ai meccanismi in movimento. Devi passare sotto un ingranaggio che oscilla come un pendolo — aspetti il momento giusto e attraversi. Scavalchi una catena di metallo spessa come il tuo polso che striscia sul pavimento verso non sai dove.\n\nIl centro della stanza. Eccolo.\n\nNon è un altare. Non è un orologio. È una colonna — cilindrica, alta forse tre metri, di metallo scuro — da cui partono tutti gli altri meccanismi. Come un albero da cui dipende tutta la foresta. Intorno alla base della colonna, seduto su un gradino circolare, c'è un uomo che dorme.",
+      "scelte": [
+        {
+          "testo": "Avvicinarti all'uomo che dorme",
+          "vaiAllaPagina": 45
+        },
+        {
+          "testo": "Ignorarlo e cercare la serratura sulla colonna",
+          "vaiAllaPagina": 55
+        }
+      ]
+    },
+    {
+      "numeroPagina": 45,
+      "testo": "Ti avvicini all'uomo. È anziano — più anziano della custode — con una barba lunga bianca e le mani intrecciate in grembo. Respira regolarmente. È davvero addormentato. Sulla giacca logora ha un cartellino, come Jeeves: \"ETTORE MORVELL. PROPRIETARIO. NON DISTURBARE.\"\n\nNon è la scala. Non è incorporato nell'architettura. È una persona — che dorme da chissà quanto tempo — accanto alla colonna centrale della sua stessa villa.\n\nLo svegli con una mano sulla spalla. Ci vuole un po'. Poi apre gli occhi — sono chiari e distanti, come chi viene da un sogno molto profondo.\n\n«Ah,» dice. «Sei arrivato.» Nessuna sorpresa. Solo quella stanchezza vastissima. Si rialza con fatica. «Ho aspettato che qualcuno arrivasse fin qui. Ci vuole così tanto, di solito.» Ti guarda. «Hai la chiave?»",
+      "scelte": [
+        {
+          "testo": "Mostrargli la chiave dorata",
+          "vaiAllaPagina": 55
+        },
+        {
+          "testo": "Chiedergli chi è prima di mostrare la chiave",
+          "vaiAllaPagina": 46
+        }
+      ]
+    },
+    {
+      "numeroPagina": 46,
+      "testo": "«Chi sei?» chiedi, anche se il cartellino ha già risposto.\n\n«Sono Ettore Morvell,» dice, come se stesse confermando qualcosa di già noto. «Ho costruito questa villa. O almeno, pensavo di averla costruita io. In realtà la villa si è costruita da sola, usando i miei piani come suggerimento.» Si guarda le mani. «È una distinzione importante.»\n\n«La custode dice che sei diventato una scala.»\n\nUna breve risata secca. «La custode dice molte cose che sono state vere in momenti diversi. Io sono rimasto qui — a questa colonna — da quando ho capito che non riuscivo a fermarla dall'interno. Speravo che qualcuno arrivasse dall'esterno.»\n\n«E adesso?»\n\n«Adesso puoi fermarla. Con la chiave. Se ce l'hai.» Ti guarda con quegli occhi distanti. «Ce l'hai?»",
+      "scelte": [
+        {
+          "testo": "Mostrare la chiave dorata",
+          "vaiAllaPagina": 55
+        },
+        {
+          "testo": "Ammettere di non avere la chiave",
+          "vaiAllaPagina": 47
+        }
+      ]
+    },
+    {
+      "numeroPagina": 47,
+      "testo": "«Non ho la chiave.»\n\nEttore chiude gli occhi per un momento. «Allora devi andare a trovarla. Ce ne sono tre nella villa. La custode probabilmente te lo ha già detto.» Pausa. «O lo dirà — il tempo qui è complicato.»\n\n«Come torno qui dopo averla trovata?»\n\n«Tieni la mano sinistra sulla parete sinistra nel corridoio. È l'unico modo per arrivare direttamente. Altrimenti la villa ti porta in giro per ore.» Si risiede sul gradino con la lentezza di chi non ha fretta da decenni. «Tornerò ad aspettare.»\n\n«Per quanto tempo aspetti?»\n\nApre gli occhi. «Per quanto serve.» Chiude di nuovo gli occhi. In pochi secondi sembra di nuovo addormentato.\n\nEsci dalla stanza degli ingranaggi nel modo in cui sei entrato.",
+      "scelte": [
+        {
+          "testo": "Go a prendere la chiave dalla custode",
+          "vaiAllaPagina": 33
+        },
+        {
+          "testo": "Go a prendere la chiave dal manichino in cantina",
+          "vaiAllaPagina": 5
+        }
+      ]
+    },
+    {
+      "numeroPagina": 48,
+      "testo": "Esplori i margini della stanza degli ingranaggi prima di avvicinarti al centro. Lungo la parete di sinistra trovi una serie di quadranti — come manometri su una caldaia — che indicano valori che non capisci. Uno di essi ha l'ago nel rosso.\n\nLungo la parete di destra, qualcosa di diverso: una serie di fotografie incorniciate. Non fotografie normali — fotografie di persone, ognuna in un momento diverso della villa. Riconosci alcuni luoghi: l'atrio, la biblioteca, la cantina. Le persone nelle fotografie sembrano vive — o almeno, alcune di esse. In una fotografia, al centro, riconosci te stesso nell'atrio, nel momento preciso in cui ti sei svegliato.\n\nStai guardando la tua fotografia quando ti rendi conto che si sta muovendo. Lentamente — te stessa nella foto stai alzandoti dal pavimento, ti stai guardando intorno, ti stai avvicinando alle porte.\n\nÈ una registrazione. La villa ti sta registrando in tempo reale.\n\nSei nella foto anche adesso — piccolo, distante, che guarda la tua stessa foto.",
+      "scelte": [
+        {
+          "testo": "Go verso il centro della stanza",
+          "vaiAllaPagina": 44
+        },
+        {
+          "testo": "Cercare una fotografia che mostri la via d'uscita",
+          "vaiAllaPagina": 49
+        }
+      ]
+    },
+    {
+      "numeroPagina": 49,
+      "testo": "Cerchi tra le fotografie. Alcune mostrano persone che non riconosci in luoghi che non hai ancora esplorato. Una mostra la custode — molto più giovane, sorridente — in un giardino che non puoi collocare nella villa.\n\nPoi trovi quello che cercavi: una fotografia del centro della stanza degli ingranaggi, con la colonna. E in questa fotografia si vede chiaramente, sul lato sinistro della colonna, una serratura. Piccola, a forma di ottagono, al di sotto di una grande ruota dentata.\n\nStai memorizzando la posizione quando la fotografia cambia — la colonna nella foto inizia a ruotare lentamente, mostrando diversi angoli, come un'istruzione d'uso. Si ferma sull'angolo che mostra la serratura, e rimane ferma. Come se ti stesse dicendo: guarda bene.\n\nGuardi bene. Poi cammini verso il centro.",
+      "scelte": [
+        {
+          "testo": "Go al centro della stanza con le istruzioni memorizzate",
+          "vaiAllaPagina": 55
+        },
+        {
+          "testo": "Return dalla custode a riferire la scoperta",
+          "vaiAllaPagina": 33
+        }
+      ]
+    },
+    {
+      "numeroPagina": 50,
+      "testo": "Perso nei corridoi della villa. Hai smesso di tenere la mano sinistra sulla parete per un solo secondo — un attimo di distrazione, una distrazione di un secondo — e ora non sai più dove sei.\n\nIl corridoio in cui ti trovi è diverso da tutti quelli che hai percorso prima. Le pareti sono di un rosso mattone molto scuro, il soffitto così basso che devi camminare curvo, e dal pavimento crescono — crescono è la parola giusta — stalattiti di sale bianco che scricchiolano sotto i tuoi passi.\n\nSembra un intestino. Non vuoi pensarci.\n\nC'è un solo modo in avanti e un solo modo indietro. Avanti c'è una curva. Indietro c'è il buio da cui sei venuto.",
+      "scelte": [
+        {
+          "testo": "Go avanti verso la curva",
+          "vaiAllaPagina": 51
+        },
+        {
+          "testo": "Return indietro nel buio",
+          "vaiAllaPagina": 30
+        }
+      ]
+    },
+    {
+      "numeroPagina": 51,
+      "testo": "Dopo la curva il corridoio rosso si apre in una piccola stanza a volta. Al centro c'è una fontana — una fontana vera, di marmo, con l'acqua che scorre. L'acqua è limpida e fa il suono più normale che tu abbia sentito in questa villa: il suono dell'acqua che cade.\n\nAccanto alla fontana c'è una panchina. Sulla panchina c'è un cappello. Dentro il cappello c'è un biglietto: \"L'acqua è vera. Puoi bere.\"\n\nBevi. L'acqua è fresca e sa di acqua — nient'altro. Nessun retrogusto strano, nessun effetto ipnotico. Solo acqua. Ti siedi sulla panchina per un momento.\n\nPoi noti che le pareti della stanza sono coperte di scritte. Decine di nomi, date, messaggi — come quelli che si lasciano nelle prigioni, sulle mura. \"Qui è passato Marco, giorno 47.\" \"Non cedere al fuoco.\" \"Il caffè.\" \"La mano sinistra sempre.\" \"V. sa la verità.\"\n\nC'è anche il tuo nome. Ma non l'hai scritto tu.",
+      "scelte": [
+        {
+          "testo": "Cercare di capire come sia possibile che il tuo nome sia lì",
+          "vaiAllaPagina": 52
+        },
+        {
+          "testo": "Ignorare le scritte e cercare una via d'uscita dalla stanza",
+          "vaiAllaPagina": 53
+        }
+      ]
+    },
+    {
+      "numeroPagina": 52,
+      "testo": "Il tuo nome è scritto in basso, vicino al pavimento, in una calligrafia che assomiglia alla tua ma non è la tua — è come una copia speculare, o una copia fatta da qualcuno che ti ha visto scrivere ma non ha mai imparato da te.\n\nSotto il tuo nome, la data di oggi. Sotto la data, una nota: \"Ce l'ha fatta. È il settimo.\"\n\nIl settimo. La custode aveva detto che in sette erano arrivati al cuore. Ma sei ancora a metà strada. A meno che...\n\nA meno che qualcuno sappia già come va a finire.\n\nAccanto al tuo nome c'è un altro nome che riconosci — Ettore Morvell — con la data di molti decenni fa. E sotto il suo nome: \"Non ce l'ha fatta. È rimasto.\"\n\nLa differenza tra voi è sottile. Ha costruito la villa. Tu ci sei entrato per caso. Forse è quello che conta.",
+      "scelte": [
+        {
+          "testo": "Alzarsi e cercare l'uscita dalla stanza",
+          "vaiAllaPagina": 53
+        },
+        {
+          "testo": "Scrivere qualcosa accanto al tuo nome",
+          "vaiAllaPagina": 52
+        }
+      ]
+    },
+    {
+      "numeroPagina": 53,
+      "testo": "Cerchi un'uscita dalla stanza della fontana. Oltre la fontana c'è un arco che porta a un corridoio — ma questo corridoio è diverso da quello rosso da cui sei venuto. È più alto, più chiaro, con le pareti di pietra grigia normale.\n\nLo segui. Curva una volta. Poi un'altra. Poi si apre — improvvisamente, senza preavviso — nella stanza degli ingranaggi. Sei entrato dalla parte opposta rispetto a prima. La colonna centrale è lì, a una trentina di metri.\n\nEttore Morvell dorme ancora sul suo gradino.\n\nGli ingranaggi ronzano. Il tempo nella villa scorre come vuole. Ma tu hai ancora la chiave in tasca — o forse no, devi controllare — e la serratura è sul lato sinistro della colonna, sotto la terza ruota.",
+      "scelte": [
+        {
+          "testo": "Controllare di avere ancora la chiave e go alla colonna",
+          "vaiAllaPagina": 55
+        },
+        {
+          "testo": "Sveglare Ettore Morvell prima di procedere",
+          "vaiAllaPagina": 45
+        }
+      ]
+    },
+    {
+      "numeroPagina": 54,
+      "testo": "Provi ad aprire la serratura senza la chiave. Con uno spillo che trovi in tasca. Con un pezzo di metallo rotto che recuperi dal pavimento. Con forza bruta. Con pazienza.\n\nNiente funziona. La serratura è ottagonale e richiede qualcosa di specifico. Non qualunque cosa.\n\nEttore Morvell, ancora sul suo gradino, senza aprire gli occhi: «Hai bisogno della chiave.»\n\n«Lo so.»\n\n«Allora vai a prenderla.»\n\nSilenzio. Il ronzio degli ingranaggi.\n\n«Hai dormito tutto il tempo che stavo provando?»\n\n«Dormo leggero.» Pausa. «La chiave è nella villa. Ce ne sono tre. Una con la custode, una col manichino in cantina, una nel pozzo degli specchi. Qualcuna ce l'hai già tu e non lo sai.»\n\nControlli le tasche.",
+      "scelte": [
+        {
+          "testo": "Trovare la chiave in tasca (sei tornato con essa)",
+          "vaiAllaPagina": 55
+        },
+        {
+          "testo": "Go a recuperare la chiave dalla custode",
+          "vaiAllaPagina": 33
+        }
+      ]
+    },
+    {
+      "numeroPagina": 55,
+      "testo": "Hai la chiave. Hai le istruzioni. Hai il coraggio necessario — o almeno, qualcosa che assomiglia abbastanza al coraggio.\n\nCammini verso la colonna centrale. Ettore ti guarda con quegli occhi distanti. Non dice nulla. Il suo sguardo però è diverso da prima — c'è qualcosa di molto vicino alla speranza, nascosto sotto tutta quella stanchezza.\n\nLa colonna da vicino è ancora più imponente. Il metallo scuro emana calore, e da vicino puoi sentire una vibrazione sottile, come un battito. Il cuore della villa. Batte davvero.\n\nSul lato sinistro, sotto la terza ruota dentata (conti: uno, due, tre — questa) c'è la serratura. Ottagonale, come nelle fotografie. Inserisci la chiave. Si adatta perfettamente — ovviamente, era fatta per questo.\n\nFai una pausa. Tre giri in senso antiorario. Uno in senso orario. Non il contrario.\n\nFai un respiro.",
+      "scelte": [
+        {
+          "testo": "Girare la chiave tre volte in senso antiorario, poi una in senso orario",
+          "vaiAllaPagina": 66
+        },
+        {
+          "testo": "Girare la chiave una volta in senso orario, poi tre in senso antiorario (il contrario)",
+          "vaiAllaPagina": 56
+        }
+      ]
+    },
+    {
+      "numeroPagina": 56,
+      "testo": "Giri la chiave nel modo sbagliato — o almeno, non nel modo che ti era stato detto.\n\nGli ingranaggi accelerano. Un ronzio che diventa rumore, poi fracasso. La vibrazione nella colonna aumenta fino a diventare un tremore. Poi un sisma. Poi qualcosa che non hai parole per descrivere.\n\nTutti gli oggetti nella stanza iniziano a muoversi. I grandi ingranaggi oscillano sul loro asse. Le fotografie alle pareti cadono. Il pavimento ondeggia come se fosse acqua.\n\nEttore Morvell, sulla sua panchina, apre gli occhi e dice con la voce piatta di chi non è sorpreso: «Hai fatto il contrario.»\n\n«Lo so. Come si ferma?»\n\n«Gira di nuovo — adesso tre antiorario, uno orario. Veloce.»\n\nL'accelerazione degli ingranaggi rende tutto più difficile — la colonna vibra così tanto che tenerci la mano è difficile. Ma la chiave è ancora nella serratura.",
+      "scelte": [
+        {
+          "testo": "Correggere il tiro: tre antiorario, uno orario",
+          "vaiAllaPagina": 57
+        },
+        {
+          "testo": "Togliere la chiave e scappare",
+          "vaiAllaPagina": 58
+        }
+      ]
+    },
+    {
+      "numeroPagina": 57,
+      "testo": "Stringi i denti e giri. Il tremore rende quasi impossibile mantenere la presa, ma giri — uno, due, tre antiorario — poi uno orario.\n\nGli ingranaggi rallentano. Lentamente. Con resistenza. Come se non volessero fermarsi. Ma rallentano.\n\nIl ronzio scende di tono. Il tremore diminuisce. Le fotografie sul pavimento smettono di scorrere. Ettore Morvell chiude gli occhi con un'espressione che potrebbe essere sollievo.\n\nPoi il meccanismo si ferma. Non di colpo — con una decelerazione lunga, quasi elegante, come la fine di un brano musicale. L'ultimo ingranaggio si ferma su un dente specifico, come se avesse sempre dovuto fermarsi lì.\n\nSilenzio.\n\nUn silenzio vero, completo, il primo che senti da quando hai aperto gli occhi in questo posto.\n\nPoi, da qualche parte nella villa — lontano, attraverso le pareti — si sente il suono di una porta che si apre.",
+      "scelte": [
+        {
+          "testo": "Seguire il suono della door",
+          "vaiAllaPagina": 66
+        },
+        {
+          "testo": "Restare a guardare gli ingranaggi fermi",
+          "vaiAllaPagina": 59
+        }
+      ]
+    },
+    {
+      "numeroPagina": 58,
+      "testo": "Togli la chiave e corri. Non sai dove stai andando — il tremore ha spostato gli ingranaggi, il pavimento è scivoloso, la stanza sembra diversa. Corri verso quello che ricordi essere l'uscita.\n\nNon trovi l'uscita. Giri attorno agli ingranaggi. Ogni volta che pensi di aver trovato il corridoio, finisce in un muro. Gli ingranaggi accelerano ancora. Il rumore è assordante.\n\nPoi una mano ti afferra per la spalla. È Ettore Morvell, in piedi per la prima volta, con un'energia sorprendente per quanto sembrava vecchio.\n\n«Non scappare,» dice ad alta voce per farsi sentire. «La chiave. Rimettila. Tre antiorario. Uno orario. O la villa non si ferma più.»\n\n«E se la metto di nuovo?»\n\n«Funziona ancora. La villa non te la toglierà finché non hai finito.»\n\nTorni alla colonna. La chiave trema nella tua mano.",
+      "scelte": [
+        {
+          "testo": "Rimettere la chiave e correggere il movimento",
+          "vaiAllaPagina": 57
+        },
+        {
+          "testo": "Cedere al panico e urlare nel vuoto",
+          "vaiAllaPagina": 50
+        }
+      ]
+    },
+    {
+      "numeroPagina": 59,
+      "testo": "Resti a guardare gli ingranaggi fermi. È la prima volta che li vedi immobili, e sono... diversi. Senza il movimento, senza la vibrazione, il ronzio che percepivi come costante e inevitabile — senza tutto questo, la stanza sembra più grande. E più silenziosa.\n\nPoi ti accorgi che gli ingranaggi non sono solo meccanismi. Ora che sono fermi puoi vedere iscrizioni incise sui bordi di molti di essi. Testi, frasi, nomi. Come se la villa avesse scritto la propria storia sulle proprie pareti.\n\nLeggi quello più vicino: \"Qui giace un secondo di settembre 1923, quando Ettore Morvell capì di non poter uscire.\"\n\nQuello accanto: \"Qui giace la curiosità di Clara R., che volle sapere troppo.\"\n\nQuello più piccolo, quasi invisibile: \"Qui giace il primo respiro di chi starà leggendo queste parole e sta per uscire.\"\n\nStai leggendo questa iscrizione. Stai per uscire.",
+      "scelte": [
+        {
+          "testo": "Go verso il suono della door che si è aperta",
+          "vaiAllaPagina": 66
+        },
+        {
+          "testo": "Cercare Ettore Morvell prima di go",
+          "vaiAllaPagina": 60
+        }
+      ]
+    },
+    {
+      "numeroPagina": 60,
+      "testo": "Cerchi Ettore. Non è più sul suo gradino. Non è nella stanza — o almeno, non in una forma che puoi vedere.\n\n«Ettore?» chiami.\n\nUn suono — quasi una risposta — viene da uno degli ingranaggi più grandi. L'ingranaggio non si muove, ma ha un'iscrizione nuova, fresca, che non c'era prima: \"Sto bene. Vai.\"\n\nPoi, subito sotto: \"Grazie.\"\n\nÈ impossibile — il metallo degli ingranaggi dovrebbe richiedere strumenti e tempo per essere inciso. Ma l'iscrizione è lì, profonda e precisa.\n\nTieni l'immagine nella mente — quella parola \"grazie\" incisa nel metallo scuro — mentre cammini verso il suono della porta aperta.\n\nLa custode era giusta. La villa ricorda ogni passo. Ma ora è ferma, e i tuoi passi possono portarti fuori.",
+      "scelte": [
+        {
+          "testo": "Seguire il suono verso la door aperta",
+          "vaiAllaPagina": 66
+        },
+        {
+          "testo": "Return nella cripta della custode a salutarla",
+          "vaiAllaPagina": 61
+        }
+      ]
+    },
+    {
+      "numeroPagina": 61,
+      "testo": "Torni nel corridoio. Tieni la mano sinistra sulla parete sinistra — per abitudine, anche se il corridoio ora è fermo e non cambierà più. Il corridoio ti riporta alla cripta della custode.\n\nLei è ancora seduta al tavolo, con le sue tazze e il suo thermos. Ti guarda arrivare senza sorpresa.\n\n«È fatta?»\n\n«Credo di sì. Gli ingranaggi si sono fermati.»\n\nAnnuisce. Un lungo silenzio. Poi: «Ettore?»\n\n«Ha scritto \"grazie\" su un ingranaggio.»\n\nUn'altra pausa. Poi — è la prima volta che la vedi farlo — la custode sorride davvero. Non il sorriso stanco di prima. Un sorriso genuino.\n\n«Bene.» Si alza. «Allora anch'io posso andare.» E nel momento in cui lo dice, qualcosa nella stanza cambia — la luce, l'aria, la qualità del silenzio. «La villa si fermava, ma qualcuno doveva ricordarla dall'interno. Ora che si è fermata, non ho più questo compito.»\n\nScompare. Non teatralmente — semplicemente non è più lì.",
+      "scelte": [
+        {
+          "testo": "Exit dalla cripta verso la door aperta",
+          "vaiAllaPagina": 66
+        },
+        {
+          "testo": "Restare un momento nella cripta vuota",
+          "vaiAllaPagina": 62
+        }
+      ]
+    },
+    {
+      "numeroPagina": 62,
+      "testo": "Rimani nella cripta per un momento. Gli oggetti sui ripiani sono ancora lì — tutti quei residui di vite passate. Il sestante, la bussola, l'orologio. Li tocchi uno a uno.\n\nNessun suono. Gli oggetti ora sono silenziosi — hanno perso la voce che avevano quando la villa era in moto.\n\nPrendi la bussola dall'ultimo ripiano. Non per nessun motivo pratico — la villa è ferma, ormai la strada è dritta. La prendi perché una bussola è un oggetto per orientarsi, e fuori dalla villa potresti averne bisogno per ricordare come funziona il mondo normale.\n\nSul tavolo della custode, tra le tazze, c'è ancora un po' del liquido scuro nel thermos. Versi un dito nell'ultima tazza. Lo bevi. Sa di erbe e legno bruciato, come prima. Ma adesso sa anche di qualcosa d'altro — qualcosa di difficile da descrivere. Sa di fine.",
+      "scelte": [
+        {
+          "testo": "Exit dalla cripta verso la door aperta",
+          "vaiAllaPagina": 66
+        },
+        {
+          "testo": "Esplorare ancora la villa ferma prima di uscire",
+          "vaiAllaPagina": 63
+        }
+      ]
+    },
+    {
+      "numeroPagina": 63,
+      "testo": "Esplori la villa ferma. È completamente diversa — senza il suo meccanismo in moto, senza i corridoi che cambiano, senza le porte che appaiono e scompaiono, è solo... una villa. Grande, vecchia, piena di stanze interessanti, ma niente di più di un edificio.\n\nTorni nell'atrio. L'orologio a pendolo è fermo. Il lampadario di cristallo non oscilla più. Sul pavimento di marmo c'è ancora l'impronta con sei dita — ma ora è solo un segno, senza il brivido sinistro di prima.\n\nApri la porta rossa. La sala degli specchi è silenziosa. I riflessi sono normali — solo te, da diverse angolazioni, con l'espressione di qualcuno che ha dormito poco e vissuto troppo.\n\nApri la porta nera. Il corridoio è semplicemente un corridoio.\n\nTorni nell'atrio. Le due porte. L'orologio fermo. Il foglietto nella tua tasca che dice \"Scegli con cura. La villa ricorda ogni passo.\"\n\nLa villa ha ricordato. E ora si è fermata.",
+      "scelte": [
+        {
+          "testo": "Go verso la door aperta di cui hai sentito il suono",
+          "vaiAllaPagina": 66
+        },
+        {
+          "testo": "Exit da una delle due porte originali",
+          "vaiAllaPagina": 64
+        }
+      ]
+    },
+    {
+      "numeroPagina": 64,
+      "testo": "Provi la porta rossa. Oltre c'è ancora la sala degli specchi — ma in fondo alla sala, dove prima c'era solo il muro, ora c'è un'apertura. Una porta che non c'era. Anzi — probabilmente c'era sempre, ma coperta dal meccanismo della villa che la teneva nascosta.\n\nOltre l'apertura, una luce. Non la luce fioca delle candele o quella luminosa del pozzo — una luce naturale. Luce del sole.\n\nIl tuo cuore fa una cosa che non fa da ore: si scalda.\n\nCammini verso la luce attraverso la sala degli specchi. I tuoi riflessi ti accompagnano, tutti sincronizzati, tutti con la stessa espressione — sollievo? speranza? entrambe? — sui mille volti riflessi.\n\nLa porta dà su un vestibolo che non avevi mai visto, e il vestibolo dà su una porta finale. Una grande porta di legno con una maniglia semplice. La luce del sole filtra dai bordi.",
+      "scelte": [
+        {
+          "testo": "Open la door e uscire",
+          "vaiAllaPagina": 100
+        },
+        {
+          "testo": "Fermarti con la mano sulla maniglia prima di aprire",
+          "vaiAllaPagina": 65
+        }
+      ]
+    },
+    {
+      "numeroPagina": 65,
+      "testo": "Ti fermi con la mano sulla maniglia. La mano trema leggermente.\n\nPerché esiti? La risposta è complicata. Hai trascorso — quanto? Ore? Giorni? Anni di villa-tempo compressi in un tempo impossibile da misurare — in questo posto. Lo conosci. Non nel senso in cui conosci la tua casa, ma nel senso in cui conosci qualcosa che ha cercato di assorbirti e non ci è riuscita. C'è qualcosa di strano nell'abbandonarlo.\n\nPoi pensi a Ettore Morvell — che ha esitato, e poi non ha più esitato perché la villa ha esitato per lui.\n\nPensi alla custode — che esitava da talmente tanto tempo da non ricordare di farlo.\n\nNon vuoi diventare né l'uno né l'altra.\n\nStringi la maniglia. Spalanchi la porta.",
+      "scelte": [
+        {
+          "testo": "Exit dalla villa",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 66,
+      "testo": "Tre antiorario. Uno orario.\n\nLa chiave gira con una resistenza precisa — come se ogni scatto fosse progettato, come se ogni grado di rotazione aprisse qualcosa di specifico. Al terzo giro antiorario senti qualcosa allentarsi all'interno della colonna. Al giro orario finale, uno scatto netto — come il clic di una serratura di alta qualità — e poi il silenzio.\n\nNon un silenzio graduale. Un silenzio istantaneo. Come se qualcuno avesse premuto un interruttore.\n\nTutti gli ingranaggi si fermano contemporaneamente. La vibrazione cessa. Il ronzio cessa. Il calore della colonna diminuisce sotto il tuo palmo.\n\nE poi — dal fondo della villa, attraverso tutti i corridoi e le stanze e i meccanismi ora fermi — senti un suono che non ti aspettavi: una porta. Una porta che si apre.\n\nEttore Morvell sul suo gradino sospira — un sospiro lungo e profondo come quello di chi ha trattenuto il respiro per decenni. «Eccola,» dice piano. «L'uscita.»",
+      "scelte": [
+        {
+          "testo": "Seguire il suono verso l'uscita",
+          "vaiAllaPagina": 77
+        },
+        {
+          "testo": "Stare un momento con Ettore prima di go",
+          "vaiAllaPagina": 60
+        }
+      ]
+    },
+    {
+      "numeroPagina": 67,
+      "testo": "Il corridoio che segui verso il suono ti porta — stranamente, direttamente, senza curve impossibili — nell'atrio. L'atrio che è il tuo punto di partenza. Il pavimento di marmo freddo. Il lampadario di cristallo. L'orologio a pendolo.\n\nL'orologio è fermo. Il pendolo immobile a metà corsa.\n\nMa le due porte — rossa e nera — sono entrambe aperte. Non spalancate — aperte di pochi centimetri, come se qualcuno le avesse appena spinte dall'altro lato e poi si fosse fatto da parte.\n\nDalla porta rossa entra una luce che prima non c'era.\nDalla porta nera entra un odore — aria fresca, terra bagnata, esterno.\n\nSei nell'atrio per l'ultima volta.",
+      "scelte": [
+        {
+          "testo": "Exit dalla door rossa verso la luce",
+          "vaiAllaPagina": 64
+        },
+        {
+          "testo": "Exit dalla door nera verso l'aria fresca",
+          "vaiAllaPagina": 68
+        }
+      ]
+    },
+    {
+      "numeroPagina": 68,
+      "testo": "La porta nera ti riporta nel corridoio lungo — ma questa volta non devi scegliere tra la scala di pietra e quella di legno. Entrambe le scale sono scomparse. Dove c'erano, ora c'è un'unica uscita: una finestra bassa nel muro, dalle dimensioni di una porta piccola, attraverso cui entra la luce del sole.\n\nLa finestra non c'era. O c'era sempre e la villa la nascondeva. O la villa la stava tenendo chiusa e ora, con il meccanismo fermo, si è aperta.\n\nCi passi attraverso — devi piegarti, mettere prima le gambe e poi il resto — ed esci.\n\nSei fuori.\n\nSei davvero fuori.",
+      "scelte": [
+        {
+          "testo": "Respirare l'aria aperta e guardare la villa dall'esterno",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 69,
+      "testo": "Percorri la biblioteca alla ricerca di qualcosa di utile. I libri che raccontano la tua storia sono tutti fermi — le ultime pagine scritte sono il momento in cui hai girato la chiave. Dopo, bianche.\n\nMa altri libri — quelli che raccontano le storie di altri — continuano. Vedi la vita del marinaio, del pittore, della persona qualunque. Nelle ultime pagine di ognuno c'è una riga aggiunta di fresco: \"La villa si è fermata. Potrà uscire ora.\"\n\nNon capisci bene cosa significa. Non sei sicuro di capire molto di quello che è successo in questa villa. Ma la biblioteca ora sembra un posto normale — alta, straordinaria, piena di libri impossibili, ma normale nel senso che non ti minaccia.\n\nScendi dalla biblioteca e segui il suono dell'uscita.",
+      "scelte": [
+        {
+          "testo": "Seguire il suono verso la door aperta",
+          "vaiAllaPagina": 77
+        },
+        {
+          "testo": "Return all'atrio",
+          "vaiAllaPagina": 67
+        }
+      ]
+    },
+    {
+      "numeroPagina": 70,
+      "testo": "Nella sala degli specchi, ferma la villa, i riflessi sono tutti sincronizzati. Nessun ritardo, nessun sorriso non tuo. Solo tu, riflesso da mille angolazioni, stanco e spettinato e vivo.\n\nLa sfera sul piedistallo di alabastro — quella che avevi toccato all'inizio, quella che ti aveva rimandato indietro — ora è trasparente. Dentro non c'è più l'ombra di prima. C'è una scena miniaturizzata — un modellino in scala della villa, perfettamente dettagliato, con tutti i corridoi e le stanze.\n\nLa osservi. In una stanzina minuscola vedi una figurina — te stesso. Cammini attraverso la villa in miniatura verso l'uscita. La figurina si muove mentre tu ti muovi.\n\nLa villa ti sta ancora guardando. Forse lo farà sempre. Ma ora il suo sguardo è neutro — di osservazione, non di trappola.\n\nEsci dalla sala degli specchi verso la luce.",
+      "scelte": [
+        {
+          "testo": "Go verso la door aperta",
+          "vaiAllaPagina": 77
+        },
+        {
+          "testo": "Return nell'atrio",
+          "vaiAllaPagina": 67
+        }
+      ]
+    },
+    {
+      "numeroPagina": 71,
+      "testo": "La scala di legno ti riporta in cucina. La moka sul tavolo ha smesso di fumare — il caffè è freddo. Il foglio con la calligrafia sottilissima è ancora lì, ma quando lo guardi adesso le parole sono cambiate: invece di \"Il cassetto che non apre,\" ora dice \"Hai trovato la strada. Vai.\"\n\nLa cucina sembra più piccola senza il meccanismo della villa che la gonfiava di importanza simbolica. È solo una cucina — grande, ben attrezzata, con la sua dispensa e la sua botola.\n\nAttraverso la finestra — che non ricordavi ci fosse — vedi un giardino. Un giardino vero, con erba e alberi e luce del sole pomeridiana. La finestra è chiusa ma non bloccata. La apri.\n\nL'aria di fuori entra — fredda, umida, con l'odore della terra dopo la pioggia. Hai dimenticato che esistesse quell'odore.",
+      "scelte": [
+        {
+          "testo": "Exit dalla finestra della cucina nel giardino",
+          "vaiAllaPagina": 100
+        },
+        {
+          "testo": "Return alla botola per controllare il tunnel",
+          "vaiAllaPagina": 22
+        }
+      ]
+    },
+    {
+      "numeroPagina": 72,
+      "testo": "Cerchi un'altra via d'uscita nella cantina. Nelle pareti di fondo — oltre la cantinetta con la bottiglia blu — c'è un'altra porta. Questa non era nascosta, semplicemente non l'avevi notata. È di ferro, con un catenaccio semplice.\n\nApri il catenaccio. La porta dà su un corridoio di mattoni — diverso dal tunnel della cucina, più basso, più stretto — che dopo pochi metri sale in un uscio a raso terra.\n\nSpingi l'uscio. Si apre verso l'esterno. Sei in un cortile posteriore della villa — grigio, acciottolato, con un pozzo secco al centro e un cancello sul lato. Il cancello è aperto.\n\nOltre il cancello c'è la strada.",
+      "scelte": [
+        {
+          "testo": "Attraversare il cancello verso la strada",
+          "vaiAllaPagina": 100
+        },
+        {
+          "testo": "Return nella villa prima di uscire definitivamente",
+          "vaiAllaPagina": 63
+        }
+      ]
+    },
+    {
+      "numeroPagina": 73,
+      "testo": "Sei tornato nell'atrio troppe volte. Cominci a capire il meccanismo — la villa ti riporta indietro quando sbagli, ma non ti punisce. Ti ricomincia. È il suo metodo, come diceva la custode.\n\nLa volta che sei entrato dal corridoio nero e hai scelto le scale, poi la cucina, poi il tunnel, poi la custode — quella era la strada giusta. Ogni altra scelta ti ha riportato qui, in modi diversi.\n\nAdesso sai dove andare. Non perché hai una mappa — anche se hai un foglio in tasca — ma perché hai memoria. E la memoria, in questa villa, è la cosa più preziosa che esiste.\n\nPorte davanti a te: una rossa, una nera. Sai quale.",
+      "scelte": [
+        {
+          "testo": "Open la door nera",
+          "vaiAllaPagina": 3
+        }
+      ]
+    },
+    {
+      "numeroPagina": 74,
+      "testo": "Stai girando per la villa ferma cercando cose che non hai ancora visto. Trovi stanze che non avevi esplorato: una sala di musica con un pianoforte coperto di polvere, le cui note suonano da sole quando ci passi accanto. Una conservatoria piena di piante — come fanno a essere ancora vive? — con foglie di colori impossibili. Una stanza completamente vuota tranne per una sedia al centro e, sul soffitto, un dipinto straordinario del cielo notturno — così dettagliato che riesci a riconoscere costellazioni.\n\nIn nessuna di queste stanze c'è un'uscita. Ma in ognuna c'è qualcosa che ti sembra importante ricordare. Come se la villa, ora che non può tenerti, stesse cercando di darti qualcosa.\n\nPoi senti di nuovo il suono — la porta aperta, il richiamo verso l'esterno — e ti rendi conto che non puoi continuare a rimandare.",
+      "scelte": [
+        {
+          "testo": "Seguire il suono verso l'uscita",
+          "vaiAllaPagina": 77
+        },
+        {
+          "testo": "Visitare ancora la sala di musica prima di go",
+          "vaiAllaPagina": 75
+        }
+      ]
+    },
+    {
+      "numeroPagina": 75,
+      "testo": "Torni nella sala di musica. Il pianoforte suona da solo — non una melodia compiuta, ma una serie di note singole, a intervalli irregolari, come se stesse cercando un accordo.\n\nTi siedi davanti allo strumento. Non sai suonare — o almeno, non ricordi di saper suonare. Premi un tasto. Una nota. Poi un altro. Poi un altro ancora. Le note del pianoforte si aggiungono alle tue in modo complementare, come se stesse improvvisando intorno a quello che suoni.\n\nPer qualche minuto fai musica insieme a una villa vuota e ferma.\n\nPoi smetti, e il pianoforte smette insieme a te. L'ultima nota risuona nell'aria per molto più tempo del normale.\n\nSul leggio del pianoforte c'è uno spartito. In cima allo spartito, invece del titolo del pezzo, c'è scritto: \"Buona fortuna fuori.\"\n\nChiudi lo spartito con cura.",
+      "scelte": [
+        {
+          "testo": "Go verso l'uscita definitivamente",
+          "vaiAllaPagina": 77
+        },
+        {
+          "testo": "Return nell'atrio un'ultima volta",
+          "vaiAllaPagina": 67
+        }
+      ]
+    },
+    {
+      "numeroPagina": 76,
+      "testo": "Nella conservatoria le piante sono silenziose ma presenti. Alcune hanno foglie che brillano leggermente di un verde impossibile. Una, in un grande vaso di terracotta, ha fiori bianchi che profumano di qualcosa che non riesci ad identificare — qualcosa di dolce, lontano, familiare.\n\nTi fermi davanti a questa pianta. Il profumo dei fiori bianchi porta qualcosa con sé: un frammento di memoria. Un giardino. Una mano che ti tiene la tua. Una voce che dice qualcosa — non riesci a sentire le parole, ma il tono è caldo.\n\nQualcuno fuori dalla villa ti sta aspettando. Forse. Non sai di chi si tratta — la villa ha preso quel ricordo — ma sai che c'è qualcuno.\n\nIl profumo dei fiori bianchi ti segue mentre esci dalla conservatoria e ti incammini verso la porta aperta.",
+      "scelte": [
+        {
+          "testo": "Seguire il profumo e il suono verso l'uscita",
+          "vaiAllaPagina": 77
+        },
+        {
+          "testo": "Portare via uno dei fiori bianchi come ricordo",
+          "vaiAllaPagina": 77
+        }
+      ]
+    },
+    {
+      "numeroPagina": 77,
+      "testo": "Il suono della porta aperta ti guida attraverso la villa ferma come un filo d'Arianna. Non devi più tenere la mano sulla parete — i corridoi non cambiano più. Non devi più scegliere tra scale o porte o passaggi — c'è solo una direzione chiara, pulita, dritta.\n\nPassi per l'atrio un'ultima volta. L'orologio fermo ti saluta con il suo pendolo immobile. Il pavimento di marmo riflette i tuoi passi. Non c'è più l'impronta con sei dita — o forse è sempre stata lì e ora non la noti più.\n\nIl suono della porta aperta viene dalla porta nera — che è aperta, questo lo vedi adesso. Oltre la soglia, invece del lungo corridoio azzurro, c'è un corridoio corto che termina in pochi passi.\n\nE quel corridoio termina in luce.",
+      "scelte": [
+        {
+          "testo": "Avanzare verso la luce",
+          "vaiAllaPagina": 88
+        },
+        {
+          "testo": "Fermarti nell'atrio e guardare la villa un'ultima volta",
+          "vaiAllaPagina": 63
+        }
+      ]
+    },
+    {
+      "numeroPagina": 78,
+      "testo": "Percorri il corridoio finale. È breve — cinque, sei passi — e termina in una porta finestra a doppia anta che si apre verso l'esterno. Attraverso i vetri vedi un portico, e oltre il portico un vialetto di ghiaia, e oltre il vialetto un cancello aperto, e oltre il cancello il mondo.\n\nSpingi le ante. Si aprono senza resistenza.\n\nIl portico è di pietra grigia, con delle sedie di ferro arrugginito che devono essere state bianche decenni fa. Sul pavimento del portico ci sono foglie secche — foglie vere, cadute da alberi veri, portate dal vento vero.\n\nRaccogli una foglia. La guardi. È solo una foglia — secca, fragile, arancione autunnale. Ma è una prova che esiste un fuori, che esiste un autunno, che esiste qualcosa oltre Villa Morvell.\n\nTieni la foglia in mano mentre scendi i gradini del portico verso il vialetto di ghiaia.",
+      "scelte": [
+        {
+          "testo": "Camminare verso il cancello aperto",
+          "vaiAllaPagina": 88
+        },
+        {
+          "testo": "Fermarti un momento sul portico",
+          "vaiAllaPagina": 79
+        }
+      ]
+    },
+    {
+      "numeroPagina": 79,
+      "testo": "Ti fermi sul portico. Guardi la villa dall'esterno — o quasi: sei ancora sul portico della villa stessa, ma il punto di vista è già diverso. La facciata è di pietra color avorio, le finestre grandi e simmetriche, i comignoli multipli sul tetto. È una villa bella, in modo severo.\n\nDall'esterno non si capisce nulla di quello che contiene.\n\nPoi noti qualcosa: a una delle finestre del piano superiore — la terza da sinistra, quella menzionata nel libro con le pagine bianche — c'è una luce. Non la luce elettrica delle applique, non il fuoco delle candele. Una luce morbida, quasi lunare, che pulsa lentamente.\n\nPoi la luce si spegne. E la finestra è buia come tutte le altre.\n\nNon sai cosa fosse. Forse la villa che saluta. Forse la custode che trova il suo modo di andare. Forse Ettore che lascia andare qualcosa che teneva da decenni.\n\nScendi i gradini.",
+      "scelte": [
+        {
+          "testo": "Go verso il cancello aperto",
+          "vaiAllaPagina": 88
+        }
+      ]
+    },
+    {
+      "numeroPagina": 80,
+      "testo": "Il vialetto di ghiaia scricchiola sotto i tuoi passi — un suono ordinario, rassicurante. A destra e sinistra del vialetto ci sono grandi alberi — tigli, forse, con i rami spogli e la corteccia scura. Foglie secche dappertutto.\n\nCammini verso il cancello. Non devi correre — il cancello è aperto, la villa è ferma, non c'è nessun meccanismo che possa riportarti indietro. Cammini lentamente, guardandoti intorno, cercando di registrare tutto.\n\nPoi ti fermi. Hai sentito qualcosa.\n\nUna voce — lontana, dall'esterno del cancello, da oltre la strada. Una voce che chiama il tuo nome. Una voce che riconosci, anche se non riesci a metterle un viso. Qualcuno ti sta cercando. Qualcuno sapeva dove eri, o sperava di trovarti.\n\nIl cuore fa di nuovo quella cosa calda.",
+      "scelte": [
+        {
+          "testo": "Rispondere alla voce e correre verso il cancello",
+          "vaiAllaPagina": 88
+        },
+        {
+          "testo": "Avvicinarti piano, con cautela",
+          "vaiAllaPagina": 88
+        }
+      ]
+    },
+    {
+      "numeroPagina": 81,
+      "testo": "Cammini lungo il perimetro della villa, fuori, nel giardino. Cerchi altri ingressi o uscite — non per tornare dentro, ma per curiosità. Per capire cosa sei appena uscito.\n\nLa villa è grande quanto sembra dall'interno — forse più grande. Ha ali che non hai esplorato, finestre a livelli che non hai raggiunto. È una struttura impossibile — dall'interno sembrava contenere più spazio di quanto ne possa fisicamente avere, ma vista dall'esterno si capisce che è semplicemente un edificio molto grande.\n\nSul lato posteriore trovi il cortile grigio con il pozzo secco — quello del corridoio della cantina. E dall'altra parte del cortile, il cancello già aperto su una strada secondaria.\n\nDue uscite. Il cancello sul fronte, la strada sul retro. Entrambe portano fuori.\n\nScegli il cancello sul fronte — è quello verso cui senti la voce.",
+      "scelte": [
+        {
+          "testo": "Go verso il cancello principale",
+          "vaiAllaPagina": 88
+        }
+      ]
+    },
+    {
+      "numeroPagina": 82,
+      "testo": "Provi a tornare dentro — non perché tu voglia restare, ma perché hai dimenticato qualcosa nel corridoio. Un oggetto piccolo, forse. O forse è solo il riflesso dell'abitudine di tornare, che la villa ti ha insegnato a forza.\n\nMa la porta dal portico non si apre più. Non è bloccata — la maniglia cede — ma la porta non si muove. Come se qualcosa dall'interno la tenesse. Non con forza, semplicemente con immobilità, come un peso.\n\nBussi. Nessuna risposta.\n\nPoi, dalla fessura sotto la porta, esce un foglio. È il foglietto che avevi trovato nell'atrio all'inizio: \"Scegli con cura. La villa ricorda ogni passo.\"\n\nSul retro, qualcuno ha aggiunto di fresco: \"Hai scelto bene. Non tornare.\"\n\nRimetti il foglietto in tasca. Non torni.",
+      "scelte": [
+        {
+          "testo": "Go verso il cancello aperto",
+          "vaiAllaPagina": 88
+        }
+      ]
+    },
+    {
+      "numeroPagina": 83,
+      "testo": "La strada oltre il cancello è una strada di campagna — asfaltata ma stretta, fiancheggiata da alberi alti. Non c'è traffico. L'aria sa di terra bagnata, foglie secche, qualcosa di fresco che si avvicina all'inverno.\n\nCammini lungo il bordo della strada senza sapere dove porta. Non importa — porta fuori dalla villa, e questo è abbastanza.\n\nDopo una curva la strada si allarga. Poi c'è un incrocio. Poi, lontano, le luci di un paese.\n\nTi fermi e guardi indietro, verso la direzione da cui sei venuto. Non riesci a vedere la villa — è troppo lontana, o nascosta dagli alberi. Poi ti rendi conto che non sei sicuro di sapere per quanto tempo hai camminato.\n\nNon importa. Continui.",
+      "scelte": [
+        {
+          "testo": "Continuare verso le luci del paese",
+          "vaiAllaPagina": 100
+        },
+        {
+          "testo": "Fermarti un momento in mezzo alla strada",
+          "vaiAllaPagina": 84
+        }
+      ]
+    },
+    {
+      "numeroPagina": 84,
+      "testo": "Ti fermi in mezzo alla strada vuota. Fai un inventario mentale di quello che hai vissuto. La lista è lunga e strana e piena di elementi che non si sa come catalogare.\n\nHai in tasca: il foglietto dell'atrio, la chiave dorata (ancora, per qualche motivo), la bussola presa nella cripta, una foglia secca del portico. Hai in testa: la faccia di Ettore Morvell che ti guardava con quella speranza nascosta. Il sorriso finale della custode. Le parole incise sull'ingranaggio. Il profumo dei fiori bianchi nella conservatoria.\n\nNon hai: i tuoi ricordi di prima. Quelli li hai dati — uno alla custode, uno alla villa, qualcuno li hai persi per strada. Sai dove abiti? Non sei sicuro. Sai chi ti aspetta? Sentivi una voce, ma ora è silenziosa.\n\nQuello che sai è che sei fuori. E che fuori si ricomincia, in un modo o nell'altro.\n\nRiprendi a camminare.",
+      "scelte": [
+        {
+          "testo": "Camminare verso le luci del paese",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 85,
+      "testo": "Lungo la strada trovi una panchina. Non ci dovrebbe essere una panchina in mezzo a una strada di campagna, ma eccola. Ci siedi.\n\nDal lato della panchina sporge un foglio, infilato nel metallo della struttura. Lo prendi. È una pagina strappata da un libro — uno dei libri della biblioteca. Il tuo libro. Racconta questo momento — te seduto sulla panchina, con il foglio in mano, che leggi di te seduto sulla panchina con il foglio in mano.\n\nIn fondo alla pagina, dopo la descrizione del presente, c'è una riga in più: \"Si alzerà. Camminerà verso le luci. Troverà qualcosa che non si aspetta e che è esattamente quello di cui ha bisogno.\"\n\nNon sai cosa sia. Ma la biblioteca non ha mai mentito — raccontava la storia mentre accadeva, senza alterarla.\n\nTi alzi. Cammini verso le luci.",
+      "scelte": [
+        {
+          "testo": "Go verso le luci del paese",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 86,
+      "testo": "La voce che sentivi chiama di nuovo. Più forte adesso — più vicina. Viene da oltre gli alberi, dalla direzione del paese. Una voce che conosci nel modo in cui conosci una melodia sentita mille volte — non sai il titolo né l'autore, ma sai ogni nota.\n\nCominci a correre. La ghiaia scricchiola, le foglie svolazzano, l'aria fredda ti entra nei polmoni. Corri senza pensare alla villa, senza pensare agli ingranaggi fermi, senza pensare a Ettore o alla custode o alle chiavi o ai meccanismi.\n\nCorri semplicemente verso la voce.\n\nPoi la vedi — oltre gli alberi, all'inizio del paese — una figura in piedi sul bordo della strada che ti guarda arrivare. Non riesci a vederla bene da questa distanza. Ma la voce è sua.",
+      "scelte": [
+        {
+          "testo": "Correre verso la figura",
+          "vaiAllaPagina": 100
+        },
+        {
+          "testo": "Fermarti e camminare gli ultimi metri",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 87,
+      "testo": "L'uscita è vicina. Lo senti — non solo il suono della porta, ma qualcosa di più fisico: un cambiamento nell'aria, una pressione diversa, il modo in cui la luce si comporta. La villa sta finendo.\n\nNei tuoi ultimi passi all'interno — se è ancora interno — raccogli i pensieri come si raccolgono le cose sparse su un tavolo prima di andarsene. La chiave in tasca. Il foglietto. La bussola. La foglia.\n\nE i ricordi della villa, che nessuno ti può togliere perché li hai vissuti, non li hai sognati: il caffè perfetto in cucina, il sorriso della custode, il grazie inciso sul metallo, il suono degli ingranaggi che si fermano.\n\nUna vita breve dentro una villa grande. Eppure — e questo ti sorprende — non è stata solo terrore e confusione. Ci sono stati momenti di qualcosa che non sapresti chiamare diversamente da bellezza.\n\nLa porta finale è davanti a te.",
+      "scelte": [
+        {
+          "testo": "Open la door e uscire",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 88,
+      "testo": "Il cancello è aperto. Ci passi attraverso.\n\nIl ferro del cancello è freddo sotto le dita — reale, fisico, inequivocabilmente fuori dalla villa. Dalla parte esterna del cancello guardi indietro: il vialetto di ghiaia, il portico, la facciata di Villa Morvell color avorio. Le finestre sono tutte buie. I comignoli non fumano.\n\nPoi — e ci metti un secondo a capire cosa stai vedendo — dalla finestra del terzo piano, la terza da sinistra, si accende una luce. Una luce morbida, quasi lunare.\n\nLa saluti con la mano, anche se non sai chi c'è lì. La luce pulsa una volta — come un battito — e poi si spegne.\n\nTi giri. Davanti a te c'è la strada, gli alberi, le luci lontane del paese, e — all'inizio di un vialetto laterale — una figura in piedi che ti guarda arrivare.\n\nLa voce che avevi sentito dice il tuo nome.",
+      "scelte": [
+        {
+          "testo": "Go verso la figura",
+          "vaiAllaPagina": 96
+        },
+        {
+          "testo": "Fermarti e fissare Villa Morvell un ultimo momento",
+          "vaiAllaPagina": 89
+        }
+      ]
+    },
+    {
+      "numeroPagina": 89,
+      "testo": "Ti fermi e fissi Villa Morvell. Dal di fuori, nel pomeriggio autunnale, con la luce che taglia obliqua tra i tigli spogli, è semplicemente bella. Imponente, seria, una di quelle ville costruite per durare secoli.\n\nNon vorresti che bruciasse. Non vorresti che crollasse. Vuoi che rimanga lì — vuota, ferma, silenziosa — per altri secoli. Perché ora che il meccanismo è fermo, è solo un edificio. Un edificio con una storia straordinaria e complicata, ma un edificio.\n\nForse qualcuno la comprerà. Forse diventerà un albergo o un museo o una residenza per artisti. Forse rimarrà lì, chiusa, aspettando.\n\nLa figura dall'inizio del vialetto chiama di nuovo il tuo nome.\n\nTi volti e vai.",
+      "scelte": [
+        {
+          "testo": "Go verso la figura",
+          "vaiAllaPagina": 96
+        }
+      ]
+    },
+    {
+      "numeroPagina": 90,
+      "testo": "Lungo il vialetto ci sono altri oggetti — lasciati lì, chissà quando, chissà da chi. Un ombrello chiuso. Un cappello di paglia fuori stagione. Un libro — rilegato in pelle, senza titolo sul dorso, esattamente come quelli della biblioteca.\n\nLo apri. È vuoto. Non bianco — vuoto, le pagine non stampate né scritte, semplicemente carta non ancora usata. Un libro che aspetta di essere scritto.\n\nLo prendi. Non sai perché. Forse perché fuori dalla villa hai bisogno di qualcosa da raccontare, e un libro vuoto è il posto giusto per cominciare.\n\nIl vialetto finisce sulla strada. La figura è lì, ad aspettarti, e mentre ti avvicini cominci a distinguerne i tratti.",
+      "scelte": [
+        {
+          "testo": "Avvicinarti alla figura",
+          "vaiAllaPagina": 96
+        }
+      ]
+    },
+    {
+      "numeroPagina": 91,
+      "testo": "Il mondo fuori dalla villa è quieto. Non silenzioso — ci sono suoni, gli uccelli, il vento tra gli alberi, il rumore lontano di un motore — ma quieto, nel senso che i suoni hanno le proporzioni giuste. Non il ronzio sopraffacente degli ingranaggi, non il silenzio assoluto post-meccanismo. La scala normale del mondo.\n\nStai camminando verso la figura quando ti accorgi di qualcosa che non avevi notato prima: la chiave dorata nella tua tasca è diventata calda. Non il calore del corpo che l'ha scaldata — un calore proprio, come se stesse generando energia dall'interno.\n\nLa tiri fuori e la guardi. Le serpi incise sembrano muoversi — è solo la luce, dici a te stesso, ma non ne sei sicuro.\n\nPoi la chiave si raffredda. Diventa normale. È solo un pezzo di metallo con delle incisioni.\n\nLa rimetti in tasca. Forse un giorno capirai cos'era. O forse no, e va bene lo stesso.",
+      "scelte": [
+        {
+          "testo": "Continuare verso la figura",
+          "vaiAllaPagina": 96
+        }
+      ]
+    },
+    {
+      "numeroPagina": 92,
+      "testo": "La strada tra il cancello e la figura è più lunga di quanto sembrasse. Cammini per minuti — o forse è la stanchezza che dilata il tempo — e la figura rimane alla stessa distanza.\n\nPoi capisci: non si è mossa. È lì, ferma, che aspetta che tu arrivi. Non viene incontro a te — lascia che tu faccia tutti i passi. Come se sapesse che ne hai bisogno.\n\nOgni passo sulla ghiaia, sull'asfalto, tra le foglie secche, è un passo nel mondo normale. Ogni respiro d'aria fredda è un respiro di qualcosa che non profuma di cera e metallo e mistero.\n\nStai rientrando nel mondo. E il mondo non è cambiato. Sei tu che sei cambiato — in modo che non saprai misurare per molto tempo, forse mai.\n\nLa figura è vicina ora. Abbastanza da vedere i suoi occhi.",
+      "scelte": [
+        {
+          "testo": "Guardare negli occhi della figura e go verso di lei",
+          "vaiAllaPagina": 96
+        }
+      ]
+    },
+    {
+      "numeroPagina": 93,
+      "testo": "Guardi la villa un'ultima volta. Davvero l'ultima.\n\nPoi ti chiedi: se qualcun altro ci entrerà, dopo di te, troverà la villa ancora ferma? O il meccanismo si riavvierà, come fa un cuore dopo uno choc, riprendendo a battere da solo?\n\nNon lo sai. Non puoi saperlo. Potresti anche tornare a controllare — ma la villa ti ha già detto, attraverso la porta che non si apriva, di non tornare.\n\nFidati della villa, in questo. Ha dimostrato di sapere quello che fa.\n\nIl cancello è alle tue spalle. La strada è davanti. La figura è lì, paziente, con quella voce calda che dice il tuo nome come se non smettesse mai.",
+      "scelte": [
+        {
+          "testo": "Raggiungere la figura sulla strada",
+          "vaiAllaPagina": 96
+        }
+      ]
+    },
+    {
+      "numeroPagina": 94,
+      "testo": "Uno degli ultimi oggetti che noti, sul bordo della strada vicino al cancello, è un orologio. Non da polso, non da tasca — un orologio da tavolo, di quelli con la sveglia a campanelle, abbandonato lì sul bordo dell'asfalto come se qualcuno lo avesse dimenticato scendendo da un'auto.\n\nLo raccogli. Non è l'orologio a pendolo dell'atrio — quello è rimasto dentro, fermo sul suo meccanismo. Questo è un orologio normale, a batterie, che segna l'ora corretta — o almeno, segna un'ora, e tu non hai modo di sapere se è corretta perché non ricordi quant'è che sei entrato nella villa.\n\nLo tieni in mano per un secondo. Poi lo rimetti sul bordo della strada dove l'hai trovato.\n\nNon hai bisogno di sapere l'ora. Non ancora.",
+      "scelte": [
+        {
+          "testo": "Go verso la figura",
+          "vaiAllaPagina": 96
+        }
+      ]
+    },
+    {
+      "numeroPagina": 95,
+      "testo": "Sei a pochi passi dalla figura. I suoi tratti sono chiari ora — una persona reale, con un cappotto pesante e le mani in tasca, che ti guarda arrivare con un'espressione che mescola sollievo e qualcosa che potrebbe essere rabbia e qualcosa che è sicuramente amore.\n\nNon ricordi il suo nome. Non ancora — i ricordi restituiti dalla villa arrivano a spizzichi, come puzzle che si riassemblano lentamente. Ma riconosci quella faccia nel modo profondo in cui si riconoscono le cose importanti, senza passare per il cervello.\n\n«Ci hai messo,» dice la figura. Non \"dove eri\", non \"stai bene\" — solo quello, detto con la voce di chi ha aspettato molto più del previsto e ha già deciso di non fare un dramma.\n\n«Lo so,» rispondi. «Mi dispiace.»\n\n«Non importa.» Una mano che esce dalla tasca e prende la tua. Calda. Reale. «Andiamo.»",
+      "scelte": [
+        {
+          "testo": "Go",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 96,
+      "testo": "La figura sei passi davanti a te ti sorride. Un sorriso pieno — non il sorriso stanco della custode, non il sorriso dipinto di Jeeves — un sorriso vero di qualcuno che è felice di vederti e non cerca di nasconderlo.\n\nAncora due passi. Uno.\n\nLe mani si trovano. Dita che si intrecciano. Una stretta — non forte, non disperata, ma ferma. Il tipo di stretta che dice \"ci sono\".\n\nPoi quella voce, vicina: «Sei sparito per tre giorni. Tre giorni. Ho cercato ovunque.»\n\nTre giorni. Nella villa sembrava insieme meno e di più.\n\n«Ho trovato qualcosa,» dici. Non sai ancora come spiegare il resto. Forse non ce n'è bisogno. Forse basta che tu sia qui, fuori, con la mano di qualcuno nella tua.\n\n«Cosa?»\n\nCi pensi. «Il modo di uscire.»\n\nLa figura ride — piano, con la gola. «Ovviamente.» Una pausa. «Andiamo a casa?»",
+      "scelte": [
+        {
+          "testo": "Yes. Let's go home.",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 97,
+      "testo": "Mentre camminate insieme lungo la strada verso il paese, parli. O almeno, provi. Le parole per descrivere Villa Morvell non esistono ancora — dovrai inventarle, o trovarle nel libro vuoto che hai in tasca, o semplicemente smettere di cercare di descriverla e lasciare che diventi un'altra cosa: memoria, non racconto.\n\nLa figura accanto a te ascolta senza interrompere. Ogni tanto annuisce. Non chiede prove, non mette in dubbio, non suggerisce spiegazioni alternative. Ascolta.\n\nQuesto — capisce adesso — è esattamente quello di cui avevi bisogno dopo la villa. Non spiegazioni. Non domande. Qualcuno che ascolti.\n\nIl paese è vicino. Le sue luci sono calde nella sera che si abbassa. Ci sono finestre illuminate, suoni di vita normale, l'odore di qualcuno che sta cucinando.\n\nIl tuo stomaco ricorda che esiste.",
+      "scelte": [
+        {
+          "testo": "Enter nel paese con la figura accanto",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 98,
+      "testo": "All'ingresso del paese c'è una piccola piazza. Una fontana al centro — questa volta una fontana normale, con acqua che cade e fa semplicemente il suono dell'acqua. Panchine. Un albero grande con le foglie quasi tutte cadute.\n\nCi siedi un momento. La figura si siede accanto a te. Silenzio condiviso — completamente diverso dai silenzi della villa. Questo silenzio è pieno di cose normali: vento, fontana, passi lontani, il cane di qualcuno che abbaia una volta e poi smette.\n\nTiri fuori la chiave dorata dalla tasca e la guardi. Poi la lasci cadere nel bacino della fontana. Non per nessun motivo preciso. O forse per un motivo molto preciso: la chiave appartiene alla villa, ed è giusto che la distanza tra te e la villa cresca.\n\nLa chiave tocca il fondo del bacino e rimane ferma. Non brillante, non misteriosa. Solo un pezzo di metallo nel fondo di una fontana, come tanti altri oggetti dimenticati in tanti altri posti.",
+      "scelte": [
+        {
+          "testo": "Alzarsi e go avanti",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 99,
+      "testo": "Hai quasi finito. Lo senti — non come una scadenza, ma come la fine naturale di una storia che ha avuto un percorso tortuoso ma è sempre andata in questa direzione, verso questo momento, verso questo passo finale.\n\nLa figura accanto a te tiene ancora la tua mano. Le luci del paese davanti. Il profumo di cucina nell'aria.\n\nHai in mente ancora la villa — gli ingranaggi fermi, Ettore e il suo grazie, la custode che scompare quando non ha più un compito, Jeeves con la sua chiave-offerta. Li porterai con te. Non come cicatrici, o almeno non solo come cicatrici. Come qualcosa di più vicino a testimonianza.\n\nSei stato dentro. Sei uscito. Hai fermato qualcosa che doveva essere fermato.\n\nUn passo ancora.",
+      "scelte": [
+        {
+          "testo": "Take the last step",
+          "vaiAllaPagina": 100
+        }
+      ]
+    },
+    {
+      "numeroPagina": 100,
+      "testo": "Esci.\n\nO ci sei già — il confine tra dentro e fuori era meno definito di quanto pensassi, e forse lo attraversi gradualmente nel corso di minuti o ore, non in un unico istante. Ma a un certo punto sei inequivocabilmente fuori. L'aria del mondo reale nei polmoni. Il suolo del mondo reale sotto i piedi. Il cielo del mondo reale sopra la tua testa — grigio autunnale, con qualche strappo di azzurro, e il sole basso che fa ombre lunghe tra gli alberi.\n\nVilla Morvell è alle tue spalle. Non la guardi più.\n\nDavanti a te c'è qualcuno che ti conosce e ti aspettava. Accanto a te c'è una strada. In tasca hai una bussola, un foglietto, un libro vuoto, e una foglia secca — le cose che porti fuori da un posto impossibile, quando non puoi portare i ricordi di prima.\n\nMa i ricordi tornano. Lentamente, mentre cammini. Come oggetti che emergono da un'acqua torbida: un nome, un indirizzo, un giorno di settimana, una abitudine. Il tuo mondo, pezzo per pezzo, che torna al suo posto.\n\nLa villa ti ha preso qualcosa. La villa ti ha dato qualcosa. Non è un pareggio — non c'è modo di misurare queste transazioni — ma è quello che è.\n\nCammini.\n\nIl paese ha luci calde nelle finestre e profumo di cucina nell'aria e il suono banale, meraviglioso, di persone che vivono la loro vita normale.\n\nCi sei.",
+      "scelte": []
+    }
+  ]
+}
