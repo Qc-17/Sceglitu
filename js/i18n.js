@@ -23,6 +23,7 @@ const translations = {
       importTitle: 'Importa storia',
       pasteTab: '📋 Incolla JSON',
       fileTab: '📂 File JSON',
+      jsonPlaceholder: 'Incolla qui il contenuto JSON della storia...',
       dropLabel: 'Clicca per scegliere un file',
       dropSub: 'oppure trascina qui un file <code>.json</code>',
       errorNoJson: 'Nessun JSON fornito. Incolla il contenuto o seleziona un file.',
@@ -80,6 +81,7 @@ const translations = {
       importTitle: 'Import story',
       pasteTab: '📋 Paste JSON',
       fileTab: '📂 JSON File',
+      jsonPlaceholder: 'Paste the story JSON content here...',
       dropLabel: 'Click to choose a file',
       dropSub: 'or drag a <code>.json</code> file here',
       errorNoJson: 'No JSON provided. Paste content or select a file.',
@@ -141,6 +143,9 @@ function setLanguage(lang) {
   });
   document.querySelectorAll('[data-i18n-title]').forEach(el => {
     el.setAttribute('title', t(el.getAttribute('data-i18n-title')));
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
   });
 
   renderHome();
