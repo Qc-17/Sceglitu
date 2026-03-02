@@ -359,7 +359,7 @@
     display: flex; align-items: center; gap: 12px;
     box-shadow: 0 1px 4px var(--shadow);
   }
-  .choice-btn::before { content: 'â'; color: var(--amber); font-size: 16px; flex-shrink: 0; transition: transform 0.2s; }
+  .choice-btn::before { content: '→'; color: var(--amber); font-size: 16px; flex-shrink: 0; transition: transform 0.2s; }
   .choice-btn:active { border-color: var(--amber); background: var(--amber-pale); }
   .choice-btn:active::before { transform: translateX(3px); }
 
@@ -483,8 +483,8 @@
       <div class="header-controls">
         <div class="sync-indicator" id="sync-indicator"></div>
         <div class="lang-switch">
-          <button class="lang-btn active" onclick="setLanguage('it')" title="Italiano">ð®ð¹</button>
-          <button class="lang-btn" onclick="setLanguage('en')" title="English">ð¬ð§</button>
+          <button class="lang-btn active" onclick="setLanguage('it')" title="Italiano">🇮🇹</button>
+          <button class="lang-btn" onclick="setLanguage('en')" title="English">🇬🇧</button>
         </div>
       </div>
     </div>
@@ -492,7 +492,7 @@
 
   <div id="stories-container" class="stories-list"></div>
 
-  <button class="fab" onclick="openEditor()" title="Crea o importa storia" data-i18n-title="fab.tooltip">ï¼</button>
+  <button class="fab" onclick="openEditor()" title="Crea o importa storia" data-i18n-title="fab.tooltip">＋</button>
 
   <footer class="app-footer">
     <span data-i18n="footer.text">Sceglitu &mdash;</span> <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub</a> <span data-i18n="footer.license">&mdash; Licenza GPL&nbsp;3.0 &copy; Qc-17</span>
@@ -509,11 +509,14 @@
   <div class="editor-body">
     <!-- Guide -->
     <div class="guide-card">
-      <h3 data-i18n="editor.guideTitle">ð Come creare una storia</h3>
-      <p data-i18n="editor.guideP1">Una storia Ã¨ composta da <strong>pagine</strong>. Ogni pagina ha un testo e delle <strong>scelte</strong> che portano ad altre pagine. Se una pagina non ha scelte, Ã¨ la fine di quel percorso.</p>
-      <p data-i18n="editor.guideP2">Incolla il JSON nell'area qui sotto oppure importa un file <code>.json</code>. Esempi e documentazione su <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub â</a>.</p>
+      <h3 data-i18n="editor.guideTitle">📖 Come creare una storia</h3>
+      <p data-i18n="editor.guideP1">Una storia è composta da <strong>pagine</strong>. Ogni pagina ha un testo e delle <strong>scelte</strong> che portano ad altre pagine. Se una pagina non ha scelte, è la fine di quel percorso.</p>
+      <p data-i18n="editor.guideP2">Incolla il JSON nell'area qui sotto oppure importa un file <code>.json</code>. Esempi e documentazione su <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub ↗</a>.</p>
 
-<p data-i18n="editor.guideP3">È disponibile un editor visuale. È usabile in due versioni, una leggera più comoda da telefono <a href ="editor.html">qui</a>  ed una più completa più comoda da computer <a href ="editorpc.html">qui</a></p>
+<p data-i18n="editor.guideP3">È possibile usare un edior visuale
+ <br>  -Per telefono clicca <a href ="editor.html">qui</a>
+ <br>  -Per computer (più  completo) clicca <a href ="editorpc.html">qui</a>
+</p>
 
       <div class="json-example">{
   <span class="jk">"titolo"</span>: <span class="js">"La mia storia"</span>,
@@ -544,21 +547,21 @@
     <div style="display:flex;flex-direction:column;gap:12px">
       <div class="section-title" data-i18n="editor.importTitle">Importa storia</div>
       <div class="import-tabs">
-        <button class="tab-btn active" onclick="switchTab('paste')" data-i18n="editor.pasteTab">ð Incolla JSON</button>
-        <button class="tab-btn" onclick="switchTab('file')" data-i18n="editor.fileTab">ð File JSON</button>
+        <button class="tab-btn active" onclick="switchTab('paste')" data-i18n="editor.pasteTab">📋 Incolla JSON</button>
+        <button class="tab-btn" onclick="switchTab('file')" data-i18n="editor.fileTab">📂 File JSON</button>
       </div>
 
       <textarea id="json-input" class="json-input" placeholder='Incolla qui il contenuto JSON della storia...'></textarea>
 
       <div class="file-drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
-        <div class="drop-icon">ð</div>
+        <div class="drop-icon">📂</div>
         <strong id="drop-label" data-i18n="editor.dropLabel">Clicca per scegliere un file</strong>
         <p id="drop-sub" data-i18n="editor.dropSub">oppure trascina qui un file <code>.json</code></p>
       </div>
       <input type="file" id="file-input" accept=".json,application/json">
 
       <div class="error-msg" id="error-msg"></div>
-      <button class="btn-primary" onclick="saveStory()" data-i18n="editor.saveBtn">ð¾ Salva storia</button>
+      <button class="btn-primary" onclick="saveStory()" data-i18n="editor.saveBtn">💾 Salva storia</button>
     </div>
   </div>
 
@@ -602,7 +605,7 @@
     <div class="modal-json" id="modal-json-content"></div>
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeJsonModal()" data-i18n="modal.closeBtn">Chiudi</button>
-      <button class="btn-copy" onclick="copyJson()" data-i18n="modal.copyBtn">ð Copia JSON</button>
+      <button class="btn-copy" onclick="copyJson()" data-i18n="modal.copyBtn">📋 Copia JSON</button>
     </div>
   </div>
 </div>
@@ -623,22 +626,23 @@ const translations = {
     },
     editor: {
       title: 'Nuova storia',
-      guideTitle: 'ð Come creare una storia',
-      guideP1: 'Una storia Ã¨ composta da <strong>pagine</strong>. Ogni pagina ha un testo e delle <strong>scelte</strong> che portano ad altre pagine. Se una pagina non ha scelte, Ã¨ la fine di quel percorso.',
-      guideP2: 'Incolla il JSON nell\'area qui sotto oppure importa un file <code>.json</code>. Esempi e documentazione su <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub â</a>',
-      guideP3: 'È disponibile un editor visuale. È usabile in due versioni, una leggera più comoda da telefono <a href ="editor.html">qui</a>  ed una più completa più comoda da computer <a href ="editorpc.html">qui</a>',
+      guideTitle: '📖 Come creare una storia',
+      guideP1: 'Una storia è composta da <strong>pagine</strong>. Ogni pagina ha un testo e delle <strong>scelte</strong> che portano ad altre pagine. Se una pagina non ha scelte, è la fine di quel percorso.',
+      guideP2: 'Incolla il JSON nell\'area qui sotto oppure importa un file <code>.json</code>. Esempi e documentazione su <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub ↗</a>',
+      guideP3: 'È possibile usare un edior visuale<br>  -Per telefono clicca <a href ="editor.html">qui</a><br>  -Per computer (più  completo) clicca <a href ="editorpc.html">qui</a>'
+      guideP3: 'È possibile usare un edior visuale<br>  -Per telefono clicca <a href ="editor.html">qui</a><br>  -Per computer (più  completo) clicca <a href ="editorpc.html">qui</a>',
       importTitle: 'Importa storia',
-      pasteTab: 'ð Incolla JSON',
-      fileTab: 'ð File JSON',
+      pasteTab: '📋 Incolla JSON',
+      fileTab: '📂 File JSON',
       dropLabel: 'Clicca per scegliere un file',
       dropSub: 'oppure trascina qui un file <code>.json</code>',
       errorNoJson: 'Nessun JSON fornito. Incolla il contenuto o seleziona un file.',
       errorInvalidJson: 'JSON non valido: ',
       errorMissingTitle: 'Campo "titolo" mancante o non valido.',
       errorMissingPages: 'Campo "pagine" mancante o vuoto.',
-      errorDuplicate: 'Esiste giÃ  una storia chiamata "',
+      errorDuplicate: 'Esiste già una storia chiamata "',
       errorDuplicateQuestion: '". Sostituirla?',
-      saveBtn: 'ð¾ Salva storia',
+      saveBtn: '💾 Salva storia',
       saveSuccess: 'Storia salvata!'
     },
     reader: {
@@ -654,7 +658,7 @@ const translations = {
     modal: {
       title: 'JSON della storia',
       closeBtn: 'Chiudi',
-      copyBtn: 'ð Copia JSON',
+      copyBtn: '📋 Copia JSON',
       copySuccess: 'JSON copiato!'
     },
     fab: {
@@ -682,13 +686,13 @@ const translations = {
     },
     editor: {
       title: 'New story',
-      guideTitle: 'ð How to create a story',
+      guideTitle: '📖 How to create a story',
       guideP1: 'A story is made of <strong>pages</strong>. Each page has text and <strong>choices</strong> that lead to other pages. If a page has no choices, it\'s the end of that path.',
-      guideP2: 'Paste the JSON in the area below or import a <code>.json</code> file. Examples and documentation on <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub â</a>',
-      guideP3: 'You can also use a visual editor. There are two versions, a lighter one for the phone <a href ="editor.html">here</a> and a more complete one for computer <a href ="editorpc.html">here</a>',
+      guideP2: 'Paste the JSON in the area below or import a <code>.json</code> file. Examples and documentation on <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub ↗</a>',
+      guideP3: 'Click <a href="editor.html">here</a> for a visual editor for the smartphone, or click <a href="editorpc.html">here</a> for a more complete editor for the computer',
       importTitle: 'Import story',
-      pasteTab: 'ð Paste JSON',
-      fileTab: 'ð JSON File',
+      pasteTab: '📋 Paste JSON',
+      fileTab: '📂 JSON File',
       dropLabel: 'Click to choose a file',
       dropSub: 'or drag a <code>.json</code> file here',
       errorNoJson: 'No JSON provided. Paste content or select a file.',
@@ -697,7 +701,7 @@ const translations = {
       errorMissingPages: 'Field "pages" missing or empty.',
       errorDuplicate: 'A story named "',
       errorDuplicateQuestion: '" already exists. Replace it?',
-      saveBtn: 'ð¾ Save story',
+      saveBtn: '💾 Save story',
       saveSuccess: 'Story saved!'
     },
     reader: {
@@ -713,7 +717,7 @@ const translations = {
     modal: {
       title: 'Story JSON',
       closeBtn: 'Close',
-      copyBtn: 'ð Copy JSON',
+      copyBtn: '📋 Copy JSON',
       copySuccess: 'JSON copied!'
     },
     fab: {
@@ -755,12 +759,12 @@ function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('sceglitu_lang', lang);
   document.documentElement.lang = lang;
-  
+
   // Update active button
   document.querySelectorAll('.lang-btn').forEach((btn, idx) => {
     btn.classList.toggle('active', (idx === 0 && lang === 'it') || (idx === 1 && lang === 'en'));
   });
-  
+
   // Re-render UI
   updateUI();
 }
@@ -804,7 +808,7 @@ function renderHome() {
   if (!stories.length) {
     c.innerHTML = `
       <div class="empty-state">
-        <div class="empty-icon">ð</div>
+        <div class="empty-icon">📚</div>
         <h2>${t('home.emptyTitle')}</h2>
         <p>${t('home.emptyDesc')}</p>
       </div>`;
@@ -820,13 +824,13 @@ function renderHome() {
     card.className = 'story-card';
     card.style.animationDelay = (idx * 0.06) + 's';
     card.innerHTML = `
-      <div class="story-card-icon">ð</div>
+      <div class="story-card-icon">📖</div>
       <div class="story-card-body">
         <div class="story-card-title">${esc(story.titolo)}</div>
-        <div class="story-card-meta">${pages} ${t('home.metaPages')}${inProgress ? ' Â· ' + t('home.metaReading') + prog + ')' : ''}</div>
+        <div class="story-card-meta">${pages} ${t('home.metaPages')}${inProgress ? ' · ' + t('home.metaReading') + prog + ')' : ''}</div>
       </div>
-      <div class="story-card-progress ${inProgress ? 'active' : ''}">${inProgress ? 'p.' + prog : 'â'}</div>
-      <button class="story-card-delete" title="Elimina storia" onclick="deleteStory(event,${idx})">ð</button>
+      <div class="story-card-progress ${inProgress ? 'active' : ''}">${inProgress ? 'p.' + prog : '–'}</div>
+      <button class="story-card-delete" title="Elimina storia" onclick="deleteStory(event,${idx})">🗑</button>
     `;
     card.addEventListener('click', e => {
       if (e.target.closest('.story-card-delete')) return;
@@ -918,7 +922,7 @@ function readFile(file) {
   const reader = new FileReader();
   reader.onload = ev => {
     pendingFileJson = ev.target.result;
-    document.getElementById('drop-label').textContent = 'â ' + file.name;
+    document.getElementById('drop-label').textContent = '✓ ' + file.name;
     document.getElementById('drop-sub').textContent = t('toast.fileLoaded');
     document.getElementById('error-msg').classList.remove('visible');
   };
@@ -1005,7 +1009,7 @@ function renderPage() {
   } else {
     const endBtn = document.createElement('button');
     endBtn.className = 'end-btn';
-    endBtn.textContent = 'â ' + t('reader.restartBtn').split('&#')[0].trim();
+    endBtn.textContent = '✓ ' + t('reader.restartBtn').split('&#')[0].trim();
     endBtn.addEventListener('click', showCompletion);
     choicesEl.appendChild(endBtn);
     restartBtn.style.display = 'block';
@@ -1096,7 +1100,7 @@ async function fetchRawJson(filename) {
 
 async function syncFromGitHub() {
   const indicator = document.getElementById('sync-indicator');
-  if (indicator) indicator.textContent = 'â³ syncâ¦';
+  if (indicator) indicator.textContent = '⟳ sync…';
 
   let synced = {};
   try { synced = JSON.parse(localStorage.getItem(SYNCED_KEY)) || {}; } catch {}
@@ -1133,7 +1137,7 @@ async function syncFromGitHub() {
     localStorage.setItem(SYNCED_KEY, JSON.stringify(synced));
     renderHome();
     const suffix = importedCount !== 1 ? t('toast.importedPlural') : t('toast.imported');
-    toast(`ð¥ ${importedCount} ${suffix}`);
+    toast(`📥 ${importedCount} ${suffix}`);
   }
 
   if (indicator) indicator.textContent = '';
