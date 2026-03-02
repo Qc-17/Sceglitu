@@ -557,27 +557,27 @@ body {
 
 <!-- ── TOP BAR ── -->
 <div id="topbar">
-  <h1>Story Editor <span>PRO</span></h1>
+  <h1 data-i18n="top.title">Story Editor <span>PRO</span></h1>
   <div class="topbar-meta">
-    <input id="f-titolo" placeholder="Titolo storia" oninput="onMeta()">
-    <input id="f-autore" placeholder="Autore" oninput="onMeta()" style="max-width:140px">
-    <input id="f-anno" placeholder="Anno" oninput="onMeta()" type="number" min="0" style="max-width:110px">
-    <input id="f-genere" placeholder="Genere" oninput="onMeta()" style="max-width:150px">
-    <input id="f-lingua" placeholder="Lingua" oninput="onMeta()" style="max-width:130px">
+    <input id="f-titolo" data-i18n-placeholder="top.storyTitle" placeholder="Titolo storia" oninput="onMeta()">
+    <input id="f-autore" data-i18n-placeholder="top.author" placeholder="Autore" oninput="onMeta()" style="max-width:140px">
+    <input id="f-anno" data-i18n-placeholder="top.year" placeholder="Anno" oninput="onMeta()" type="number" min="0" style="max-width:110px">
+    <input id="f-genere" data-i18n-placeholder="top.genre" placeholder="Genere" oninput="onMeta()" style="max-width:150px">
+    <input id="f-lingua" data-i18n-placeholder="top.language" placeholder="Lingua" oninput="onMeta()" style="max-width:130px">
   </div>
   <div class="topbar-actions">
-    <button class="btn btn-surface btn-sm" onclick="openImport()">⬆ Importa</button>
-    <button class="btn btn-ok btn-sm" onclick="downloadJSON()">⬇ Salva JSON</button>
+    <button class="btn btn-surface btn-sm" onclick="openImport()" data-i18n="top.importBtn">⬆ Importa</button>
+    <button class="btn btn-ok btn-sm" onclick="downloadJSON()" data-i18n="top.saveJsonBtn">⬇ Salva JSON</button>
   </div>
 </div>
 
 <!-- ── TAB BAR ── -->
 <div id="tabbar">
-  <div class="tab active" onclick="switchTab('editor')" id="tab-editor">✏️ Editor</div>
-  <div class="tab" onclick="switchTab('graph')" id="tab-graph">🔀 Grafo</div>
+  <div class="tab active" onclick="switchTab('editor')" id="tab-editor" data-i18n="tabs.editor">✏️ Editor</div>
+  <div class="tab" onclick="switchTab('graph')" id="tab-graph" data-i18n="tabs.graph">🔀 Grafo</div>
   <div class="tab" onclick="switchTab('json')" id="tab-json">{ } JSON</div>
   <div class="tab" onclick="switchTab('stats')" id="tab-stats">
-    📊 Analisi <span class="badge" id="issues-badge">0</span>
+    <span data-i18n="tabs.analysis">📊 Analisi</span> <span class="badge" id="issues-badge">0</span>
   </div>
 </div>
 
@@ -588,13 +588,13 @@ body {
   <div class="panel active" id="editor-panel-wrap">
     <div id="searchbar">
       <span style="font-size:13px;color:var(--text3)">🔍</span>
-      <input id="search-input" placeholder="Cerca nel testo delle pagine…" oninput="doSearch()">
+      <input id="search-input" data-i18n-placeholder="editor.searchPlaceholder" placeholder="Cerca nel testo delle pagine…" oninput="doSearch()">
       <span id="search-count"></span>
-      <button class="btn btn-surface btn-sm" onclick="openFindReplace()">Sostituisci</button>
+      <button class="btn btn-surface btn-sm" onclick="openFindReplace()" data-i18n="editor.replaceBtn">Sostituisci</button>
     </div>
     <div id="editor-panel">
       <!-- cards injected here -->
-      <button id="add-page-btn" onclick="addPage()">＋ Aggiungi pagina</button>
+      <button id="add-page-btn" onclick="addPage()" data-i18n="editor.addPageBtn">＋ Aggiungi pagina</button>
     </div>
   </div>
 
@@ -602,10 +602,10 @@ body {
   <div class="panel" id="graph-panel">
     <canvas id="graph-canvas"></canvas>
     <div id="graph-info">
-      <div class="graph-stat"><b id="g-pages">0</b><span>Pagine</span></div>
-      <div class="graph-stat"><b id="g-choices">0</b><span>Scelte</span></div>
-      <div class="graph-stat"><b id="g-ends">0</b><span>Finali</span></div>
-      <div class="graph-stat"><b id="g-broken">0</b><span>Rotti</span></div>
+      <div class="graph-stat"><b id="g-pages">0</b><span data-i18n="graph.pages">Pagine</span></div>
+      <div class="graph-stat"><b id="g-choices">0</b><span data-i18n="graph.choices">Scelte</span></div>
+      <div class="graph-stat"><b id="g-ends">0</b><span data-i18n="graph.endings">Finali</span></div>
+      <div class="graph-stat"><b id="g-broken">0</b><span data-i18n="graph.broken">Rotti</span></div>
     </div>
     <div id="graph-controls">
       <button class="btn btn-surface btn-sm" onclick="graphZoomIn()">＋</button>
@@ -614,10 +614,10 @@ body {
       <button class="btn btn-accent btn-sm" onclick="graphLayout()">⟳ Layout</button>
     </div>
     <div id="graph-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Valida</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Finale</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Link rotto</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#6366f1"></div>Pagina 1</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div><span data-i18n="graph.valid">Valida</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div><span data-i18n="graph.ending">Finale</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div><span data-i18n="graph.brokenLink">Link rotto</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6366f1"></div><span data-i18n="graph.pageOne">Pagina 1</span></div>
     </div>
     <div id="graph-tooltip"></div>
   </div>
@@ -625,18 +625,18 @@ body {
   <!-- JSON -->
   <div class="panel" id="json-panel">
     <div id="json-toolbar">
-      <span style="font-size:13px;color:var(--text2);flex:1">Anteprima JSON — seleziona per copiare</span>
-      <button class="btn btn-surface btn-sm" onclick="copyJson()">📋 Copia tutto</button>
-      <button class="btn btn-ok btn-sm" onclick="downloadJSON()">⬇ Scarica</button>
+      <span style="font-size:13px;color:var(--text2);flex:1" data-i18n="json.preview">Anteprima JSON — seleziona per copiare</span>
+      <button class="btn btn-surface btn-sm" onclick="copyJson()" data-i18n="json.copyAll">📋 Copia tutto</button>
+      <button class="btn btn-ok btn-sm" onclick="downloadJSON()" data-i18n="json.download">⬇ Scarica</button>
     </div>
     <textarea id="json-output" readonly spellcheck="false"></textarea>
   </div>
 
   <!-- STATS -->
   <div class="panel" id="stats-panel">
-    <div class="section-title">Statistiche</div>
+    <div class="section-title" data-i18n="stats.title">Statistiche</div>
     <div class="stats-grid" id="stats-grid"></div>
-    <div class="section-title" style="margin-top:8px">Problemi rilevati</div>
+    <div class="section-title" style="margin-top:8px" data-i18n="stats.issues">Problemi rilevati</div>
     <div class="issues-list" id="issues-list"></div>
   </div>
 
@@ -648,19 +648,19 @@ body {
 <!-- Import -->
 <div class="modal-overlay" id="modal-import">
   <div class="modal">
-    <h2>⬆ Importa storia</h2>
+    <h2 data-i18n="import.title">⬆ Importa storia</h2>
     <div>
-      <label>File JSON</label>
+      <label data-i18n="import.fileLabel">File JSON</label>
       <input type="file" accept=".json" id="import-file" onchange="doImport(event)">
     </div>
-    <div style="color:var(--text3);font-size:13px">oppure incolla il JSON direttamente:</div>
+    <div style="color:var(--text3);font-size:13px" data-i18n="import.orPaste">oppure incolla il JSON direttamente:</div>
     <div>
-      <label>JSON</label>
+      <label data-i18n="import.jsonLabel">JSON</label>
       <textarea id="import-json" rows="8" placeholder='{"titolo":"...","autore":"...","anno":2026,"genere":"...","lingua":"...","pagine":[...]}'></textarea>
     </div>
     <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal('modal-import')">Annulla</button>
-      <button class="btn btn-accent" onclick="doImportJson()">Importa</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-import')" data-i18n="common.cancel">Annulla</button>
+      <button class="btn btn-accent" onclick="doImportJson()" data-i18n="top.importBtn">⬆ Importa</button>
     </div>
   </div>
 </div>
@@ -668,20 +668,20 @@ body {
 <!-- Find & Replace -->
 <div class="modal-overlay" id="modal-findreplace">
   <div class="modal">
-    <h2>🔍 Trova e sostituisci</h2>
+    <h2 data-i18n="findReplace.title">🔍 Trova e sostituisci</h2>
     <div>
-      <label>Cerca</label>
-      <input id="fr-find" placeholder="Testo da cercare…">
+      <label data-i18n="findReplace.findLabel">Cerca</label>
+      <input id="fr-find" data-i18n-placeholder="findReplace.findPlaceholder" placeholder="Testo da cercare…">
     </div>
     <div>
-      <label>Sostituisci con</label>
-      <input id="fr-replace" placeholder="Testo sostitutivo…">
+      <label data-i18n="findReplace.replaceLabel">Sostituisci con</label>
+      <input id="fr-replace" data-i18n-placeholder="findReplace.replacePlaceholder" placeholder="Testo sostitutivo…">
     </div>
     <div id="fr-preview" style="font-size:13px;color:var(--text3)"></div>
     <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal('modal-findreplace')">Chiudi</button>
-      <button class="btn btn-warn" onclick="doFindReplace(true)">Anteprima</button>
-      <button class="btn btn-accent" onclick="doFindReplace(false)">Sostituisci tutto</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-findreplace')" data-i18n="common.close">Chiudi</button>
+      <button class="btn btn-warn" onclick="doFindReplace(true)" data-i18n="findReplace.previewBtn">Anteprima</button>
+      <button class="btn btn-accent" onclick="doFindReplace(false)" data-i18n="findReplace.replaceAllBtn">Sostituisci tutto</button>
     </div>
   </div>
 </div>
@@ -698,11 +698,46 @@ const uiLang = localStorage.getItem('sceglitu_lang') || 'it';
 document.documentElement.lang = uiLang;
 
 const I18N = {
-  it: {searchFound:'trovate',deletePage:'Eliminare pagina',pageDuplicated:'Pagina duplicata ✓',jsonCopied:'JSON copiato negli appunti ✓',fileDownloaded:'File scaricato ✓',storyImported:'Storia importata ✓',invalidJson:'JSON non valido: ',importMissingPages:'"pagine" mancante'},
-  en: {searchFound:'found',deletePage:'Delete page',pageDuplicated:'Page duplicated ✓',jsonCopied:'JSON copied to clipboard ✓',fileDownloaded:'File downloaded ✓',storyImported:'Story imported ✓',invalidJson:'Invalid JSON: ',importMissingPages:'"pagine" missing'}
+  it: {
+    top: { title: 'Story Editor <span>PRO</span>', storyTitle: 'Titolo storia', author: 'Autore', year: 'Anno', genre: 'Genere', language: 'Lingua', importBtn: '⬆ Importa', saveJsonBtn: '⬇ Salva JSON' },
+    tabs: { editor: '✏️ Editor', graph: '🔀 Grafo', analysis: '📊 Analisi' },
+    editor: { searchPlaceholder: 'Cerca nel testo delle pagine…', replaceBtn: 'Sostituisci', addPageBtn: '＋ Aggiungi pagina', scenePlaceholder: 'Testo della scena…', choicesLabel: 'Scelte', choicePlaceholder: 'Testo della scelta…', addChoiceBtn: '＋ Aggiungi scelta', targetPage: '→ Pag.', missingPage: 'pag. inesistente' },
+    graph: { pages: 'Pagine', choices: 'Scelte', endings: 'Finali', broken: 'Rotti', valid: 'Valida', ending: 'Finale', brokenLink: 'Link rotto', pageOne: 'Pagina 1' },
+    json: { preview: 'Anteprima JSON — seleziona per copiare', copyAll: '📋 Copia tutto', download: '⬇ Scarica' },
+    stats: { title: 'Statistiche', issues: 'Problemi rilevati', totalPages: 'Pagine totali', endings: 'Finali', endingsSub: 'pagine senza scelte', totalChoices: 'Scelte totali', perPage: 'per pagina', brokenLinks: 'Link rotti', unreachable: 'Non raggiungibili', fromPage1: 'dalla pagina 1', words: 'Parole', wordsSub: 'nel testo delle pagine', maxDepth: 'Profondità max', fromRoot: 'dal nodo radice', reachedPages: 'Pagine raggiunte', outOf: 'su', noIssues: '✓ Nessun problema rilevato' },
+    import: { title: '⬆ Importa storia', fileLabel: 'File JSON', orPaste: 'oppure incolla il JSON direttamente:', jsonLabel: 'JSON' },
+    findReplace: { title: '🔍 Trova e sostituisci', findLabel: 'Cerca', findPlaceholder: 'Testo da cercare…', replaceLabel: 'Sostituisci con', replacePlaceholder: 'Testo sostitutivo…', previewBtn: 'Anteprima', replaceAllBtn: 'Sostituisci tutto', foundOccurrences: 'Trovate {count} occorrenze', noneFound: 'Nessuna occorrenza trovata', replacedOccurrences: 'Sostituite {count} occorrenze' },
+    common: { cancel: 'Annulla', close: 'Chiudi', duplicate: 'Duplica', delete: 'Elimina', dragToSort: 'Trascina per riordinare' },
+    status: { valid: 'Valida', endpoint: 'Fine percorso', broken: 'Link rotto' },
+    issues: { searchFound: 'trovate', deletePage: 'Eliminare pagina', pageDuplicated: 'Pagina duplicata ✓', jsonCopied: 'JSON copiato negli appunti ✓', fileDownloaded: 'File scaricato ✓', storyImported: 'Storia importata ✓', invalidJson: 'JSON non valido: ', importMissingPages: '"pagine" mancante', badChoice: 'Pag. {page}: scelta "{choice}" punta alla pag. {target} che non esiste', unreachable: 'Pag. {page}: non raggiungibile dalla pagina 1', emptyText: 'Pag. {page}: testo vuoto' }
+  },
+  en: {
+    top: { title: 'Story Editor <span>PRO</span>', storyTitle: 'Story title', author: 'Author', year: 'Year', genre: 'Genre', language: 'Language', importBtn: '⬆ Import', saveJsonBtn: '⬇ Save JSON' },
+    tabs: { editor: '✏️ Editor', graph: '🔀 Graph', analysis: '📊 Analysis' },
+    editor: { searchPlaceholder: 'Search in page text…', replaceBtn: 'Replace', addPageBtn: '＋ Add page', scenePlaceholder: 'Scene text…', choicesLabel: 'Choices', choicePlaceholder: 'Choice text…', addChoiceBtn: '＋ Add choice', targetPage: '→ Pg.', missingPage: 'missing page' },
+    graph: { pages: 'Pages', choices: 'Choices', endings: 'Endings', broken: 'Broken', valid: 'Valid', ending: 'Ending', brokenLink: 'Broken link', pageOne: 'Page 1' },
+    json: { preview: 'JSON preview — select to copy', copyAll: '📋 Copy all', download: '⬇ Download' },
+    stats: { title: 'Statistics', issues: 'Detected issues', totalPages: 'Total pages', endings: 'Endings', endingsSub: 'pages without choices', totalChoices: 'Total choices', perPage: 'per page', brokenLinks: 'Broken links', unreachable: 'Unreachable', fromPage1: 'from page 1', words: 'Words', wordsSub: 'in page text', maxDepth: 'Max depth', fromRoot: 'from root node', reachedPages: 'Reached pages', outOf: 'of', noIssues: '✓ No issues detected' },
+    import: { title: '⬆ Import story', fileLabel: 'JSON file', orPaste: 'or paste JSON directly:', jsonLabel: 'JSON' },
+    findReplace: { title: '🔍 Find and replace', findLabel: 'Find', findPlaceholder: 'Text to find…', replaceLabel: 'Replace with', replacePlaceholder: 'Replacement text…', previewBtn: 'Preview', replaceAllBtn: 'Replace all', foundOccurrences: 'Found {count} occurrences', noneFound: 'No occurrences found', replacedOccurrences: 'Replaced {count} occurrences' },
+    common: { cancel: 'Cancel', close: 'Close', duplicate: 'Duplicate', delete: 'Delete', dragToSort: 'Drag to reorder' },
+    status: { valid: 'Valid', endpoint: 'Path end', broken: 'Broken link' },
+    issues: { searchFound: 'found', deletePage: 'Delete page', pageDuplicated: 'Page duplicated ✓', jsonCopied: 'JSON copied to clipboard ✓', fileDownloaded: 'File downloaded ✓', storyImported: 'Story imported ✓', invalidJson: 'Invalid JSON: ', importMissingPages: '"pages" missing', badChoice: 'Pg. {page}: choice "{choice}" points to pg. {target} which does not exist', unreachable: 'Pg. {page}: unreachable from page 1', emptyText: 'Pg. {page}: empty text' }
+  }
 };
 
-function txt(key){ return (I18N[uiLang] || I18N.it)[key] || key; }
+function txt(key) {
+  return key.split('.').reduce((obj, k) => obj && obj[k], I18N[uiLang] || I18N.it) || key;
+}
+
+function txtf(key, params = {}) {
+  return Object.entries(params).reduce((acc, [k, v]) => acc.replaceAll(`{${k}}`, v), txt(key));
+}
+
+function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = txt(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.setAttribute('placeholder', txt(el.getAttribute('data-i18n-placeholder'))); });
+}
 
 
 let pages = JSON.parse(localStorage.getItem('sep_pages') || '[]');
@@ -773,7 +808,7 @@ function addPage() {
 }
 
 function deletePage(i) {
-  if (!confirm(`${txt('deletePage')} ${pages[i].numeroPagina}?`)) return;
+  if (!confirm(`${txt('issues.deletePage')} ${pages[i].numeroPagina}?`)) return;
   pages.splice(i, 1);
   renumber();
 }
@@ -783,7 +818,7 @@ function duplicatePage(i) {
   copy.numeroPagina = pages.length + 1;
   pages.splice(i + 1, 0, copy);
   renumber();
-  toast(txt('pageDuplicated'), 'ok');
+  toast(txt('issues.pageDuplicated'), 'ok');
 }
 
 function renumber() {
@@ -880,7 +915,7 @@ function buildCard(i) {
   // Status display
   const statusIcon = status === 'ok' ? '✓' : status === 'endpoint' ? '⚑' : '✕';
   const statusColor = status === 'ok' ? 'var(--ok)' : status === 'endpoint' ? 'var(--warn)' : 'var(--danger)';
-  const statusLabel = status === 'ok' ? 'Valida' : status === 'endpoint' ? 'Fine percorso' : 'Link rotto';
+  const statusLabel = status === 'ok' ? txt('status.valid') : status === 'endpoint' ? txt('status.endpoint') : txt('status.broken');
 
   card.innerHTML = `
     <div class="card-header">
@@ -889,19 +924,19 @@ function buildCard(i) {
         <span>${statusIcon}</span> <span>${statusLabel}</span>
       </div>
       <div style="margin-left:auto;display:flex;gap:4px;align-items:center">
-        <button class="btn btn-surface btn-sm" title="Duplica" onclick="duplicatePage(${i})">⧉</button>
-        <button class="btn btn-danger btn-sm" title="Elimina" onclick="deletePage(${i})">🗑</button>
-        <div class="drag-handle" title="Trascina per riordinare">⋮⋮</div>
+        <button class="btn btn-surface btn-sm" title="${txt('common.duplicate')}" onclick="duplicatePage(${i})">⧉</button>
+        <button class="btn btn-danger btn-sm" title="${txt('common.delete')}" onclick="deletePage(${i})">🗑</button>
+        <div class="drag-handle" title="${txt('common.dragToSort')}">⋮⋮</div>
       </div>
     </div>
 
-    <textarea class="page-text" rows="3" placeholder="Testo della scena…"
+    <textarea class="page-text" rows="3" placeholder="${txt('editor.scenePlaceholder')}"
       oninput="pages[${i}].testo=this.value;save();updateCardStatus(${i})">${escHtml(p.testo)}</textarea>
 
     <div class="choices-section" id="choices-${i}"></div>
 
     <button class="btn btn-info btn-sm" style="margin-top:6px" onclick="addChoice(${i})">
-      ＋ Aggiungi scelta
+      ${txt('editor.addChoiceBtn')}
     </button>
   `;
 
@@ -910,7 +945,7 @@ function buildCard(i) {
   if (p.scelte.length > 0) {
     const label = document.createElement('div');
     label.className = 'choices-label';
-    label.textContent = 'Scelte';
+    label.textContent = txt('editor.choicesLabel');
     choicesDiv.appendChild(label);
   }
 
@@ -921,14 +956,14 @@ function buildCard(i) {
     cdiv.innerHTML = `
       <span class="choice-arrow">→</span>
       <div class="choice-fields">
-        <input class="choice-text" value="${escHtml(c.testo)}" placeholder="Testo della scelta…"
+        <input class="choice-text" value="${escHtml(c.testo)}" placeholder="${txt('editor.choicePlaceholder')}"
           oninput="pages[${i}].scelte[${ci}].testo=this.value;save()">
         <div class="choice-target-row">
-          <span class="choice-target-label">→ Pag.</span>
+          <span class="choice-target-label">${txt('editor.targetPage')}</span>
           <input class="choice-target${isBroken ? ' broken' : ''}" type="number" min="1"
             value="${c.vaiAllaPagina || ''}" placeholder="?"
             oninput="pages[${i}].scelte[${ci}].vaiAllaPagina=parseInt(this.value)||0;save();updateCardStatus(${i});this.className='choice-target'+(pages[${i}].scelte[${ci}].vaiAllaPagina&&!allNums().has(pages[${i}].scelte[${ci}].vaiAllaPagina)?' broken':'')">
-          ${isBroken ? `<span style="color:var(--danger);font-size:11px">pag. inesistente</span>` : ''}
+          ${isBroken ? `<span style="color:var(--danger);font-size:11px">${txt('editor.missingPage')}</span>` : ''}
         </div>
       </div>
       <button class="btn btn-danger btn-sm" onclick="deleteChoice(${i},${ci})">✕</button>
@@ -986,7 +1021,7 @@ function doSearch() {
   });
 
   document.getElementById('search-count').textContent =
-    q ? `${matches} ${txt('searchFound')}` : '';
+    q ? `${matches} ${txt('issues.searchFound')}` : '';
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1023,12 +1058,12 @@ function doFindReplace(preview) {
 
   if (preview) {
     document.getElementById('fr-preview').textContent =
-      count > 0 ? `Trovate ${count} occorrenze` : 'Nessuna occorrenza trovata';
+      count > 0 ? txtf('findReplace.foundOccurrences', { count }) : txt('findReplace.noneFound');
   } else {
     save();
     render();
     closeModal('modal-findreplace');
-    toast(`Sostituite ${count} occorrenze`, 'ok');
+    toast(txtf('findReplace.replacedOccurrences', { count }), 'ok');
   }
 }
 
@@ -1054,7 +1089,7 @@ function renderJson() {
 
 function copyJson() {
   navigator.clipboard.writeText(JSON.stringify(generateJSON(), null, 2));
-  toast(txt('jsonCopied'), 'ok');
+  toast(txt('issues.jsonCopied'), 'ok');
 }
 
 function downloadJSON() {
@@ -1064,7 +1099,7 @@ function downloadJSON() {
   const a = document.createElement('a');
   a.href = url; a.download = name + '.json'; a.click();
   URL.revokeObjectURL(url);
-  toast(txt('fileDownloaded'), 'ok');
+  toast(txt('issues.fileDownloaded'), 'ok');
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1087,7 +1122,7 @@ function doImportJson() {
   try {
     const raw = document.getElementById('import-json').value;
     const data = JSON.parse(raw);
-    if (!data.pagine || !Array.isArray(data.pagine)) throw new Error(txt('importMissingPages'));
+    if (!data.pagine || !Array.isArray(data.pagine)) throw new Error(txt('issues.importMissingPages'));
     pages = data.pagine;
     titolo = data.titolo || '';
     autore = data.autore || '';
@@ -1102,9 +1137,9 @@ function doImportJson() {
     save();
     render();
     closeModal('modal-import');
-    toast(txt('storyImported'), 'ok');
+    toast(txt('issues.storyImported'), 'ok');
   } catch (e) {
-    toast(txt('invalidJson') + e.message, 'err');
+    toast(txt('issues.invalidJson') + e.message, 'err');
   }
 }
 
@@ -1139,26 +1174,26 @@ function renderStats() {
   const issues = [];
   brokenPages.forEach(p => {
     p.scelte.filter(c => c.vaiAllaPagina && !nums.has(Number(c.vaiAllaPagina))).forEach(c => {
-      issues.push({ type: 'err', page: p.numeroPagina, msg: `Pag. ${p.numeroPagina}: scelta "${c.testo || '?'}" punta alla pag. ${c.vaiAllaPagina} che non esiste` });
+      issues.push({ type: 'err', page: p.numeroPagina, msg: txtf('issues.badChoice', { page: p.numeroPagina, choice: c.testo || '?', target: c.vaiAllaPagina }) });
     });
   });
   unreachable.forEach(p => {
-    issues.push({ type: 'warn', page: p.numeroPagina, msg: `Pag. ${p.numeroPagina}: non raggiungibile dalla pagina 1` });
+    issues.push({ type: 'warn', page: p.numeroPagina, msg: txtf('issues.unreachable', { page: p.numeroPagina }) });
   });
   pages.filter(p => !p.testo?.trim()).forEach(p => {
-    issues.push({ type: 'warn', page: p.numeroPagina, msg: `Pag. ${p.numeroPagina}: testo vuoto` });
+    issues.push({ type: 'warn', page: p.numeroPagina, msg: txtf('issues.emptyText', { page: p.numeroPagina }) });
   });
 
   // Render stats grid
   document.getElementById('stats-grid').innerHTML = [
-    { label: 'Pagine totali', value: total, sub: '' },
-    { label: 'Finali', value: ends.length, sub: 'pagine senza scelte' },
-    { label: 'Scelte totali', value: allChoices.length, sub: `~ ${total > 0 ? (allChoices.length/total).toFixed(1) : 0} per pagina` },
-    { label: 'Link rotti', value: brokenPages.length, sub: '' },
-    { label: 'Non raggiungibili', value: unreachable.length, sub: 'dalla pagina 1' },
-    { label: 'Parole', value: words, sub: 'nel testo delle pagine' },
-    { label: 'Profondità max', value: computeMaxDepth(), sub: 'dal nodo radice' },
-    { label: 'Pagine raggiunte', value: reachable.size, sub: `su ${total}` },
+    { label: txt('stats.totalPages'), value: total, sub: '' },
+    { label: txt('stats.endings'), value: ends.length, sub: txt('stats.endingsSub') },
+    { label: txt('stats.totalChoices'), value: allChoices.length, sub: `~ ${total > 0 ? (allChoices.length/total).toFixed(1) : 0} ${txt('stats.perPage')}` },
+    { label: txt('stats.brokenLinks'), value: brokenPages.length, sub: '' },
+    { label: txt('stats.unreachable'), value: unreachable.length, sub: txt('stats.fromPage1') },
+    { label: txt('stats.words'), value: words, sub: txt('stats.wordsSub') },
+    { label: txt('stats.maxDepth'), value: computeMaxDepth(), sub: txt('stats.fromRoot') },
+    { label: txt('stats.reachedPages'), value: reachable.size, sub: `${txt('stats.outOf')} ${total}` },
   ].map(s => `
     <div class="stat-card">
       <div class="stat-label">${s.label}</div>
@@ -1170,7 +1205,7 @@ function renderStats() {
   // Render issues
   const issuesList = document.getElementById('issues-list');
   if (issues.length === 0) {
-    issuesList.innerHTML = `<div style="color:var(--ok);font-size:14px;padding:12px">✓ Nessun problema rilevato</div>`;
+    issuesList.innerHTML = `<div style="color:var(--ok);font-size:14px;padding:12px">${txt('stats.noIssues')}</div>`;
   } else {
     issuesList.innerHTML = issues.map(iss => `
       <div class="issue-item" onclick="jumpToPage(${iss.page})">
@@ -1679,6 +1714,7 @@ window.addEventListener('resize', () => {
 //  INIT
 // ═══════════════════════════════════════════════════════════════
 
+applyI18n();
 render();
 </script>
 </body>
