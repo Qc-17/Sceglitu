@@ -11,40 +11,89 @@
   <main class="tutorial-page">
     <header class="tutorial-header">
       <div class="logo">Scegli<span>tu</span></div>
-      <h1>Tutorial rapido</h1>
-      <p>Ti mostriamo come usare le funzionalità principali in meno di un minuto.</p>
+      <h1 id="t-title">Tutorial rapido</h1>
+      <p id="t-subtitle">Ti mostriamo come usare le funzionalità principali in meno di un minuto.</p>
     </header>
 
     <section class="tutorial-content">
       <article class="tutorial-step">
-        <h3>1) Importa o crea una storia</h3>
-        <p>Dalla home premi il pulsante <strong>+</strong> per aprire la sezione editor. Puoi incollare un JSON o caricare un file <code>.json</code>.</p>
+        <h3 id="s1-title">1) Importa o crea una storia</h3>
+        <p id="s1-text">Dalla home premi il pulsante <strong>+</strong> per aprire la sezione editor. Puoi incollare un JSON o caricare un file <code>.json</code>.</p>
       </article>
 
       <article class="tutorial-step">
-        <h3>2) Leggi e scegli</h3>
-        <p>Apri una storia dall'elenco e usa le scelte disponibili per avanzare tra le pagine. Se arrivi a una fine puoi ricominciare in qualsiasi momento.</p>
+        <h3 id="s2-title">2) Leggi e scegli</h3>
+        <p id="s2-text">Apri una storia dall'elenco e usa le scelte disponibili per avanzare tra le pagine. Se arrivi a una fine puoi ricominciare in qualsiasi momento.</p>
       </article>
 
       <article class="tutorial-step">
-        <h3>3) Cambia lingua e sincronizza</h3>
-        <p>In alto a destra puoi cambiare lingua (IT/EN). Le storie importate da GitHub vengono sincronizzate automaticamente.</p>
+        <h3 id="s3-title">3) Cambia lingua e sincronizza</h3>
+        <p id="s3-text">In alto a destra puoi cambiare lingua (IT/EN). Le storie importate da GitHub vengono sincronizzate automaticamente.</p>
       </article>
 
       <article class="tutorial-step">
-        <h3>4) Riapri il tutorial quando vuoi</h3>
-        <p>Dopo la prima chiusura troverai il pulsante <strong>?</strong> nella schermata principale per rivedere questa guida.</p>
+        <h3 id="s4-title">4) Riapri il tutorial quando vuoi</h3>
+        <p id="s4-text">Dopo la prima chiusura troverai il pulsante <strong>?</strong> nella schermata principale per rivedere questa guida.</p>
       </article>
     </section>
 
     <div class="tutorial-actions">
-      <button class="btn-primary" onclick="closeTutorial()">Ho capito, inizia</button>
-      <button class="btn-secondary" onclick="goBackHome()">Torna alla home</button>
+      <button class="btn-primary" onclick="closeTutorial()" id="cta-start">Ho capito, inizia</button>
+      <button class="btn-secondary" onclick="goBackHome()" id="cta-home">Torna alla home</button>
     </div>
   </main>
 
 <script>
 const STORAGE_TUTORIAL = 'sceglitu_tutorial_seen_v1';
+const lang = localStorage.getItem('sceglitu_lang') || 'it';
+
+const tr = {
+  it: {
+    title: 'Tutorial rapido',
+    subtitle: 'Ti mostriamo come usare le funzionalità principali in meno di un minuto.',
+    s1t: '1) Importa o crea una storia',
+    s1: 'Dalla home premi il pulsante <strong>+</strong> per aprire la sezione editor. Puoi incollare un JSON o caricare un file <code>.json</code>.',
+    s2t: '2) Leggi e scegli',
+    s2: "Apri una storia dall'elenco e usa le scelte disponibili per avanzare tra le pagine. Se arrivi a una fine puoi ricominciare in qualsiasi momento.",
+    s3t: '3) Cambia lingua e sincronizza',
+    s3: 'In alto a destra puoi cambiare lingua (IT/EN). Le storie importate da GitHub vengono sincronizzate automaticamente.',
+    s4t: '4) Riapri il tutorial quando vuoi',
+    s4: 'Dopo la prima chiusura troverai il pulsante <strong>?</strong> nella schermata principale per rivedere questa guida.',
+    start: 'Ho capito, inizia',
+    home: 'Torna alla home'
+  },
+  en: {
+    title: 'Quick tutorial',
+    subtitle: 'We will show you the main features in under a minute.',
+    s1t: '1) Import or create a story',
+    s1: 'From the home screen, press the <strong>+</strong> button to open the editor. You can paste JSON or upload a <code>.json</code> file.',
+    s2t: '2) Read and choose',
+    s2: 'Open a story from the list and use the available choices to move through the pages. If you reach an ending, you can restart anytime.',
+    s3t: '3) Change language and sync',
+    s3: 'At the top right you can switch language (IT/EN). Stories imported from GitHub are synced automatically.',
+    s4t: '4) Reopen the tutorial anytime',
+    s4: 'After the first close, you can use the <strong>?</strong> button on the main screen to read this guide again.',
+    start: 'Got it, start',
+    home: 'Back to home'
+  }
+};
+
+function applyTranslations() {
+  const t = tr[lang] || tr.it;
+  document.documentElement.lang = lang;
+  document.getElementById('t-title').textContent = t.title;
+  document.getElementById('t-subtitle').textContent = t.subtitle;
+  document.getElementById('s1-title').textContent = t.s1t;
+  document.getElementById('s1-text').innerHTML = t.s1;
+  document.getElementById('s2-title').textContent = t.s2t;
+  document.getElementById('s2-text').textContent = t.s2;
+  document.getElementById('s3-title').textContent = t.s3t;
+  document.getElementById('s3-text').textContent = t.s3;
+  document.getElementById('s4-title').textContent = t.s4t;
+  document.getElementById('s4-text').innerHTML = t.s4;
+  document.getElementById('cta-start').textContent = t.start;
+  document.getElementById('cta-home').textContent = t.home;
+}
 
 function closeTutorial() {
   localStorage.setItem(STORAGE_TUTORIAL, '1');
@@ -59,6 +108,8 @@ function goBackHome() {
 
   closeTutorial();
 }
+
+applyTranslations();
 </script>
 </body>
 </html>
