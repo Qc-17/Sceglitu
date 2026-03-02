@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sceglitu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/header.css">
+<link rel="stylesheet" href="styles/home.css">
+<link rel="stylesheet" href="styles/editor.css">
+<link rel="stylesheet" href="styles/reader.css">
+<link rel="stylesheet" href="styles/modal.css">
+<link rel="stylesheet" href="styles/animations.css">
+</head>
+<body>
+
+<!-- ====== HOME ====== -->
+<div id="home" class="view active">
+  <div class="app-header">
+    <div class="header-top">
+      <div>
+        <div class="logo">Scegli<span>tu</span></div>
+        <div class="subtitle" data-i18n="home.subtitle">Storie interattive</div>
+      </div>
+      <div class="header-controls">
+        <div class="sync-indicator" id="sync-indicator"></div>
+        <div class="lang-switch">
+          <button class="lang-btn active" onclick="setLanguage('it')" title="Italiano">🇮🇹</button>
+          <button class="lang-btn" onclick="setLanguage('en')" title="English">🇬🇧</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="stories-container" class="stories-list"></div>
+
+  <button class="fab" onclick="openEditor()" title="Crea o importa storia" data-i18n-title="fab.tooltip">＋</button>
+
+  <footer class="app-footer">
+    <span data-i18n="footer.text">Sceglitu &mdash;</span> <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub</a> <span data-i18n="footer.license">&mdash; Licenza GPL&nbsp;3.0 &copy; Qc-17</span>
+  </footer>
+</div>
+
+<!-- ====== EDITOR ====== -->
+<div id="editor" class="view">
+  <div class="editor-header">
+    <button class="back-btn" onclick="closeEditor()">&#8592;</button>
+    <h2 data-i18n="editor.title">Nuova storia</h2>
+  </div>
+
+  <div class="editor-body">
+    <!-- Guide -->
+    <div class="guide-card">
+      <h3 data-i18n="editor.guideTitle">📖 Come creare una storia</h3>
+      <p data-i18n="editor.guideP1">Una storia è composta da <strong>pagine</strong>. Ogni pagina ha un testo e delle <strong>scelte</strong> che portano ad altre pagine. Se una pagina non ha scelte, è la fine di quel percorso.</p>
+      <p data-i18n="editor.guideP2">Incolla il JSON nell'area qui sotto oppure importa un file <code>.json</code>. Esempi e documentazione su <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub ↗</a></p>
+      <p data-i18n="editor.guideP3">È possibile usare un editor visuale<br>  -Per telefono clicca <a href ="editor.html">qui</a><br>  -Per computer (più completo) clicca <a href ="editorpc.html">qui</a></p>
+
+      <div class="json-example">{
+  <span class="jk">"titolo"</span>: <span class="js">"La mia storia"</span>,
+  <span class="jk">"autore"</span>: <span class="js">"Nome Autore"</span>,
+  <span class="jk">"anno"</span>: <span class="jn">2026</span>,
+  <span class="jk">"genere"</span>: <span class="js">"Fantasy"</span>,
+  <span class="jk">"lingua"</span>: <span class="js">"it"</span>,
+  <span class="jk">"pagine"</span>: [
+    {
+      <span class="jk">"numeroPagina"</span>: <span class="jn">1</span>,
+      <span class="jk">"testo"</span>: <span class="js">"Sei all'incrocio. Dove vai?"</span>,
+      <span class="jk">"scelte"</span>: [
+        { <span class="jk">"testo"</span>: <span class="js">"A sinistra"</span>, <span class="jk">"vaiAllaPagina"</span>: <span class="jn">2</span> },
+        { <span class="jk">"testo"</span>: <span class="js">"A destra"</span>, <span class="jk">"vaiAllaPagina"</span>: <span class="jn">3</span> }
+      ]
+    }
+  ]
+}</div>
+    </div>
+
+    <!-- Import section -->
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="section-title" data-i18n="editor.importTitle">Importa storia</div>
+      <div class="import-tabs">
+        <button class="tab-btn active" onclick="switchTab('paste')" data-i18n="editor.pasteTab">📋 Incolla JSON</button>
+        <button class="tab-btn" onclick="switchTab('file')" data-i18n="editor.fileTab">📂 File JSON</button>
+      </div>
+
+      <textarea id="json-input" class="json-input" placeholder='Incolla qui il contenuto JSON della storia...'></textarea>
+
+      <div class="file-drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+        <div class="drop-icon">📂</div>
+        <strong id="drop-label" data-i18n="editor.dropLabel">Clicca per scegliere un file</strong>
+        <p id="drop-sub" data-i18n="editor.dropSub">oppure trascina qui un file <code>.json</code></p>
+      </div>
+      <input type="file" id="file-input" accept=".json,application/json">
+
+      <div class="error-msg" id="error-msg"></div>
+      <button class="btn-primary" onclick="saveStory()" data-i18n="editor.saveBtn">💾 Salva storia</button>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <span data-i18n="footer.text">Sceglitu &mdash;</span> <a href="https://github.com/Qc-17/Sceglitu" target="_blank">GitHub</a> <span data-i18n="footer.license">&mdash; Licenza GPL&nbsp;3.0 &copy; Qc-17</span>
+  </footer>
+</div>
+
+<!-- ====== READER ====== -->
+<div id="reader" class="view">
+  <div class="reader-header">
+    <button class="back-btn" onclick="closeReader()">&#8592;</button>
+    <div class="reader-title" id="reader-title"></div>
+    <div class="page-badge" id="page-badge">Pag. 1</div>
+    <button class="icon-btn" title="Mostra JSON" onclick="showJsonModal()" data-i18n-title="reader.jsonBtn">{}</button>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-bar" style="width:0%"></div></div>
+
+  <div class="reader-body" id="reader-body">
+    <div class="page-text" id="page-text"></div>
+    <div class="choices-section" id="choices-section"></div>
+    <button class="restart-btn" id="restart-btn" onclick="restartStory()" style="display:none" data-i18n="reader.restartBtn">&#8634; Ricomincia da capo</button>
+  </div>
+
+  <div class="completion-screen" id="completion-screen">
+    <div class="completion-icon">&#127881;</div>
+    <h2 data-i18n="reader.completionTitle">Storia completata!</h2>
+    <p data-i18n="reader.completionText">Hai raggiunto la fine di questo percorso narrativo. Bravo!</p>
+    <div class="completion-btns">
+      <button class="btn-primary" onclick="restartStory()" data-i18n="reader.restartBtn">&#8634; Ricomincia da capo</button>
+      <button class="restart-btn" onclick="closeReader()" data-i18n="reader.backBtn">&#8592; Torna all'elenco</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== JSON MODAL ====== -->
+<div class="modal-overlay" id="json-modal" onclick="maybeCloseModal(event)">
+  <div class="modal-card">
+    <div class="modal-handle"></div>
+    <div class="modal-title" data-i18n="modal.title">JSON della storia</div>
+    <div class="modal-json" id="modal-json-content"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeJsonModal()" data-i18n="modal.closeBtn">Chiudi</button>
+      <button class="btn-copy" onclick="copyJson()" data-i18n="modal.copyBtn">📋 Copia JSON</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Scripts modulari -->
+<script src="js/translations.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/ui-utils.js"></script>
+<script src="js/home.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/reader.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
