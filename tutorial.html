@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Tutorial - Sceglitu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="tutorial-page">
+    <header class="tutorial-header">
+      <div class="logo">Scegli<span>tu</span></div>
+      <h1>Tutorial rapido</h1>
+      <p>Ti mostriamo come usare le funzionalità principali in meno di un minuto.</p>
+    </header>
+
+    <section class="tutorial-content">
+      <article class="tutorial-step">
+        <h3>1) Importa o crea una storia</h3>
+        <p>Dalla home premi il pulsante <strong>+</strong> per aprire la sezione editor. Puoi incollare un JSON o caricare un file <code>.json</code>.</p>
+      </article>
+
+      <article class="tutorial-step">
+        <h3>2) Leggi e scegli</h3>
+        <p>Apri una storia dall'elenco e usa le scelte disponibili per avanzare tra le pagine. Se arrivi a una fine puoi ricominciare in qualsiasi momento.</p>
+      </article>
+
+      <article class="tutorial-step">
+        <h3>3) Cambia lingua e sincronizza</h3>
+        <p>In alto a destra puoi cambiare lingua (IT/EN). Le storie importate da GitHub vengono sincronizzate automaticamente.</p>
+      </article>
+
+      <article class="tutorial-step">
+        <h3>4) Riapri il tutorial quando vuoi</h3>
+        <p>Dopo la prima chiusura troverai il pulsante <strong>?</strong> nella schermata principale per rivedere questa guida.</p>
+      </article>
+    </section>
+
+    <div class="tutorial-actions">
+      <button class="btn-primary" onclick="closeTutorial()">Ho capito, inizia</button>
+      <button class="btn-secondary" onclick="goBackHome()">Torna alla home</button>
+    </div>
+  </main>
+
+<script>
+const STORAGE_TUTORIAL = 'sceglitu_tutorial_seen_v1';
+
+function closeTutorial() {
+  localStorage.setItem(STORAGE_TUTORIAL, '1');
+  window.location.href = 'index.html';
+}
+
+function goBackHome() {
+  if (localStorage.getItem(STORAGE_TUTORIAL)) {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  closeTutorial();
+}
+</script>
+</body>
+</html>

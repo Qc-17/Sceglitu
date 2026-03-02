@@ -12,6 +12,11 @@ let currentLang    = localStorage.getItem('sceglitu_lang') || 'it';
 
 const STORAGE_STORIES  = 'sceglitu_stories_v1';
 const STORAGE_PROGRESS = 'sceglitu_progress_v1';
+const STORAGE_TUTORIAL = 'sceglitu_tutorial_seen_v1';
+
+if (!localStorage.getItem(STORAGE_TUTORIAL)) {
+  window.location.href = 'tutorial.html?first=1';
+}
 
 // ── Utilità condivise ────────────────────────────────────────
 function showView(id) {
@@ -33,6 +38,10 @@ function esc(s) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function openTutorial() {
+  window.location.href = 'tutorial.html?manual=1';
 }
 
 // ── Init ────────────────────────────────────────────────────
