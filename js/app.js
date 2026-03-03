@@ -71,12 +71,6 @@ document.documentElement.lang = currentLang;
 const savedTheme = localStorage.getItem('sceglitu_theme') || 'dark';
 applyTheme(savedTheme);
 
-document.querySelectorAll('.lang-btn').forEach((btn, idx) => {
-  btn.classList.toggle('active',
-    (idx === 0 && currentLang === 'it') || (idx === 1 && currentLang === 'en')
-  );
-});
-
 // Wire up file input and drag-and-drop for editor
 document.getElementById('file-input').addEventListener('change', function () {
   const file = this.files[0];
@@ -94,5 +88,5 @@ dz.addEventListener('drop', e => {
   if (file) readFile(file);
 });
 
-renderHome();
+setLanguage(currentLang);
 syncFromGitHub();
