@@ -145,6 +145,7 @@
 
     document.getElementById('signup-form').addEventListener('submit', async (event) => {
       event.preventDefault();
+      /*
       const email = document.getElementById('signup-email').value.trim();
       const password = document.getElementById('signup-password').value;
 
@@ -160,6 +161,10 @@
       } else {
         setStatus(t('signup.successConfirm'));
       }
+      */
+
+      alert('Azione momentaneamente bloccata dal proprietario perché in sviluppo.');
+      setStatus('Azione momentaneamente bloccata dal proprietario perché in sviluppo.', true);
     });
 
     document.getElementById('login-form').addEventListener('submit', async (event) => {
