@@ -43,11 +43,14 @@ function setProgress(title, page) {
     const all = JSON.parse(localStorage.getItem(STORAGE_PROGRESS)) || {};
     all[title] = page;
     localStorage.setItem(STORAGE_PROGRESS, JSON.stringify(all));
+    return all[title];
   } catch {}
+
+  return page;
 }
 
 async function salvaProgresso(storiaId, dati) {
-  setProgress(storiaId, dati);
+  const progressoSalvatoInLocale = setProgress(storiaId, dati);
 
   const client = getSupabaseClient();
   if (!client) return;
@@ -61,7 +64,7 @@ async function salvaProgresso(storiaId, dati) {
       {
         user_id: user.id,
         storia_id: storiaId,
-        dati,
+        dati: progressoSalvatoInLocale,
         updated_at: new Date().toISOString()
       },
       { onConflict: 'user_id,storia_id' }
@@ -84,7 +87,10 @@ async function caricaProgresso(storiaId) {
     .maybeSingle();
 
   if (error || !data) return localProgress;
-  return data.dati ?? localProgress;
+
+  const progress = data.dati ?? localProgress;
+  setProgress(storiaId, progress);
+  return progress;
 }
 
 function clearProgress(title) {
