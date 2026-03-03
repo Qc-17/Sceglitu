@@ -52,8 +52,10 @@
       </div>
     </section>
 
-    <section class="setting-card">
-      <h2 style="color: red;" data-i18n="warnigLog">⚠️⚠️ATTENZIONE!! IL LOGIN / SIGN IN AL MOMENTO È NON NECESSARIO E SCONSIGLIATO ⚠️⚠️</h2>
+    <section class="settings-card warning-card">
+      <h2 data-i18n="warningLog.title">⚠️ Avviso login / sign in</h2>
+      <p data-i18n="warningLog.message">Al momento il login / sign in non è necessario ed è sconsigliato.</p>
+    </section>
   </main>
 
   <script>
@@ -64,7 +66,11 @@
         account: { title: 'Account', openProfile: '🪪 Apri profilo' },
         appearance: { title: 'Aspetto', darkTheme: '☾ Tema scuro', lightTheme: '☀ Tema chiaro' },
         language: { title: 'Lingua' },
-        help: { title: 'Aiuto', openTutorial: '? Apri tutorial' }
+        help: { title: 'Aiuto', openTutorial: '? Apri tutorial' },
+        warningLog: {
+          title: '⚠️ Avviso login / sign in',
+          message: 'Al momento il login / sign in non è necessario ed è sconsigliato.'
+        }
       },
       en: {
         pageTitle: 'Settings - Sceglitu',
@@ -72,7 +78,11 @@
         account: { title: 'Account', openProfile: '🪪 Open profile' },
         appearance: { title: 'Appearance', darkTheme: '☾ Dark theme', lightTheme: '☀ Light theme' },
         language: { title: 'Language' },
-        help: { title: 'Help', openTutorial: '? Open tutorial' }
+        help: { title: 'Help', openTutorial: '? Open tutorial' },
+        warningLog: {
+          title: '⚠️ Login / sign in warning',
+          message: 'Right now login / sign in is not required and is discouraged.'
+        }
       }
     };
 

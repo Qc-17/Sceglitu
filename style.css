@@ -355,3 +355,19 @@ textarea.json-input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rg
   color: #fff;
   border-color: var(--amber);
 }
+
+.warning-card {
+  border-color: #c73b45;
+  background: #fff4f4;
+}
+
+.warning-card h2 {
+  color: #9f1f28;
+  margin-bottom: 6px;
+}
+
+.warning-card p {
+  color: #742029;
+  font-size: 14px;
+  line-height: 1.45;
+}
