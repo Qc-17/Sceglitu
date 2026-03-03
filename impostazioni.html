@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impostazioni - Sceglitu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dark.css" id="dark-theme-link">
+  <script>
+    const darkThemeSaved = localStorage.getItem('sceglitu_theme') || 'dark';
+    if (darkThemeSaved !== 'dark') {
+      document.getElementById('dark-theme-link')?.setAttribute('disabled', 'disabled');
+    }
+  </script>
+</head>
+<body>
+  <main class="tutorial-page">
+    <header class="tutorial-header">
+      <h1>Impostazioni</h1>
+      <p>Tutti i controlli principali sono qui. In alto su Home resta solo il login.</p>
+    </header>
+
+    <section class="tutorial-content">
+      <article class="tutorial-step">
+        <h3>Tema</h3>
+        <button id="theme-toggle" class="btn-primary" type="button">Tema</button>
+      </article>
+
+      <article class="tutorial-step">
+        <h3>Lingua</h3>
+        <div class="lang-switch">
+          <button class="lang-btn" id="lang-it" type="button">🇮🇹 IT</button>
+          <button class="lang-btn" id="lang-en" type="button">🇬🇧 EN</button>
+        </div>
+      </article>
+
+      <article class="tutorial-step">
+        <h3>Navigazione</h3>
+        <div class="tutorial-actions">
+          <a class="btn-secondary block-link" href="profilo.html">Profilo</a>
+          <a class="btn-secondary block-link" href="tutorial.html?manual=1">Tutorial</a>
+        </div>
+      </article>
+    </section>
+
+    <div class="tutorial-actions">
+      <a class="restart-btn block-link" href="index.html">Torna alla Home</a>
+      <a class="btn-secondary block-link" href="login.html">Login / Signup</a>
+    </div>
+  </main>
+
+  <script>
+    function applyTheme(theme) {
+      const darkCss = document.getElementById('dark-theme-link');
+      if (darkCss) darkCss.disabled = theme !== 'dark';
+      const toggle = document.getElementById('theme-toggle');
+      if (toggle) toggle.textContent = theme === 'dark' ? 'Tema: Scuro' : 'Tema: Chiaro';
+    }
+
+    function toggleTheme() {
+      const currentTheme = localStorage.getItem('sceglitu_theme') || 'dark';
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('sceglitu_theme', nextTheme);
+      applyTheme(nextTheme);
+    }
+
+    function applyLanguage(lang) {
+      localStorage.setItem('sceglitu_lang', lang);
+      document.documentElement.lang = lang;
+      document.getElementById('lang-it').classList.toggle('active', lang === 'it');
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+    document.getElementById('lang-it').addEventListener('click', () => applyLanguage('it'));
+    document.getElementById('lang-en').addEventListener('click', () => applyLanguage('en'));
+
+    applyTheme(localStorage.getItem('sceglitu_theme') || 'dark');
+    applyLanguage(localStorage.getItem('sceglitu_lang') || 'it');
+  </script>
+</body>
+</html>

@@ -247,3 +247,11 @@ textarea.json-input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rg
 .tutorial-step h3 { font-size: 15px; margin-bottom: 8px; color: var(--amber-dark); }
 .tutorial-step p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
 .tutorial-actions { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+
+/* ── AUTH/SETTINGS standalone pages ── */
+.stack-form { display: flex; flex-direction: column; gap: 10px; }
+.compact-input { min-height: 46px; }
+.block-link { display: block; text-align: center; text-decoration: none; }
+.auth-status { font-size: 14px; color: var(--sage); }
+.auth-status.error { color: var(--rust); }
+.profile-note { margin-top: 8px; font-size: 13px; color: var(--ink-faint); }

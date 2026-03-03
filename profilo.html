@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profilo - Sceglitu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dark.css" id="dark-theme-link">
+  <script>
+    const darkThemeSaved = localStorage.getItem('sceglitu_theme') || 'dark';
+    if (darkThemeSaved !== 'dark') {
+      document.getElementById('dark-theme-link')?.setAttribute('disabled', 'disabled');
+    }
+  </script>
+</head>
+<body>
+  <main class="tutorial-page">
+    <header class="tutorial-header">
+      <h1>Profilo</h1>
+      <p>Se autenticato vedi i dati utente, altrimenti resti in modalità ospite.</p>
+    </header>
+
+    <section class="tutorial-content">
+      <article class="tutorial-step">
+        <p><strong>Stato:</strong> <span id="state">Verifica sessione...</span></p>
+        <p><strong>Email:</strong> <span id="email">-</span></p>
+        <p><strong>ID utente:</strong> <span id="uid">-</span></p>
+        <p id="guest-note" class="profile-note" hidden>Non sei autenticato: il sito resta utilizzabile anche senza login.</p>
+      </article>
+    </section>
+
+    <div class="tutorial-actions">
+      <button id="logout-btn" class="btn-primary" type="button" hidden>Logout</button>
+      <a class="btn-secondary block-link" href="login.html">Vai a Login / Signup</a>
+      <a class="restart-btn block-link" href="index.html">Torna al sito</a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://kwytluxudzevpmrunxzx.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3eXRsdXh1ZHpldnBtcnVueHp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MzUsImV4cCI6MjA4ODA4ODgzNX0.xHJXX7OzABwJZFcEZnJWj_IaFydH9y5N0fW8drkNswg';
+
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function renderSessionState() {
+      const { data, error } = await client.auth.getSession();
+      const stateEl = document.getElementById('state');
+      const logoutBtn = document.getElementById('logout-btn');
+      const guestNote = document.getElementById('guest-note');
+
+      if (error) {
+        stateEl.textContent = `Errore: ${error.message}`;
+        return;
+      }
+
+      if (!data.session) {
+        stateEl.textContent = 'Ospite (non autenticato)';
+        document.getElementById('email').textContent = '(nessuna email)';
+        document.getElementById('uid').textContent = '(nessun id)';
+        guestNote.hidden = false;
+        return;
+      }
+
+      const user = data.session.user;
+      stateEl.textContent = 'Autenticato';
+      document.getElementById('email').textContent = user.email ?? '(nessuna email)';
+      document.getElementById('uid').textContent = user.id;
+      logoutBtn.hidden = false;
+    }
+
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await client.auth.signOut();
+      window.location.replace('login.html');
+    });
+
+    renderSessionState();
+  </script>
+</body>
+</html>

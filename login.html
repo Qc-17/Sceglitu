@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Sceglitu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dark.css" id="dark-theme-link">
+  <script>
+    const darkThemeSaved = localStorage.getItem('sceglitu_theme') || 'dark';
+    if (darkThemeSaved !== 'dark') {
+      document.getElementById('dark-theme-link')?.setAttribute('disabled', 'disabled');
+    }
+  </script>
+</head>
+<body>
+  <main class="tutorial-page">
+    <header class="tutorial-header">
+      <h1>Accesso</h1>
+      <p>Login/Signup facoltativi: puoi usare il sito anche da ospite.</p>
+    </header>
+
+    <section class="tutorial-content">
+      <article class="tutorial-step">
+        <h3>Signup</h3>
+        <form id="signup-form" class="stack-form">
+          <input id="signup-email" class="json-input compact-input" type="email" placeholder="Email" required />
+          <input id="signup-password" class="json-input compact-input" type="password" placeholder="Password" minlength="6" required />
+          <button class="btn-primary" type="submit">Crea account</button>
+        </form>
+      </article>
+
+      <article class="tutorial-step">
+        <h3>Login</h3>
+        <form id="login-form" class="stack-form">
+          <input id="login-email" class="json-input compact-input" type="email" placeholder="Email" required />
+          <input id="login-password" class="json-input compact-input" type="password" placeholder="Password" minlength="6" required />
+          <button class="btn-primary" type="submit">Entra</button>
+        </form>
+      </article>
+
+      <article class="tutorial-step">
+        <p id="status" class="auth-status" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <div class="tutorial-actions">
+      <a class="btn-secondary block-link" href="index.html">Continua senza login</a>
+      <a class="restart-btn block-link" href="impostazioni.html">Impostazioni</a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://kwytluxudzevpmrunxzx.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3eXRsdXh1ZHpldnBtcnVueHp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MzUsImV4cCI6MjA4ODA4ODgzNX0.xHJXX7OzABwJZFcEZnJWj_IaFydH9y5N0fW8drkNswg';
+
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const statusEl = document.getElementById('status');
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle('error', isError);
+    }
+
+    async function redirectIfLoggedIn() {
+      const { data, error } = await client.auth.getSession();
+      if (error) {
+        setStatus(error.message, true);
+        return;
+      }
+      if (data.session) window.location.replace('profilo.html');
+    }
+
+    document.getElementById('signup-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+      const { data, error } = await client.auth.signUp({ email, password });
+
+      if (error) return setStatus(`Signup fallita: ${error.message}`, true);
+      if (data.session) {
+        setStatus('Signup riuscita. Reindirizzamento...');
+        window.location.replace('profilo.html');
+      } else {
+        setStatus('Signup riuscita. Controlla la tua email per confermare.');
+      }
+    });
+
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const { error } = await client.auth.signInWithPassword({ email, password });
+
+      if (error) return setStatus(`Login fallita: ${error.message}`, true);
+      setStatus('Login riuscita. Reindirizzamento...');
+      window.location.replace('profilo.html');
+    });
+
+    redirectIfLoggedIn();
+  </script>
+</body>
+</html>
