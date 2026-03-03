@@ -247,3 +247,111 @@ textarea.json-input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rg
 .tutorial-step h3 { font-size: 15px; margin-bottom: 8px; color: var(--amber-dark); }
 .tutorial-step p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
 .tutorial-actions { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+
+/* ── AUTH + SETTINGS PAGES ── */
+.auth-page,
+.settings-page {
+  min-height: 100vh;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 18px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-header h1,
+.settings-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: var(--ink);
+}
+
+.auth-header p,
+.settings-header p {
+  margin-top: 8px;
+  color: var(--ink-faint);
+  font-size: 14px;
+}
+
+.back-link {
+  display: inline-flex;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: var(--amber-dark);
+  font-weight: 600;
+}
+
+.auth-card,
+.settings-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.auth-card h2,
+.settings-card h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--amber-dark);
+}
+
+.auth-form,
+.settings-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-form input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 12px;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.auth-actions,
+.settings-actions.inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.auth-link,
+.settings-btn {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.status-msg {
+  min-height: 1.2rem;
+  font-size: 14px;
+  color: #2d8b45;
+}
+
+.status-msg.error {
+  color: #c73b45;
+}
+
+.muted {
+  color: var(--ink-faint);
+}
+
+.settings-lang-btn.active {
+  background: var(--amber);
+  color: #fff;
+  border-color: var(--amber);
+}
