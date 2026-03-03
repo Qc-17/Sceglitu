@@ -17,21 +17,21 @@
 <body>
   <main class="auth-page">
     <header class="auth-header">
-      <a class="back-link" href="index.html">&#8592; Torna alla home</a>
-      <h1>Profilo utente</h1>
+      <a class="back-link" href="index.html" data-i18n="header.backHome">&#8592; Torna alla home</a>
+      <h1 data-i18n="header.title">Profilo utente</h1>
     </header>
 
     <section class="auth-card">
-      <p><strong>Stato:</strong> <span id="state">Verifica sessione...</span></p>
-      <p><strong>Email:</strong> <span id="email">-</span></p>
-      <p><strong>ID utente:</strong> <span id="uid">-</span></p>
-      <p id="guest-note" class="muted" hidden>Non sei autenticato: il sito resta utilizzabile anche senza login.</p>
+      <p><strong data-i18n="labels.state">Stato:</strong> <span id="state">Verifica sessione...</span></p>
+      <p><strong data-i18n="labels.email">Email:</strong> <span id="email">-</span></p>
+      <p><strong data-i18n="labels.uid">ID utente:</strong> <span id="uid">-</span></p>
+      <p id="guest-note" class="muted" hidden data-i18n="guest.note">Non sei autenticato: il sito resta utilizzabile anche senza login.</p>
     </section>
 
     <div class="auth-actions">
-      <button id="logout-btn" class="btn-secondary" type="button" hidden>Logout</button>
-      <a class="auth-link" href="login.html">Vai a Login / Signup</a>
-      <a class="auth-link" href="impostazioni.html">Apri impostazioni</a>
+      <button id="logout-btn" class="btn-secondary" type="button" hidden data-i18n="actions.logout">Logout</button>
+      <a class="auth-link" href="login.html" data-i18n="actions.toLogin">Vai a Login / Signup</a>
+      <a class="auth-link" href="impostazioni.html" data-i18n="actions.toSettings">Apri impostazioni</a>
     </div>
   </main>
 
@@ -40,7 +40,47 @@
     const SUPABASE_URL = 'https://kwytluxudzevpmrunxzx.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3eXRsdXh1ZHpldnBtcnVueHp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MzUsImV4cCI6MjA4ODA4ODgzNX0.xHJXX7OzABwJZFcEZnJWj_IaFydH9y5N0fW8drkNswg';
 
+    const I18N = {
+      it: {
+        pageTitle: 'Profilo - Sceglitu',
+        header: { backHome: '← Torna alla home', title: 'Profilo utente' },
+        labels: { state: 'Stato:', email: 'Email:', uid: 'ID utente:' },
+        status: { checking: 'Verifica sessione...', authenticated: 'Autenticato', guest: 'Ospite (non autenticato)', noEmail: '(nessuna email)', noId: '(nessun id)', error: 'Errore: {error}' },
+        guest: { note: 'Non sei autenticato: il sito resta utilizzabile anche senza login.' },
+        actions: { logout: 'Logout', toLogin: 'Vai a Login / Signup', toSettings: 'Apri impostazioni' }
+      },
+      en: {
+        pageTitle: 'Profile - Sceglitu',
+        header: { backHome: '← Back to home', title: 'User profile' },
+        labels: { state: 'Status:', email: 'Email:', uid: 'User ID:' },
+        status: { checking: 'Checking session...', authenticated: 'Authenticated', guest: 'Guest (not authenticated)', noEmail: '(no email)', noId: '(no id)', error: 'Error: {error}' },
+        guest: { note: 'You are not authenticated: the site can still be used without login.' },
+        actions: { logout: 'Logout', toLogin: 'Go to Login / Signup', toSettings: 'Open settings' }
+      }
+    };
+
+    let currentLang = localStorage.getItem('sceglitu_lang') || 'it';
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    function t(path) {
+      return path.split('.').reduce((obj, key) => obj?.[key], I18N[currentLang])
+        ?? path.split('.').reduce((obj, key) => obj?.[key], I18N.it)
+        ?? path;
+    }
+
+    function translate(message, vars = {}) {
+      return Object.entries(vars).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), message);
+    }
+
+    function applyLanguage() {
+      currentLang = I18N[currentLang] ? currentLang : 'it';
+      document.documentElement.lang = currentLang;
+      document.title = t('pageTitle');
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        el.innerHTML = t(el.getAttribute('data-i18n'));
+      });
+      document.getElementById('state').textContent = t('status.checking');
+    }
 
     async function renderSessionState() {
       const { data, error } = await client.auth.getSession();
@@ -49,21 +89,21 @@
       const guestNote = document.getElementById('guest-note');
 
       if (error) {
-        stateEl.textContent = `Errore: ${error.message}`;
+        stateEl.textContent = translate(t('status.error'), { error: error.message });
         return;
       }
 
       if (!data.session) {
-        stateEl.textContent = 'Ospite (non autenticato)';
-        document.getElementById('email').textContent = '(nessuna email)';
-        document.getElementById('uid').textContent = '(nessun id)';
+        stateEl.textContent = t('status.guest');
+        document.getElementById('email').textContent = t('status.noEmail');
+        document.getElementById('uid').textContent = t('status.noId');
         guestNote.hidden = false;
         return;
       }
 
       const user = data.session.user;
-      stateEl.textContent = 'Autenticato';
-      document.getElementById('email').textContent = user.email ?? '(nessuna email)';
+      stateEl.textContent = t('status.authenticated');
+      document.getElementById('email').textContent = user.email ?? t('status.noEmail');
       document.getElementById('uid').textContent = user.id;
       logoutBtn.hidden = false;
     }
@@ -73,6 +113,7 @@
       window.location.replace('login.html');
     });
 
+    applyLanguage();
     renderSessionState();
   </script>
 </body>
