@@ -3,55 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profilo - Supabase</title>
-  <style>
-    :root { color-scheme: light dark; }
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      max-width: 720px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      line-height: 1.4;
+  <title>Profilo - Sceglitu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dark.css" id="dark-theme-link">
+  <script>
+    const darkThemeSaved = localStorage.getItem('sceglitu_theme') || 'dark';
+    if (darkThemeSaved !== 'dark') {
+      document.getElementById('dark-theme-link')?.setAttribute('disabled', 'disabled');
     }
-    .card {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .actions {
-      display: grid;
-      gap: 0.5rem;
-      max-width: 320px;
-    }
-    button, a {
-      padding: 0.65rem 1rem;
-      border-radius: 8px;
-      border: 1px solid #999;
-      cursor: pointer;
-      font-size: 1rem;
-      text-decoration: none;
-      text-align: center;
-      color: inherit;
-    }
-    .muted { opacity: 0.8; }
-  </style>
+  </script>
 </head>
 <body>
-  <h1>Profilo utente</h1>
+  <main class="auth-page">
+    <header class="auth-header">
+      <a class="back-link" href="index.html">&#8592; Torna alla home</a>
+      <h1>Profilo utente</h1>
+    </header>
 
-  <section class="card">
-    <p><strong>Stato:</strong> <span id="state">Verifica sessione...</span></p>
-    <p><strong>Email:</strong> <span id="email">-</span></p>
-    <p><strong>ID utente:</strong> <span id="uid">-</span></p>
-    <p id="guest-note" class="muted" hidden>Non sei autenticato: il sito resta utilizzabile anche senza login.</p>
-  </section>
+    <section class="auth-card">
+      <p><strong>Stato:</strong> <span id="state">Verifica sessione...</span></p>
+      <p><strong>Email:</strong> <span id="email">-</span></p>
+      <p><strong>ID utente:</strong> <span id="uid">-</span></p>
+      <p id="guest-note" class="muted" hidden>Non sei autenticato: il sito resta utilizzabile anche senza login.</p>
+    </section>
 
-  <div class="actions">
-    <button id="logout-btn" type="button" hidden>Logout</button>
-    <a href="login.html">Vai a Login / Signup</a>
-    <a href="index.html">Torna al sito</a>
-  </div>
+    <div class="auth-actions">
+      <button id="logout-btn" class="btn-secondary" type="button" hidden>Logout</button>
+      <a class="auth-link" href="login.html">Vai a Login / Signup</a>
+      <a class="auth-link" href="impostazioni.html">Apri impostazioni</a>
+    </div>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>

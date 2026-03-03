@@ -3,63 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Supabase</title>
-  <style>
-    :root { color-scheme: light dark; }
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      max-width: 720px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      line-height: 1.4;
+  <title>Login - Sceglitu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dark.css" id="dark-theme-link">
+  <script>
+    const darkThemeSaved = localStorage.getItem('sceglitu_theme') || 'dark';
+    if (darkThemeSaved !== 'dark') {
+      document.getElementById('dark-theme-link')?.setAttribute('disabled', 'disabled');
     }
-    .card {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    input, button, a.btn-link {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 0.65rem;
-      margin: 0.4rem 0;
-      border-radius: 8px;
-      border: 1px solid #999;
-      font-size: 1rem;
-      display: block;
-      text-align: center;
-      text-decoration: none;
-    }
-    button, a.btn-link { cursor: pointer; }
-    .status { font-size: 0.95rem; min-height: 1.2rem; }
-    .muted { opacity: 0.8; font-size: 0.95rem; }
-  </style>
+  </script>
 </head>
 <body>
-  <h1>Accesso (facoltativo)</h1>
-  <p class="muted">Puoi registrarti/accedere oppure continuare senza login.</p>
+  <main class="auth-page">
+    <header class="auth-header">
+      <a class="back-link" href="index.html">&#8592; Torna alla home</a>
+      <h1>Accesso (facoltativo)</h1>
+      <p>Puoi registrarti/accedere oppure continuare senza login.</p>
+    </header>
 
-  <section class="card">
-    <h2>Signup</h2>
-    <form id="signup-form">
-      <input id="signup-email" type="email" placeholder="Email" required />
-      <input id="signup-password" type="password" placeholder="Password" minlength="6" required />
-      <button type="submit">Crea account</button>
-    </form>
-  </section>
+    <section class="auth-card">
+      <h2>Signup</h2>
+      <form id="signup-form" class="auth-form">
+        <input id="signup-email" type="email" placeholder="Email" required />
+        <input id="signup-password" type="password" placeholder="Password" minlength="6" required />
+        <button class="btn-primary" type="submit">Crea account</button>
+      </form>
+    </section>
 
-  <section class="card">
-    <h2>Login</h2>
-    <form id="login-form">
-      <input id="login-email" type="email" placeholder="Email" required />
-      <input id="login-password" type="password" placeholder="Password" minlength="6" required />
-      <button type="submit">Entra</button>
-    </form>
-  </section>
+    <section class="auth-card">
+      <h2>Login</h2>
+      <form id="login-form" class="auth-form">
+        <input id="login-email" type="email" placeholder="Email" required />
+        <input id="login-password" type="password" placeholder="Password" minlength="6" required />
+        <button class="btn-primary" type="submit">Entra</button>
+      </form>
+    </section>
 
-  <a class="btn-link" href="index.html">Continua senza login</a>
-  <p id="status" class="status"></p>
+    <a class="auth-link" href="index.html">Continua senza login</a>
+    <p id="status" class="status-msg"></p>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
@@ -71,7 +54,7 @@
 
     function setStatus(message, isError = false) {
       statusEl.textContent = message;
-      statusEl.style.color = isError ? 'crimson' : 'green';
+      statusEl.classList.toggle('error', isError);
     }
 
     async function redirectIfLoggedIn() {
