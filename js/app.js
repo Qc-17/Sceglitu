@@ -44,9 +44,32 @@ function openTutorial() {
   window.location.href = 'tutorial.html?manual=1';
 }
 
+function applyTheme(theme) {
+  const darkCss = document.getElementById('dark-theme-link');
+  if (darkCss) {
+    darkCss.disabled = theme !== 'dark';
+  }
+  const toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    const isDark = theme === 'dark';
+    toggle.textContent = isDark ? '☀' : '☾';
+    toggle.title = isDark ? 'Tema chiaro' : 'Tema scuro';
+  }
+}
+
+function toggleTheme() {
+  const currentTheme = localStorage.getItem('sceglitu_theme') || 'dark';
+  const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('sceglitu_theme', nextTheme);
+  applyTheme(nextTheme);
+}
+
 // ── Init ────────────────────────────────────────────────────
 loadStories();
 document.documentElement.lang = currentLang;
+
+const savedTheme = localStorage.getItem('sceglitu_theme') || 'dark';
+applyTheme(savedTheme);
 
 document.querySelectorAll('.lang-btn').forEach((btn, idx) => {
   btn.classList.toggle('active',
