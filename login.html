@@ -107,6 +107,41 @@
       }
     }
 
+
+    async function sincronizzaLocal(user) {
+      if (!user) return;
+
+      const chiaviProgresso = Object.keys(localStorage).filter((key) => key.startsWith('progresso_'));
+
+      // CREATE UNIQUE INDEX IF NOT EXISTS progressi_user_storia_unique ON progressi (user_id, storia_id);
+
+      for (const chiave of chiaviProgresso) {
+        const storiaId = chiave.replace('progresso_', '');
+        const raw = localStorage.getItem(chiave);
+        if (raw == null) continue;
+
+        let dati;
+        try {
+          dati = JSON.parse(raw);
+        } catch {
+          dati = raw;
+        }
+
+        await client
+          .from('progressi')
+          .upsert(
+            {
+              user_id: user.id,
+              storia_id: storiaId,
+              dati,
+              updated_at: new Date()
+            },
+            { onConflict: 'user_id,storia_id' }
+          );
+
+      }
+    }
+
     document.getElementById('signup-form').addEventListener('submit', async (event) => {
       event.preventDefault();
       const email = document.getElementById('signup-email').value.trim();
@@ -131,12 +166,13 @@
       const email = document.getElementById('login-email').value.trim();
       const password = document.getElementById('login-password').value;
 
-      const { error } = await client.auth.signInWithPassword({ email, password });
+      const { data, error } = await client.auth.signInWithPassword({ email, password });
       if (error) {
         setStatus(translate(t('login.failed'), { error: error.message }), true);
         return;
       }
 
+      await sincronizzaLocal(data?.user);
       setStatus(t('login.success'));
       window.location.replace('profilo.html');
     });
