@@ -11,11 +11,11 @@
       "scelte": [
         {
           "testo": "Open the RED door",
-          "vaAllaPagina": 2
+          "vaiAllaPagina": 2
         },
         {
           "testo": "Open the BLACK door",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         }
       ]
     },
@@ -25,11 +25,11 @@
       "scelte": [
         {
           "testo": "Catch your breath and return to the gates",
-          "vaAllaPagina": 1
+          "vaiAllaPagina": 1
         },
         {
           "testo": "Examine the footprint on the floor",
-          "vaAllaPagina": 4
+          "vaiAllaPagina": 4
         }
       ]
     },
@@ -39,11 +39,11 @@
       "scelte": [
         {
           "testo": "Go down the stone stairs",
-          "vaAllaPagina": 5
+          "vaiAllaPagina": 5
         },
         {
           "testo": "Climb up the wooden ladder",
-          "vaAllaPagina": 7
+          "vaiAllaPagina": 7
         }
       ]
     },
@@ -53,11 +53,11 @@
       "scelte": [
         {
           "testo": "Looking for a staircase to the upper floor",
-          "vaAllaPagina": 6
+          "vaiAllaPagina": 6
         },
         {
           "testo": "Ignore the book and return to the doors",
-          "vaAllaPagina": 1
+          "vaiAllaPagina": 1
         }
       ]
     },
@@ -67,11 +67,11 @@
       "scelte": [
         {
           "testo": "Take the key from the dummy's hand",
-          "vaAllaPagina": 8
+          "vaiAllaPagina": 8
         },
         {
           "testo": "Run up the stairs",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         }
       ]
     },
@@ -81,15 +81,15 @@
       "scelte": [
         {
           "testo": "Open door number 1",
-          "vaAllaPagina": 9
+          "vaiAllaPagina": 9
         },
         {
           "testo": "Open door number 2",
-          "vaAllaPagina": 10
+          "vaiAllaPagina": 10
         },
         {
           "testo": "Open door number 3",
-          "vaAllaPagina": 11
+          "vaiAllaPagina": 11
         }
       ]
     },
@@ -99,11 +99,11 @@
       "scelte": [
         {
           "testo": "Looking for something to pry open the drawer with",
-          "vaAllaPagina": 12
+          "vaiAllaPagina": 12
         },
         {
           "testo": "Drink coffee and explore beyond the kitchen",
-          "vaAllaPagina": 14
+          "vaiAllaPagina": 14
         }
       ]
     },
@@ -113,11 +113,11 @@
       "scelte": [
         {
           "testo": "Looking for a ladder to the upper floor",
-          "vaAllaPagina": 6
+          "vaiAllaPagina": 6
         },
         {
           "testo": "Return to the black corridor to explore",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         }
       ]
     },
@@ -127,11 +127,11 @@
       "scelte": [
         {
           "testo": "Follow the sign and go back downstairs",
-          "vaAllaPagina": 6
+          "vaiAllaPagina": 6
         },
         {
           "testo": "Continue exploring the library",
-          "vaAllaPagina": 13
+          "vaiAllaPagina": 13
         }
       ]
     },
@@ -141,11 +141,11 @@
       "scelte": [
         {
           "testo": "Try to block the door before it closes",
-          "vaAllaPagina": 10
+          "vaiAllaPagina": 10
         },
         {
           "testo": "Let the door close and study the well",
-          "vaAllaPagina": 15
+          "vaiAllaPagina": 15
         }
       ]
     },
@@ -155,11 +155,11 @@
       "scelte": [
         {
           "testo": "Looking for something among the ashes of the fireplace",
-          "vaAllaPagina": 16
+          "vaiAllaPagina": 16
         },
         {
           "testo": "Rummaging through the desk for something else",
-          "vaAllaPagina": 17
+          "vaiAllaPagina": 17
         }
       ]
     },
@@ -169,11 +169,11 @@
       "scelte": [
         {
           "testo": "Read the contents of the envelope",
-          "vaAllaPagina": 18
+          "vaiAllaPagina": 18
         },
         {
           "testo": "Put the envelope back in the drawer and move on",
-          "vaAllaPagina": 14
+          "vaiAllaPagina": 14
         }
       ]
     },
@@ -183,11 +183,11 @@
       "scelte": [
         {
           "testo": "Return to the atrium doors",
-          "vaAllaPagina": 1
+          "vaiAllaPagina": 1
         },
         {
           "testo": "Look for the stairs to the upper floor",
-          "vaAllaPagina": 6
+          "vaiAllaPagina": 6
         }
       ]
     },
@@ -197,11 +197,11 @@
       "scelte": [
         {
           "testo": "Spy through the latticed window before opening",
-          "vaAllaPagina": 22
+          "vaiAllaPagina": 22
         },
         {
           "testo": "Open the door without looking",
-          "vaAllaPagina": 19
+          "vaiAllaPagina": 19
         }
       ]
     },
@@ -211,11 +211,11 @@
       "scelte": [
         {
           "testo": "Look into the well again",
-          "vaAllaPagina": 20
+          "vaiAllaPagina": 20
         },
         {
           "testo": "Looking for something on the mirrored ceiling",
-          "vaAllaPagina": 21
+          "vaiAllaPagina": 21
         }
       ]
     },
@@ -225,11 +225,11 @@
       "scelte": [
         {
           "testo": "Keep the medallion and return to the corridor",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         },
         {
           "testo": "Replace the medallion in the ashes and examine the room",
-          "vaAllaPagina": 11
+          "vaiAllaPagina": 11
         }
       ]
     },
@@ -239,11 +239,11 @@
       "scelte": [
         {
           "testo": "Use something to open the fifth drawer",
-          "vaAllaPagina": 11
+          "vaiAllaPagina": 11
         },
         {
           "testo": "Take the letter and return to the corridor",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         }
       ]
     },
@@ -253,11 +253,11 @@
       "scelte": [
         {
           "testo": "Look for the tunnel mentioned in the letter",
-          "vaAllaPagina": 14
+          "vaiAllaPagina": 14
         },
         {
           "testo": "Ignore the instructions and explore the kitchen further",
-          "vaAllaPagina": 12
+          "vaiAllaPagina": 12
         }
       ]
     },
@@ -267,11 +267,11 @@
       "scelte": [
         {
           "testo": "Resist hypnosis and return to the tunnel",
-          "vaAllaPagina": 14
+          "vaiAllaPagina": 14
         },
         {
           "testo": "Giving in to sleep in front of the fire",
-          "vaAllaPagina": 1
+          "vaiAllaPagina": 1
         }
       ]
     },
@@ -281,11 +281,11 @@
       "scelte": [
         {
           "testo": "Go find out what this key opens",
-          "vaAllaPagina": 6
+          "vaiAllaPagina": 6
         },
         {
           "testo": "Throw the key into the well",
-          "vaAllaPagina": 15
+          "vaiAllaPagina": 15
         }
       ]
     },
@@ -295,11 +295,11 @@
       "scelte": [
         {
           "testo": "Open the door with the word BELOW written on it",
-          "vaAllaPagina": 22
+          "vaiAllaPagina": 22
         },
         {
           "testo": "Ignore the new door and return to the lobby",
-          "vaAllaPagina": 6
+          "vaiAllaPagina": 6
         }
       ]
     },
@@ -309,11 +309,11 @@
       "scelte": [
         {
           "testo": "Come in and sit down",
-          "vaAllaPagina": 33
+          "vaiAllaPagina": 33
         },
         {
           "testo": "Ask who it is before approaching",
-          "vaAllaPagina": 23
+          "vaiAllaPagina": 23
         }
       ]
     },
@@ -323,11 +323,11 @@
       "scelte": [
         {
           "testo": "Resist and sit by the keeper",
-          "vaAllaPagina": 33
+          "vaiAllaPagina": 33
         },
         {
           "testo": "Letting yourself be dragged by the tunnel",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         }
       ]
     },
@@ -337,11 +337,11 @@
       "scelte": [
         {
           "testo": "Going through the black door again",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         },
         {
           "testo": "Sit in the lobby and wait for something to happen",
-          "vaAllaPagina": 25
+          "vaiAllaPagina": 25
         }
       ]
     },
@@ -351,11 +351,11 @@
       "scelte": [
         {
           "testo": "Drinking coffee",
-          "vaAllaPagina": 7
+          "vaiAllaPagina": 7
         },
         {
           "testo": "Leave the cafe and return to the doors",
-          "vaAllaPagina": 1
+          "vaiAllaPagina": 1
         }
       ]
     },
@@ -365,11 +365,11 @@
       "scelte": [
         {
           "testo": "Read the book on the table",
-          "vaAllaPagina": 27
+          "vaiAllaPagina": 27
         },
         {
           "testo": "Sit back and listen to the caretaker",
-          "vaAllaPagina": 33
+          "vaiAllaPagina": 33
         }
       ]
     },
@@ -379,11 +379,11 @@
       "scelte": [
         {
           "testo": "Ask for the right corridor",
-          "vaAllaPagina": 28
+          "vaiAllaPagina": 28
         },
         {
           "testo": "Ask for the gear room",
-          "vaAllaPagina": 29
+          "vaiAllaPagina": 29
         }
       ]
     },
@@ -393,11 +393,11 @@
       "scelte": [
         {
           "testo": "Follow the corridor keeping your left hand on the wall",
-          "vaAllaPagina": 30
+          "vaiAllaPagina": 30
         },
         {
           "testo": "Return to the caretaker with more questions",
-          "vaAllaPagina": 26
+          "vaiAllaPagina": 26
         }
       ]
     },
@@ -407,11 +407,11 @@
       "scelte": [
         {
           "testo": "Go to the right corridor",
-          "vaAllaPagina": 30
+          "vaiAllaPagina": 30
         },
         {
           "testo": "Thank the keeper and ask again",
-          "vaAllaPagina": 33
+          "vaiAllaPagina": 33
         }
       ]
     },
@@ -421,11 +421,11 @@
       "scelte": [
         {
           "testo": "Enter the gear room",
-          "vaAllaPagina": 44
+          "vaiAllaPagina": 44
         },
         {
           "testo": "Stop at the threshold and observe before entering",
-          "vaAllaPagina": 31
+          "vaiAllaPagina": 31
         }
       ]
     },
@@ -435,11 +435,11 @@
       "scelte": [
         {
           "testo": "Take the elevated walkway",
-          "vaAllaPagina": 32
+          "vaiAllaPagina": 32
         },
         {
           "testo": "Follow the path on the floor",
-          "vaAllaPagina": 44
+          "vaiAllaPagina": 44
         }
       ]
     },
@@ -449,11 +449,11 @@
       "scelte": [
         {
           "testo": "Continue towards the center of the room",
-          "vaAllaPagina": 44
+          "vaiAllaPagina": 44
         },
         {
           "testo": "Go back to the corridor",
-          "vaAllaPagina": 30
+          "vaiAllaPagina": 30
         }
       ]
     },
@@ -463,11 +463,11 @@
       "scelte": [
         {
           "testo": "Show the golden key with the snakes (if you have it)",
-          "vaAllaPagina": 35
+          "vaiAllaPagina": 35
         },
         {
           "testo": "Admit that you have no key",
-          "vaAllaPagina": 34
+          "vaiAllaPagina": 34
         }
       ]
     },
@@ -477,11 +477,11 @@
       "scelte": [
         {
           "testo": "Ask for the way to the gear room",
-          "vaAllaPagina": 28
+          "vaiAllaPagina": 28
         },
         {
           "testo": "Say that you already know the way",
-          "vaAllaPagina": 30
+          "vaiAllaPagina": 30
         }
       ]
     },
@@ -491,11 +491,11 @@
       "scelte": [
         {
           "testo": "Follow the instructions and go to the corridor on the right",
-          "vaAllaPagina": 30
+          "vaiAllaPagina": 30
         },
         {
           "testo": "Ask the caretaker one last question",
-          "vaAllaPagina": 36
+          "vaiAllaPagina": 36
         }
       ]
     },
@@ -505,11 +505,11 @@
       "scelte": [
         {
           "testo": "Go to the right corridor",
-          "vaAllaPagina": 30
+          "vaiAllaPagina": 30
         },
         {
           "testo": "Ask what other absorbed people have become",
-          "vaAllaPagina": 37
+          "vaiAllaPagina": 37
         }
       ]
     },
@@ -519,11 +519,11 @@
       "scelte": [
         {
           "testo": "Go immediately to the right corridor",
-          "vaAllaPagina": 30
+          "vaiAllaPagina": 30
         },
         {
           "testo": "Return to the hall to reflect",
-          "vaAllaPagina": 24
+          "vaiAllaPagina": 24
         }
       ]
     },
@@ -533,11 +533,11 @@
       "scelte": [
         {
           "testo": "Wait in the cellar to see what happens",
-          "vaAllaPagina": 39
+          "vaiAllaPagina": 39
         },
         {
           "testo": "Take the key and go back up",
-          "vaAllaPagina": 8
+          "vaiAllaPagina": 8
         }
       ]
     },
@@ -547,11 +547,11 @@
       "scelte": [
         {
           "testo": "Go back up and go to the kitchen",
-          "vaAllaPagina": 7
+          "vaiAllaPagina": 7
         },
         {
           "testo": "Exploring the cellar further",
-          "vaAllaPagina": 40
+          "vaiAllaPagina": 40
         }
       ]
     },
@@ -561,11 +561,11 @@
       "scelte": [
         {
           "testo": "Go back up the stone stairs",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         },
         {
           "testo": "Go to Jeeves to get the key",
-          "vaAllaPagina": 8
+          "vaiAllaPagina": 8
         }
       ]
     },
@@ -575,11 +575,11 @@
       "scelte": [
         {
           "testo": "Try to get closer to the mirror to read the paper",
-          "vaAllaPagina": 42
+          "vaiAllaPagina": 42
         },
         {
           "testo": "Exit the room quickly",
-          "vaAllaPagina": 6
+          "vaiAllaPagina": 6
         }
       ]
     },
@@ -589,11 +589,11 @@
       "scelte": [
         {
           "testo": "Try to lift the license plate",
-          "vaAllaPagina": 43
+          "vaiAllaPagina": 43
         },
         {
           "testo": "Ignore the license plate and get out before the water rises",
-          "vaAllaPagina": 6
+          "vaiAllaPagina": 6
         }
       ]
     },
@@ -603,11 +603,11 @@
       "scelte": [
         {
           "testo": "Go to the gear room with the key",
-          "vaAllaPagina": 44
+          "vaiAllaPagina": 44
         },
         {
           "testo": "Return to the caretaker to report",
-          "vaAllaPagina": 33
+          "vaiAllaPagina": 33
         }
       ]
     },
@@ -617,11 +617,11 @@
       "scelte": [
         {
           "testo": "Come closer to the sleeping man",
-          "vaAllaPagina": 45
+          "vaiAllaPagina": 45
         },
         {
           "testo": "Ignore it and look for the lock on the column",
-          "vaAllaPagina": 55
+          "vaiAllaPagina": 55
         }
       ]
     },
@@ -631,11 +631,11 @@
       "scelte": [
         {
           "testo": "Show him the golden key",
-          "vaAllaPagina": 55
+          "vaiAllaPagina": 55
         },
         {
           "testo": "Ask him who he is before showing the key",
-          "vaAllaPagina": 46
+          "vaiAllaPagina": 46
         }
       ]
     },
@@ -645,11 +645,11 @@
       "scelte": [
         {
           "testo": "Show the golden key",
-          "vaAllaPagina": 55
+          "vaiAllaPagina": 55
         },
         {
           "testo": "Admitting you don't have the key",
-          "vaAllaPagina": 47
+          "vaiAllaPagina": 47
         }
       ]
     },
@@ -659,11 +659,11 @@
       "scelte": [
         {
           "testo": "Go get the key from the caretaker",
-          "vaAllaPagina": 33
+          "vaiAllaPagina": 33
         },
         {
           "testo": "Go get the key from the mannequin in the cellar",
-          "vaAllaPagina": 5
+          "vaiAllaPagina": 5
         }
       ]
     },
@@ -673,11 +673,11 @@
       "scelte": [
         {
           "testo": "Go to the center of the room",
-          "vaAllaPagina": 44
+          "vaiAllaPagina": 44
         },
         {
           "testo": "Look for a photograph that shows the way out",
-          "vaAllaPagina": 49
+          "vaiAllaPagina": 49
         }
       ]
     },
@@ -687,11 +687,11 @@
       "scelte": [
         {
           "testo": "Go to the center of the room with the instructions memorized",
-          "vaAllaPagina": 55
+          "vaiAllaPagina": 55
         },
         {
           "testo": "Return to the keeper to report the discovery",
-          "vaAllaPagina": 33
+          "vaiAllaPagina": 33
         }
       ]
     },
@@ -701,11 +701,11 @@
       "scelte": [
         {
           "testo": "Move forward towards the curve",
-          "vaAllaPagina": 51
+          "vaiAllaPagina": 51
         },
         {
           "testo": "Going back into the darkness",
-          "vaAllaPagina": 30
+          "vaiAllaPagina": 30
         }
       ]
     },
@@ -715,11 +715,11 @@
       "scelte": [
         {
           "testo": "Trying to understand how your name is there",
-          "vaAllaPagina": 52
+          "vaiAllaPagina": 52
         },
         {
           "testo": "Ignore the writings and find a way out of the room",
-          "vaAllaPagina": 53
+          "vaiAllaPagina": 53
         }
       ]
     },
@@ -729,11 +729,11 @@
       "scelte": [
         {
           "testo": "Get up and look for the exit from the room",
-          "vaAllaPagina": 53
+          "vaiAllaPagina": 53
         },
         {
           "testo": "Write something next to your name",
-          "vaAllaPagina": 52
+          "vaiAllaPagina": 52
         }
       ]
     },
@@ -743,11 +743,11 @@
       "scelte": [
         {
           "testo": "Please check that you still have the key and go to the column",
-          "vaAllaPagina": 55
+          "vaiAllaPagina": 55
         },
         {
           "testo": "Wake Ettore Morvell before proceeding",
-          "vaAllaPagina": 45
+          "vaiAllaPagina": 45
         }
       ]
     },
@@ -757,11 +757,11 @@
       "scelte": [
         {
           "testo": "Find the key in your pocket (you came back with it)",
-          "vaAllaPagina": 55
+          "vaiAllaPagina": 55
         },
         {
           "testo": "Go and get the key from the caretaker",
-          "vaAllaPagina": 33
+          "vaiAllaPagina": 33
         }
       ]
     },
@@ -771,11 +771,11 @@
       "scelte": [
         {
           "testo": "Turn the key three times counterclockwise, then once clockwise",
-          "vaAllaPagina": 66
+          "vaiAllaPagina": 66
         },
         {
           "testo": "Turn the key once clockwise, then three times counterclockwise (the opposite)",
-          "vaAllaPagina": 56
+          "vaiAllaPagina": 56
         }
       ]
     },
@@ -785,11 +785,11 @@
       "scelte": [
         {
           "testo": "Correct your aim: three counterclockwise, one clockwise",
-          "vaAllaPagina": 57
+          "vaiAllaPagina": 57
         },
         {
           "testo": "Take the key away and run away",
-          "vaAllaPagina": 58
+          "vaiAllaPagina": 58
         }
       ]
     },
@@ -799,11 +799,11 @@
       "scelte": [
         {
           "testo": "Follow the sound of the door",
-          "vaAllaPagina": 66
+          "vaiAllaPagina": 66
         },
         {
           "testo": "Standing by and watching the gears stop turning",
-          "vaAllaPagina": 59
+          "vaiAllaPagina": 59
         }
       ]
     },
@@ -813,11 +813,11 @@
       "scelte": [
         {
           "testo": "Replace the key and correct the movement",
-          "vaAllaPagina": 57
+          "vaiAllaPagina": 57
         },
         {
           "testo": "Give in to panic and scream into the void",
-          "vaAllaPagina": 50
+          "vaiAllaPagina": 50
         }
       ]
     },
@@ -827,11 +827,11 @@
       "scelte": [
         {
           "testo": "Go towards the sound of the door opening",
-          "vaAllaPagina": 66
+          "vaiAllaPagina": 66
         },
         {
           "testo": "Look for Ettore Morvell before going",
-          "vaAllaPagina": 60
+          "vaiAllaPagina": 60
         }
       ]
     },
@@ -841,11 +841,11 @@
       "scelte": [
         {
           "testo": "Follow the sound to the open door",
-          "vaAllaPagina": 66
+          "vaiAllaPagina": 66
         },
         {
           "testo": "Return to the guardian's crypt to greet her",
-          "vaAllaPagina": 61
+          "vaiAllaPagina": 61
         }
       ]
     },
@@ -855,11 +855,11 @@
       "scelte": [
         {
           "testo": "Exit the crypt towards the open door",
-          "vaAllaPagina": 66
+          "vaiAllaPagina": 66
         },
         {
           "testo": "Stay a moment in the empty crypt",
-          "vaAllaPagina": 62
+          "vaiAllaPagina": 62
         }
       ]
     },
@@ -869,11 +869,11 @@
       "scelte": [
         {
           "testo": "Exit the crypt towards the open door",
-          "vaAllaPagina": 66
+          "vaiAllaPagina": 66
         },
         {
           "testo": "Explore the villa still before leaving",
-          "vaAllaPagina": 63
+          "vaiAllaPagina": 63
         }
       ]
     },
@@ -883,11 +883,11 @@
       "scelte": [
         {
           "testo": "Go towards the open door you heard the sound of",
-          "vaAllaPagina": 66
+          "vaiAllaPagina": 66
         },
         {
           "testo": "Exit through one of the two original doors",
-          "vaAllaPagina": 64
+          "vaiAllaPagina": 64
         }
       ]
     },
@@ -897,11 +897,11 @@
       "scelte": [
         {
           "testo": "Open the door and go out",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         },
         {
           "testo": "Please stop with your hand on the handle before opening",
-          "vaAllaPagina": 65
+          "vaiAllaPagina": 65
         }
       ]
     },
@@ -911,7 +911,7 @@
       "scelte": [
         {
           "testo": "Leaving the villa",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -921,11 +921,11 @@
       "scelte": [
         {
           "testo": "Follow the sound to the exit",
-          "vaAllaPagina": 77
+          "vaiAllaPagina": 77
         },
         {
           "testo": "Spend a moment with Hector before going",
-          "vaAllaPagina": 60
+          "vaiAllaPagina": 60
         }
       ]
     },
@@ -935,11 +935,11 @@
       "scelte": [
         {
           "testo": "Exit through the red door into the light",
-          "vaAllaPagina": 64
+          "vaiAllaPagina": 64
         },
         {
           "testo": "Stepping out the black door into the fresh air",
-          "vaAllaPagina": 68
+          "vaiAllaPagina": 68
         }
       ]
     },
@@ -949,7 +949,7 @@
       "scelte": [
         {
           "testo": "Breathe the fresh air and look at the villa from the outside",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -959,11 +959,11 @@
       "scelte": [
         {
           "testo": "Follow the sound to the open door",
-          "vaAllaPagina": 77
+          "vaiAllaPagina": 77
         },
         {
           "testo": "Return to the lobby",
-          "vaAllaPagina": 67
+          "vaiAllaPagina": 67
         }
       ]
     },
@@ -973,11 +973,11 @@
       "scelte": [
         {
           "testo": "Go towards the open door",
-          "vaAllaPagina": 77
+          "vaiAllaPagina": 77
         },
         {
           "testo": "Return to the atrium",
-          "vaAllaPagina": 67
+          "vaiAllaPagina": 67
         }
       ]
     },
@@ -987,11 +987,11 @@
       "scelte": [
         {
           "testo": "Going out the kitchen window into the garden",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         },
         {
           "testo": "Return to the hatch to check the tunnel",
-          "vaAllaPagina": 22
+          "vaiAllaPagina": 22
         }
       ]
     },
@@ -1001,11 +1001,11 @@
       "scelte": [
         {
           "testo": "Go through the gate onto the road",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         },
         {
           "testo": "Return to the villa before leaving for good",
-          "vaAllaPagina": 63
+          "vaiAllaPagina": 63
         }
       ]
     },
@@ -1015,7 +1015,7 @@
       "scelte": [
         {
           "testo": "Open the black door",
-          "vaAllaPagina": 3
+          "vaiAllaPagina": 3
         }
       ]
     },
@@ -1025,11 +1025,11 @@
       "scelte": [
         {
           "testo": "Follow the sound to the exit",
-          "vaAllaPagina": 77
+          "vaiAllaPagina": 77
         },
         {
           "testo": "Visit the music room again before you go",
-          "vaAllaPagina": 75
+          "vaiAllaPagina": 75
         }
       ]
     },
@@ -1039,11 +1039,11 @@
       "scelte": [
         {
           "testo": "Going towards the exit for good",
-          "vaAllaPagina": 77
+          "vaiAllaPagina": 77
         },
         {
           "testo": "Return to the hall one last time",
-          "vaAllaPagina": 67
+          "vaiAllaPagina": 67
         }
       ]
     },
@@ -1053,11 +1053,11 @@
       "scelte": [
         {
           "testo": "Follow the scent and sound to the exit",
-          "vaAllaPagina": 77
+          "vaiAllaPagina": 77
         },
         {
           "testo": "Take away one of the white flowers as a souvenir",
-          "vaAllaPagina": 77
+          "vaiAllaPagina": 77
         }
       ]
     },
@@ -1067,11 +1067,11 @@
       "scelte": [
         {
           "testo": "Moving towards the light",
-          "vaAllaPagina": 88
+          "vaiAllaPagina": 88
         },
         {
           "testo": "Stop in the foyer and look at the villa one last time",
-          "vaAllaPagina": 63
+          "vaiAllaPagina": 63
         }
       ]
     },
@@ -1081,11 +1081,11 @@
       "scelte": [
         {
           "testo": "Walking towards the open gate",
-          "vaAllaPagina": 88
+          "vaiAllaPagina": 88
         },
         {
           "testo": "Stop for a moment on the porch",
-          "vaAllaPagina": 79
+          "vaiAllaPagina": 79
         }
       ]
     },
@@ -1095,7 +1095,7 @@
       "scelte": [
         {
           "testo": "Go towards the open gate",
-          "vaAllaPagina": 88
+          "vaiAllaPagina": 88
         }
       ]
     },
@@ -1105,11 +1105,11 @@
       "scelte": [
         {
           "testo": "Answer the voice and run to the gate",
-          "vaAllaPagina": 88
+          "vaiAllaPagina": 88
         },
         {
           "testo": "Approach slowly, with caution",
-          "vaAllaPagina": 88
+          "vaiAllaPagina": 88
         }
       ]
     },
@@ -1119,7 +1119,7 @@
       "scelte": [
         {
           "testo": "Go to the main gate",
-          "vaAllaPagina": 88
+          "vaiAllaPagina": 88
         }
       ]
     },
@@ -1129,7 +1129,7 @@
       "scelte": [
         {
           "testo": "Go towards the open gate",
-          "vaAllaPagina": 88
+          "vaiAllaPagina": 88
         }
       ]
     },
@@ -1139,11 +1139,11 @@
       "scelte": [
         {
           "testo": "Continue towards the lights of the village",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         },
         {
           "testo": "Stop for a moment in the middle of the road",
-          "vaAllaPagina": 84
+          "vaiAllaPagina": 84
         }
       ]
     },
@@ -1153,7 +1153,7 @@
       "scelte": [
         {
           "testo": "Walking towards the town lights",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -1163,7 +1163,7 @@
       "scelte": [
         {
           "testo": "Going towards the lights of the village",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -1173,11 +1173,11 @@
       "scelte": [
         {
           "testo": "Run towards the figure",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         },
         {
           "testo": "Stop and walk the last few meters",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -1187,7 +1187,7 @@
       "scelte": [
         {
           "testo": "Open the door and go out",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -1197,11 +1197,11 @@
       "scelte": [
         {
           "testo": "Go towards the figure",
-          "vaAllaPagina": 96
+          "vaiAllaPagina": 96
         },
         {
           "testo": "Stop and stare at Villa Morvell one last moment",
-          "vaAllaPagina": 89
+          "vaiAllaPagina": 89
         }
       ]
     },
@@ -1211,7 +1211,7 @@
       "scelte": [
         {
           "testo": "Go towards the figure",
-          "vaAllaPagina": 96
+          "vaiAllaPagina": 96
         }
       ]
     },
@@ -1221,7 +1221,7 @@
       "scelte": [
         {
           "testo": "Come closer to the figure",
-          "vaAllaPagina": 96
+          "vaiAllaPagina": 96
         }
       ]
     },
@@ -1231,7 +1231,7 @@
       "scelte": [
         {
           "testo": "Continue to figure",
-          "vaAllaPagina": 96
+          "vaiAllaPagina": 96
         }
       ]
     },
@@ -1241,7 +1241,7 @@
       "scelte": [
         {
           "testo": "Look into the figure's eyes and walk towards her",
-          "vaAllaPagina": 96
+          "vaiAllaPagina": 96
         }
       ]
     },
@@ -1251,7 +1251,7 @@
       "scelte": [
         {
           "testo": "Reach the figure on the road",
-          "vaAllaPagina": 96
+          "vaiAllaPagina": 96
         }
       ]
     },
@@ -1261,7 +1261,7 @@
       "scelte": [
         {
           "testo": "Go towards the figure",
-          "vaAllaPagina": 96
+          "vaiAllaPagina": 96
         }
       ]
     },
@@ -1271,7 +1271,7 @@
       "scelte": [
         {
           "testo": "Go",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -1281,7 +1281,7 @@
       "scelte": [
         {
           "testo": "Yes. Let's go home.",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -1291,7 +1291,7 @@
       "scelte": [
         {
           "testo": "Enter the town with the figure next to it",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -1301,7 +1301,7 @@
       "scelte": [
         {
           "testo": "Get up and move on",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
@@ -1311,7 +1311,7 @@
       "scelte": [
         {
           "testo": "Take the final step",
-          "vaAllaPagina": 100
+          "vaiAllaPagina": 100
         }
       ]
     },
