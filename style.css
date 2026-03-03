@@ -56,6 +56,7 @@ body::before {
 .header-controls { display: flex; align-items: center; gap: 12px; }
 .help-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: var(--paper); color: var(--ink-soft); font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.15s; }
 .help-btn:active { background: var(--amber-pale); border-color: var(--amber); color: var(--amber-dark); }
+.theme-btn { font-size: 15px; line-height: 1; }
 .lang-switch { display: flex; gap: 4px; background: var(--paper); border-radius: 8px; padding: 4px; border: 1px solid var(--border); }
 .lang-btn { background: none; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.15s; color: var(--ink-faint); }
 .lang-btn.active { background: var(--amber); color: white; }

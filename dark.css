@@ -1,0 +1,87 @@
+:root {
+  --cream: #040404;
+  --paper: #0e0e0e;
+  --ink: #f4e7c1;
+  --ink-soft: #d0bc89;
+  --ink-faint: #9f8a57;
+  --amber: #d4af37;
+  --amber-dark: #b68f23;
+  --amber-pale: #261f0c;
+  --sage: #d4af37;
+  --shadow: rgba(0, 0, 0, 0.45);
+  --border: rgba(212, 175, 55, 0.3);
+
+  /* Editor PRO vars */
+  --bg: #040404;
+  --surface: #0e0e0e;
+  --surface2: #1a1a1a;
+  --accent: #d4af37;
+  --accent2: #b68f23;
+  --accent-muted: rgba(212, 175, 55, 0.14);
+  --accent-dim: rgba(212, 175, 55, 0.45);
+  --text: #f4e7c1;
+  --text2: #d0bc89;
+  --text3: #9f8a57;
+  --ok: #d4af37;
+  --ok-bg: rgba(212, 175, 55, 0.16);
+  --warn: #d4af37;
+  --warn-bg: rgba(212, 175, 55, 0.16);
+  --danger: #df7b67;
+  --danger-bg: rgba(223, 123, 103, 0.18);
+  --info: #d4af37;
+  --info-bg: rgba(212, 175, 55, 0.16);
+}
+
+.app-header,
+.editor-header {
+  background: rgba(4, 4, 4, 0.9);
+}
+
+.reader-header {
+  background: rgba(8, 8, 8, 0.92);
+}
+
+.lang-btn.active,
+.fab,
+.guide-card .editor-cta-btn,
+.tab-btn.active,
+.btn-primary,
+.end-btn,
+.btn-copy {
+  color: #1a1406;
+}
+
+.fab {
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.45);
+}
+
+.btn-primary {
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+}
+
+.end-btn {
+  background: var(--amber);
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+}
+
+.btn-copy {
+  font-weight: 700;
+}
+
+.modal-json {
+  background: #080808;
+}
+
+.toast {
+  background: #171717;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+
+.btn-accent,
+#add-page-btn {
+  color: #1a1406;
+}

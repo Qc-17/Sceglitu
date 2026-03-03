@@ -6,6 +6,13 @@
 <title>Tutorial - Sceglitu</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="dark.css" id="dark-theme-link">
+<script>
+  const darkThemeSaved = localStorage.getItem('sceglitu_theme') || 'dark';
+  if (darkThemeSaved !== 'dark') {
+    document.getElementById('dark-theme-link')?.setAttribute('disabled', 'disabled');
+  }
+</script>
 </head>
 <body>
   <main class="tutorial-page">

@@ -551,6 +551,13 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 </style>
+<link rel="stylesheet" href="dark.css" id="dark-theme-link">
+<script>
+  const darkThemeSaved = localStorage.getItem('sceglitu_theme') || 'dark';
+  if (darkThemeSaved !== 'dark') {
+    document.getElementById('dark-theme-link')?.setAttribute('disabled', 'disabled');
+  }
+</script>
 </head>
 <body>
 <div id="app">
@@ -566,6 +573,7 @@ body {
     <input id="f-lingua" data-i18n-placeholder="top.language" placeholder="Lingua" oninput="onMeta()" style="max-width:130px">
   </div>
   <div class="topbar-actions">
+    <button class="btn btn-surface btn-sm" id="theme-toggle-editor" onclick="toggleThemeEditor()" title="Tema">☀</button>
     <button class="btn btn-surface btn-sm" onclick="openImport()" data-i18n="top.importBtn">⬆ Importa</button>
     <button class="btn btn-ok btn-sm" onclick="downloadJSON()" data-i18n="top.saveJsonBtn">⬇ Salva JSON</button>
   </div>
@@ -696,6 +704,28 @@ body {
 
 const uiLang = localStorage.getItem('sceglitu_lang') || 'it';
 document.documentElement.lang = uiLang;
+
+
+function applyThemeEditor(theme) {
+  const darkCss = document.getElementById('dark-theme-link');
+  if (darkCss) darkCss.disabled = theme !== 'dark';
+  const toggle = document.getElementById('theme-toggle-editor');
+  if (toggle) {
+    const isDark = theme === 'dark';
+    toggle.textContent = isDark ? '☀' : '☾';
+    toggle.title = isDark ? 'Tema chiaro' : 'Tema scuro';
+  }
+}
+
+function toggleThemeEditor() {
+  const currentTheme = localStorage.getItem('sceglitu_theme') || 'dark';
+  const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('sceglitu_theme', nextTheme);
+  applyThemeEditor(nextTheme);
+}
+
+const savedTheme = localStorage.getItem('sceglitu_theme') || 'dark';
+applyThemeEditor(savedTheme);
 
 const I18N = {
   it: {
