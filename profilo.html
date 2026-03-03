@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profilo - Supabase</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.4;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .actions {
+      display: grid;
+      gap: 0.5rem;
+      max-width: 320px;
+    }
+    button, a {
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #999;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      color: inherit;
+    }
+    .muted { opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <h1>Profilo utente</h1>
+
+  <section class="card">
+    <p><strong>Stato:</strong> <span id="state">Verifica sessione...</span></p>
+    <p><strong>Email:</strong> <span id="email">-</span></p>
+    <p><strong>ID utente:</strong> <span id="uid">-</span></p>
+    <p id="guest-note" class="muted" hidden>Non sei autenticato: il sito resta utilizzabile anche senza login.</p>
+  </section>
+
+  <div class="actions">
+    <button id="logout-btn" type="button" hidden>Logout</button>
+    <a href="login.html">Vai a Login / Signup</a>
+    <a href="index.html">Torna al sito</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://kwytluxudzevpmrunxzx.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3eXRsdXh1ZHpldnBtcnVueHp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MzUsImV4cCI6MjA4ODA4ODgzNX0.xHJXX7OzABwJZFcEZnJWj_IaFydH9y5N0fW8drkNswg';
+
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function renderSessionState() {
+      const { data, error } = await client.auth.getSession();
+      const stateEl = document.getElementById('state');
+      const logoutBtn = document.getElementById('logout-btn');
+      const guestNote = document.getElementById('guest-note');
+
+      if (error) {
+        stateEl.textContent = `Errore: ${error.message}`;
+        return;
+      }
+
+      if (!data.session) {
+        stateEl.textContent = 'Ospite (non autenticato)';
+        document.getElementById('email').textContent = '(nessuna email)';
+        document.getElementById('uid').textContent = '(nessun id)';
+        guestNote.hidden = false;
+        return;
+      }
+
+      const user = data.session.user;
+      stateEl.textContent = 'Autenticato';
+      document.getElementById('email').textContent = user.email ?? '(nessuna email)';
+      document.getElementById('uid').textContent = user.id;
+      logoutBtn.hidden = false;
+    }
+
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await client.auth.signOut();
+      window.location.replace('login.html');
+    });
+
+    renderSessionState();
+  </script>
+</body>
+</html>
