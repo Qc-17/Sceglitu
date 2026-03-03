@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Supabase</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.4;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    input, button, a.btn-link {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.65rem;
+      margin: 0.4rem 0;
+      border-radius: 8px;
+      border: 1px solid #999;
+      font-size: 1rem;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+    }
+    button, a.btn-link { cursor: pointer; }
+    .status { font-size: 0.95rem; min-height: 1.2rem; }
+    .muted { opacity: 0.8; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>Accesso (facoltativo)</h1>
+  <p class="muted">Puoi registrarti/accedere oppure continuare senza login.</p>
+
+  <section class="card">
+    <h2>Signup</h2>
+    <form id="signup-form">
+      <input id="signup-email" type="email" placeholder="Email" required />
+      <input id="signup-password" type="password" placeholder="Password" minlength="6" required />
+      <button type="submit">Crea account</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Login</h2>
+    <form id="login-form">
+      <input id="login-email" type="email" placeholder="Email" required />
+      <input id="login-password" type="password" placeholder="Password" minlength="6" required />
+      <button type="submit">Entra</button>
+    </form>
+  </section>
+
+  <a class="btn-link" href="index.html">Continua senza login</a>
+  <p id="status" class="status"></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://kwytluxudzevpmrunxzx.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3eXRsdXh1ZHpldnBtcnVueHp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MzUsImV4cCI6MjA4ODA4ODgzNX0.xHJXX7OzABwJZFcEZnJWj_IaFydH9y5N0fW8drkNswg';
+
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const statusEl = document.getElementById('status');
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.style.color = isError ? 'crimson' : 'green';
+    }
+
+    async function redirectIfLoggedIn() {
+      const { data, error } = await client.auth.getSession();
+      if (error) {
+        setStatus(error.message, true);
+        return;
+      }
+      if (data.session) {
+        window.location.replace('profilo.html');
+      }
+    }
+
+    document.getElementById('signup-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+
+      const { data, error } = await client.auth.signUp({ email, password });
+      if (error) {
+        setStatus(`Signup fallita: ${error.message}`, true);
+        return;
+      }
+
+      if (data.session) {
+        setStatus('Signup riuscita. Reindirizzamento...');
+        window.location.replace('profilo.html');
+      } else {
+        setStatus('Signup riuscita. Controlla la tua email per la conferma.');
+      }
+    });
+
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      const { error } = await client.auth.signInWithPassword({ email, password });
+      if (error) {
+        setStatus(`Login fallita: ${error.message}`, true);
+        return;
+      }
+
+      setStatus('Login riuscita. Reindirizzamento...');
+      window.location.replace('profilo.html');
+    });
+
+    redirectIfLoggedIn();
+  </script>
+</body>
+</html>
