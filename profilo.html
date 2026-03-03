@@ -25,11 +25,15 @@
       <p><strong data-i18n="labels.state">Stato:</strong> <span id="state">Verifica sessione...</span></p>
       <p><strong data-i18n="labels.email">Email:</strong> <span id="email">-</span></p>
       <p><strong data-i18n="labels.uid">ID utente:</strong> <span id="uid">-</span></p>
+      <p><strong data-i18n="labels.dbProgressTotal">Progressi salvati nel database:</strong> <span id="stats-db-total">-</span></p>
+      <p><strong data-i18n="labels.localProgressTotal">Progressi in locale:</strong> <span id="stats-local-total">-</span></p>
+      <p><strong data-i18n="labels.lastUpdate">Ultimo aggiornamento:</strong> <span id="stats-last-update">-</span></p>
       <p id="guest-note" class="muted" hidden data-i18n="guest.note">Non sei autenticato: il sito resta utilizzabile anche senza login.</p>
     </section>
 
     <div class="auth-actions">
       <button id="logout-btn" class="btn-secondary" type="button" hidden data-i18n="actions.logout">Logout</button>
+      <button id="delete-account-btn" class="btn-secondary" type="button" hidden data-i18n="actions.deleteAccount">Elimina account</button>
       <a class="auth-link" href="login.html" data-i18n="actions.toLogin">Vai a Login / Signup</a>
       <a class="auth-link" href="impostazioni.html" data-i18n="actions.toSettings">Apri impostazioni</a>
     </div>
@@ -44,18 +48,20 @@
       it: {
         pageTitle: 'Profilo - Sceglitu',
         header: { backHome: '← Torna alla home', title: 'Profilo utente' },
-        labels: { state: 'Stato:', email: 'Email:', uid: 'ID utente:' },
+        labels: { state: 'Stato:', email: 'Email:', uid: 'ID utente:', dbProgressTotal: 'Progressi salvati nel database:', localProgressTotal: 'Progressi in locale:', lastUpdate: 'Ultimo aggiornamento:' },
         status: { checking: 'Verifica sessione...', authenticated: 'Autenticato', guest: 'Ospite (non autenticato)', noEmail: '(nessuna email)', noId: '(nessun id)', error: 'Errore: {error}' },
         guest: { note: 'Non sei autenticato: il sito resta utilizzabile anche senza login.' },
-        actions: { logout: 'Logout', toLogin: 'Vai a Login / Signup', toSettings: 'Apri impostazioni' }
+        actions: { logout: 'Logout', deleteAccount: 'Elimina account', toLogin: 'Vai a Login / Signup', toSettings: 'Apri impostazioni' },
+        account: { deleteConfirm: 'Vuoi davvero eliminare il tuo account? Questa azione non può essere annullata.', deleteSuccess: 'Account eliminato. Reindirizzamento...', deleteFailed: 'Eliminazione account fallita: {error}' }
       },
       en: {
         pageTitle: 'Profile - Sceglitu',
         header: { backHome: '← Back to home', title: 'User profile' },
-        labels: { state: 'Status:', email: 'Email:', uid: 'User ID:' },
+        labels: { state: 'Status:', email: 'Email:', uid: 'User ID:', dbProgressTotal: 'Saved progress in database:', localProgressTotal: 'Local progress:', lastUpdate: 'Last update:' },
         status: { checking: 'Checking session...', authenticated: 'Authenticated', guest: 'Guest (not authenticated)', noEmail: '(no email)', noId: '(no id)', error: 'Error: {error}' },
         guest: { note: 'You are not authenticated: the site can still be used without login.' },
-        actions: { logout: 'Logout', toLogin: 'Go to Login / Signup', toSettings: 'Open settings' }
+        actions: { logout: 'Logout', deleteAccount: 'Delete account', toLogin: 'Go to Login / Signup', toSettings: 'Open settings' },
+        account: { deleteConfirm: 'Do you really want to delete your account? This action cannot be undone.', deleteSuccess: 'Account deleted. Redirecting...', deleteFailed: 'Account deletion failed: {error}' }
       }
     };
 
@@ -82,10 +88,59 @@
       document.getElementById('state').textContent = t('status.checking');
     }
 
+
+
+    function contaProgressiLocali() {
+      return Object.keys(localStorage).filter((key) => key.startsWith('progresso_')).length;
+    }
+
+    async function caricaStatistiche(user) {
+      const dbTotalEl = document.getElementById('stats-db-total');
+      const localTotalEl = document.getElementById('stats-local-total');
+      const lastUpdateEl = document.getElementById('stats-last-update');
+
+      localTotalEl.textContent = String(contaProgressiLocali());
+
+      if (!user) {
+        dbTotalEl.textContent = '0';
+        lastUpdateEl.textContent = '-';
+        return;
+      }
+
+      const { count, error: countError } = await client
+        .from('progressi')
+        .select('user_id', { count: 'exact', head: true })
+        .eq('user_id', user.id);
+
+      if (countError) {
+        dbTotalEl.textContent = '-';
+        lastUpdateEl.textContent = '-';
+        return;
+      }
+
+      dbTotalEl.textContent = String(count ?? 0);
+
+      const { data: latestRows, error: latestError } = await client
+        .from('progressi')
+        .select('updated_at')
+        .eq('user_id', user.id)
+        .order('updated_at', { ascending: false })
+        .limit(1);
+
+      if (latestError || !latestRows || latestRows.length === 0 || !latestRows[0].updated_at) {
+        lastUpdateEl.textContent = '-';
+        return;
+      }
+
+      const latest = new Date(latestRows[0].updated_at);
+      lastUpdateEl.textContent = Number.isNaN(latest.getTime()) ? String(latestRows[0].updated_at) : latest.toLocaleString();
+    }
+
     async function renderSessionState() {
       const { data, error } = await client.auth.getSession();
       const stateEl = document.getElementById('state');
       const logoutBtn = document.getElementById('logout-btn');
+      const deleteAccountBtn = document.getElementById('delete-account-btn');
       const guestNote = document.getElementById('guest-note');
 
       if (error) {
@@ -98,6 +153,7 @@
         document.getElementById('email').textContent = t('status.noEmail');
         document.getElementById('uid').textContent = t('status.noId');
         guestNote.hidden = false;
+        await caricaStatistiche(null);
         return;
       }
 
@@ -106,9 +162,34 @@
       document.getElementById('email').textContent = user.email ?? t('status.noEmail');
       document.getElementById('uid').textContent = user.id;
       logoutBtn.hidden = false;
+      deleteAccountBtn.hidden = false;
+      await caricaStatistiche(user);
     }
 
     document.getElementById('logout-btn').addEventListener('click', async () => {
+      await client.auth.signOut();
+      window.location.replace('login.html');
+    });
+
+
+
+    document.getElementById('delete-account-btn').addEventListener('click', async () => {
+      if (!confirm(t('account.deleteConfirm'))) return;
+
+      const stateEl = document.getElementById('state');
+      const { data: userData, error: userError } = await client.auth.getUser();
+      if (userError || !userData?.user) {
+        stateEl.textContent = translate(t('account.deleteFailed'), { error: userError?.message || 'Utente non autenticato' });
+        return;
+      }
+
+      const { error } = await client.auth.admin.deleteUser(userData.user.id);
+      if (error) {
+        stateEl.textContent = translate(t('account.deleteFailed'), { error: error.message });
+        return;
+      }
+
+      stateEl.textContent = t('account.deleteSuccess');
       await client.auth.signOut();
       window.location.replace('login.html');
     });

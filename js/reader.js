@@ -2,9 +2,9 @@
 //  reader.js — Vista lettore storia (invariato)
 // ================================================================
 
-function openReader(idx) {
+async function openReader(idx) {
   currentStory = stories[idx];
-  currentPage = getProgress(currentStory.titolo);
+  currentPage = await caricaProgresso(currentStory.titolo);
   document.getElementById('reader-title').textContent = currentStory.titolo;
   document.getElementById('reader-body').style.display = 'flex';
   document.getElementById('completion-screen').classList.remove('visible');
@@ -26,7 +26,7 @@ function renderPage() {
   const page = getPageData(currentPage);
   if (!page) { toast(t('reader.pageNotFound') + ' ' + currentPage); return; }
 
-  setProgress(currentStory.titolo, currentPage);
+  salvaProgresso(currentStory.titolo, currentPage);
 
   // Progress bar
   const maxNum = Math.max(...currentStory.pagine.map(p => p.numeroPagina));
