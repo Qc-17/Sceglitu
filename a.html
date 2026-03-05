@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cataloghoo</title>
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Cataloghoo%22%2C%22short_name%22%3A%22Cataloghoo%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22theme_color%22%3A%22%23141418%22%2C%22background_color%22%3A%22%23141418%22%7D">
+<meta name="theme-color" content="#141418">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+// Attendi che jsPDF si carichi
+window.addEventListener('load', function(){
+    if(window.jspdf) console.log('✅ jsPDF caricato');
+    else console.error('❌ jsPDF NON caricato');
+});
+</script>
+<style>
+/* ═══ RESET + VARIABLES ═══ */
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+    --bg-primary:#141418; --bg-secondary:#1a1a1e; --bg-tertiary:#252529;
+    --bg-quaternary:#3a3a3e; --text-primary:#fff; --text-secondary:#aaa;
+    --accent:#2563eb; --accent-hover:#1d4ed8; --danger:#dc2626;
+}
+body.light-theme {
+    --bg-primary:#f0f2f5; --bg-secondary:#fff; --bg-tertiary:#e8eaed;
+    --bg-quaternary:#d0d3d8; --text-primary:#1a1a1a; --text-secondary:#555;
+}
+body {
+    font-family:'Segoe UI',Tahoma,sans-serif;
+    background:var(--bg-primary); color:var(--text-primary);
+    min-height:100vh; display:flex; flex-direction:column;
+    transition:background .3s, color .3s;
+}
+
+/* ═══ HEADER ═══ */
+.header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:11px 14px; background:var(--bg-secondary); border-radius:10px;
+    margin:10px; gap:6px;
+}
+.header h1 { flex:1; text-align:center; font-size:21px; letter-spacing:1px; }
+.header-btn { padding:8px 15px; background:var(--accent); color:#fff;
+    border:none; border-radius:6px; cursor:pointer; font-size:13px; white-space:nowrap; }
+.header-btn:hover { background:var(--accent-hover); }
+.theme-toggle { display:flex; gap:3px; background:var(--bg-tertiary); border-radius:17px; padding:3px; }
+.theme-toggle button { padding:5px 9px; font-size:14px; background:transparent;
+    border:none; border-radius:13px; cursor:pointer; }
+.theme-toggle button.active { background:var(--accent); }
+
+/* ═══ TABLE ═══ */
+.table-header {
+    display:grid; grid-template-columns:33% 22% 11% 20% 14%;
+    padding:9px 14px; background:var(--bg-tertiary); border-radius:6px;
+    margin:0 10px 5px; font-weight:bold; font-size:12px;
+}
+.scroll-container { flex:1; overflow-y:auto; padding:0 10px; margin-bottom:5px; }
+.catalog-row {
+    display:grid; grid-template-columns:33% 22% 11% 20% 14%;
+    padding:11px 14px; margin-bottom:4px; border-radius:6px;
+    cursor:pointer; transition:transform .15s, filter .15s; font-size:12.5px;
+}
+.catalog-row:hover { transform:translateX(4px); filter:brightness(1.12); }
+.catalog-row > div { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:0 3px; }
+
+/* colori scuro */
+body:not(.light-theme) .tipo-libro          { background:#0d0d0d; color:#fff; }
+body:not(.light-theme) .tipo-fumetto        { background:#cc4c4c; color:#fff; }
+body:not(.light-theme) .tipo-rivista        { background:#196619; color:#fff; }
+body:not(.light-theme) .tipo-cd             { background:#262673; color:#fff; }
+body:not(.light-theme) .tipo-dvd            { background:#737326; color:#fff; }
+body:not(.light-theme) .tipo-videocassetta  { background:#267373; color:#fff; }
+body:not(.light-theme) .tipo-musicassetta   { background:#732673; color:#fff; }
+body:not(.light-theme) .tipo-altro          { background:#404040; color:#fff; }
+body:not(.light-theme) .no-color            { background:#262626; color:#fff; }
+/* colori chiaro */
+body.light-theme .tipo-libro          { background:#d4d4d4; color:#111; }
+body.light-theme .tipo-fumetto        { background:#ffb4b4; color:#111; }
+body.light-theme .tipo-rivista        { background:#b4ffb4; color:#111; }
+body.light-theme .tipo-cd             { background:#b4b4ff; color:#111; }
+body.light-theme .tipo-dvd            { background:#ffffb4; color:#111; }
+body.light-theme .tipo-videocassetta  { background:#b4ffff; color:#111; }
+body.light-theme .tipo-musicassetta   { background:#ffb4ff; color:#111; }
+body.light-theme .tipo-altro          { background:#dcdcdc; color:#111; }
+body.light-theme .no-color            { background:#e6e6e6; color:#111; }
+
+/* ═══ RAGGRUPPAMENTO ═══ */
+.group-header {
+    display:flex; align-items:center; gap:9px;
+    padding:8px 14px; margin-bottom:3px; border-radius:6px;
+    background:var(--bg-tertiary); cursor:pointer;
+    user-select:none; font-size:13px; font-weight:600;
+}
+.group-header:hover { filter:brightness(1.1); }
+.group-arrow { font-size:11px; transition:transform .2s; display:inline-block; width:14px; text-align:center; }
+.group-arrow.open { transform:rotate(90deg); }
+.group-badge { font-size:10px; background:var(--bg-quaternary); border-radius:10px;
+    padding:1px 7px; color:var(--text-secondary); margin-left:auto; }
+.group-tipo-badge { font-size:9px; background:var(--accent); color:#fff;
+    border-radius:9px; padding:1px 6px; margin-left:6px; opacity:.8; }
+.group-children { overflow:hidden; transition:max-height .25s ease; }
+
+/* ═══ FOOTER ═══ */
+.footer { display:flex; justify-content:space-between; align-items:center;
+    padding:9px 14px; background:var(--bg-secondary); border-radius:10px; margin:5px 10px 10px; }
+.footer button { padding:7px 14px; background:var(--accent); color:#fff;
+    border:none; border-radius:6px; cursor:pointer; font-size:12px; }
+.footer button:hover { background:var(--accent-hover); }
+.footer .user-badge { font-size:12px; color:var(--text-secondary); }
+.footer .user-badge strong { color:var(--text-primary); }
+
+/* ═══ MODAL ═══ */
+.modal { display:none; position:fixed; inset:0; z-index:1000;
+    background:rgba(0,0,0,.55); align-items:center; justify-content:center; }
+.modal.active { display:flex; }
+.modal-content { background:var(--bg-secondary); padding:22px; border-radius:12px;
+    max-width:500px; width:92%; max-height:85vh; overflow-y:auto; }
+.modal-header { font-size:18px; font-weight:bold; margin-bottom:16px; }
+
+/* ═══ FORM ═══ */
+.fg { margin-bottom:12px; }
+.fg label { display:block; margin-bottom:5px; font-weight:500; font-size:12.5px; }
+.fg input,.fg select,.fg textarea {
+    width:100%; padding:8px 10px; background:var(--bg-tertiary);
+    border:1px solid var(--bg-quaternary); border-radius:6px;
+    color:var(--text-primary); font-size:13px;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus { outline:none; border-color:var(--accent); }
+.fg textarea { resize:vertical; min-height:55px; }
+.fg .hint { font-size:10.5px; color:var(--text-secondary); margin-top:3px; }
+.fg input.input-error { border-color:var(--danger); }
+.checkbox-row { display:flex; align-items:center; gap:7px; }
+.checkbox-row input[type=checkbox] { width:17px; height:17px; accent-color:var(--accent); }
+.optional-section { border-top:1px solid var(--bg-quaternary); margin-top:9px; padding-top:9px; }
+.optional-section .section-label { font-size:10px; text-transform:uppercase;
+    letter-spacing:1px; color:var(--text-secondary); margin-bottom:7px; }
+
+/* ═══ BUTTONS ═══ */
+.btn-row { display:flex; gap:8px; margin-top:16px; }
+.btn-row button { flex:1; padding:9px; border:none; border-radius:6px;
+    cursor:pointer; font-size:13px; color:#fff; transition:filter .2s; }
+.btn-row button:hover { filter:brightness(1.15); }
+.btn-primary { background:var(--accent); }
+.btn-secondary { background:var(--bg-quaternary); color:var(--text-primary) !important; }
+.btn-danger { background:var(--danger); }
+.btn-full { display:block; width:100%; padding:9px; margin-bottom:7px;
+    background:var(--accent); color:#fff; border:none; border-radius:6px;
+    cursor:pointer; font-size:12.5px; text-align:left; text-decoration:none; }
+.btn-full:hover { filter:brightness(1.12); }
+.btn-full.sec { background:var(--bg-quaternary); color:var(--text-primary); }
+
+/* ═══ DETAIL ═══ */
+.detail-info { background:var(--bg-tertiary); padding:13px; border-radius:8px; margin-bottom:12px; }
+.detail-row { display:flex; margin-bottom:7px; font-size:12.5px; }
+.detail-row strong { min-width:130px; flex-shrink:0; }
+
+/* ═══ SWITCH ═══ */
+.switch-group { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.switch { position:relative; width:44px; height:23px; }
+.switch input { opacity:0; width:0; height:0; }
+.slider { position:absolute; inset:0; background:#666; border-radius:23px; cursor:pointer; transition:.3s; }
+.slider:before { content:''; position:absolute; width:17px; height:17px; left:3px; bottom:3px;
+    background:#fff; border-radius:50%; transition:.3s; }
+.switch input:checked+.slider { background:var(--accent); }
+.switch input:checked+.slider:before { transform:translateX(21px); }
+
+/* ═══ PASSWORD ═══ */
+.pwd-wrap { position:relative; }
+.pwd-wrap input { padding-right:34px; }
+.pwd-eye { position:absolute; right:9px; top:50%; transform:translateY(-50%);
+    cursor:pointer; font-size:15px; user-select:none; }
+
+/* ═══ MISC ═══ */
+.info-text { font-size:10.5px; color:var(--text-secondary); margin-top:3px; margin-bottom:6px; }
+.warning-box { background:#3a2020; border:1px solid #6a3030; border-radius:8px;
+    padding:12px 14px; margin:10px 0; }
+body.light-theme .warning-box { background:#fff3cd; border-color:#ffc107; color:#333; }
+.warning-box strong { color:#f59e0b; }
+body.light-theme .warning-box strong { color:#b45309; }
+hr.sep { border:none; border-top:1px solid var(--bg-quaternary); margin:13px 0; }
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:640px){
+    .table-header,.catalog-row { grid-template-columns:30% 22% 13% 22% 13%; font-size:11.5px; }
+    .header h1 { font-size:16px; }
+    .header-btn { padding:6px 9px; font-size:11px; }
+}
+
+/* ═══ SELEZIONE MULTIPLA ═══ */
+.selection-mode .catalog-row,
+.selection-mode .group-header { cursor:default; }
+.catalog-row.selected { 
+    outline:2px solid var(--accent); 
+    outline-offset:-2px;
+    filter:brightness(1.2);
+}
+.selection-checkbox {
+    position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    width:20px; height:20px; pointer-events:none;
+    border:2px solid var(--accent); border-radius:4px;
+    background:var(--bg-secondary); display:none;
+}
+.selection-mode .selection-checkbox { display:block; }
+.selected .selection-checkbox {
+    background:var(--accent);
+}
+.selected .selection-checkbox::after {
+    content:'✓'; position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:14px; font-weight:bold;
+}
+.selection-bar {
+    display:none; position:fixed; bottom:10px; left:10px; right:10px;
+    background:var(--bg-secondary); border-radius:10px; padding:10px 14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.3); z-index:999;
+    align-items:center; gap:8px;
+}
+.selection-bar.active { display:flex; }
+.selection-bar-count { flex:1; font-size:14px; font-weight:600; }
+.selection-bar button {
+    padding:7px 14px; border:none; border-radius:6px; cursor:pointer;
+    font-size:12px; color:#fff; transition:filter .2s;
+}
+.selection-bar button:hover { filter:brightness(1.15); }
+.selection-bar .btn-sel-all { background:var(--accent); }
+.selection-bar .btn-desel-all { background:var(--bg-quaternary); color:var(--text-primary) !important; }
+.selection-bar .btn-delete { background:var(--danger); }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+    <button class="header-btn" onclick="openAddModal()">+ Aggiungi</button>
+    <h1>Cataloghoo</h1>
+    <div style="display:flex;align-items:center;gap:8px;">
+        <button class="header-btn" onclick="openSettingsModal()">⚙ Impostazioni</button>
+        <div class="theme-toggle">
+            <button id="darkBtn" class="active" onclick="setTheme('dark')">🌙</button>
+            <button id="lightBtn" onclick="setTheme('light')">☀️</button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ TABELLA ═══ -->
+<div class="table-header" id="tableHeader">
+    <div>Titolo</div><div>Autore / Artista</div><div>Anno</div><div>Editore / Etichetta</div><div>Tipologia</div>
+</div>
+<div class="scroll-container" id="catalogContainer"></div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+    <div class="user-badge">Questo sito l'ha creato 👤 Qc17 e tu sei 👤 <strong id="footerUsername">—</strong></div>
+    <button onclick="openFilterModal()">🔍 Filtra</button>
+</div>
+
+<!-- ═══ BARRA SELEZIONE ═══ -->
+<div class="selection-bar" id="selectionBar">
+    <div class="selection-bar-count" id="selectionCount">0 selezionati</div>
+    <button class="btn-sel-all" onclick="selectAll()">Seleziona tutti</button>
+    <button class="btn-desel-all" onclick="deselectAll()">Deseleziona</button>
+    <button class="btn-delete" onclick="deleteSelected()">🗑 Elimina</button>
+</div>
+
+<!-- ═══ MODALI ═══ -->
+
+<!-- SETUP UTENTE -->
+<div id="setupModal" class="modal">
+<div class="modal-content">
+    <div class="modal-header">👋 Benvenuto in Cataloghoo</div>
+    <p style="font-size:13px;margin-bottom:14px;color:var(--text-secondary);">
+        Prima di tutto crea il tuo account. Questi dati vengono salvati solo nel browser.
+    </p>
+    <div class="warning-box">
+        <strong>⚠ Attenzione:</strong> tutti i dati (catalogo, account, impostazioni) sono salvati
+        nel localStorage di questo browser. <strong>Non cancellare i dati dell'app</strong> altrimenti
+        perdi tutto il catalogo. Esporta periodicamente un file .cic come backup.
+    </div>
+    <div class="fg" style="margin-top:14px;">
+        <label>Username</label>
+        <input type="text" id="setupUsername" placeholder="Es. Mario">
+    </div>
+    <div class="fg">
+        <label>Password (per i file .cic)</label>
+        <div class="pwd-wrap">
+            <input type="password" id="setupPassword" placeholder="Scegli una password">
+            <span class="pwd-eye" onclick="togglePassword('setupPassword')">👁️</span>
+        </div>
+        <div class="hint">Viene usata di default quando esporti .cic</div>
+    </div>
+    <div class="fg">
+        <label>Conferma password</label>
+        <input type="password" id="setupPasswordConfirm">
+    </div>
+    <div class="btn-row">
+        <button class="btn-primary" onclick="confirmSetup()" style="width:100%;">Inizia</button>
+    </div>
+</div>
+</div>
+
+<!-- AGGIUNGI / MODIFICA -->
+<div id="editModal" class="modal">
+<div class="modal-content">
+    <div class="modal-header" id="modalTitle">Aggiungi elemento</div>
+    <form id="editForm">
+        <div class="fg">
+            <label>Tipologia</label>
+            <select id="inputTipologia" onchange="rebuildForm()">
+                <option>Libro</option><option>Fumetto</option><option>Rivista</option>
+                <option>CD</option><option>DVD</option><option>Videocassetta</option>
+                <option>Musicassetta</option><option>Altro</option>
+            </select>
+        </div>
+        <div id="dynamicFields"></div>
+        <div class="btn-row">
+            <button type="button" class="btn-secondary" onclick="closeModal('editModal')">Annulla</button>
+            <button type="submit" class="btn-primary">Salva</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<!-- DETTAGLI -->
+<div id="detailModal" class="modal">
+<div class="modal-content" style="max-width:540px;">
+    <div class="modal-header">Dettagli elemento</div>
+    <div class="detail-info" id="detailInfo"></div>
+    <div class="btn-row">
+        <button class="btn-danger" onclick="deleteCurrentItem()">🗑 Elimina</button>
+        <button class="btn-secondary" onclick="editCurrentItem()">✏ Modifica</button>
+        <button class="btn-secondary" onclick="closeModal('detailModal')">Chiudi</button>
+    </div>
+</div>
+</div>
+
+<!-- IMPOSTAZIONI -->
+<div id="settingsModal" class="modal">
+<div class="modal-content">
+    <div class="modal-header">⚙ Impostazioni</div>
+    <div class="fg">
+        <label>Ordina per</label>
+        <select id="orderField">
+            <option value="titolo">Titolo</option>
+            <option value="autore">Autore / Artista</option>
+            <option value="anno">Anno</option>
+            <option value="casa">Editore / Etichetta</option>
+            <option value="tipologia">Tipologia</option>
+        </select>
+    </div>
+    <div class="fg">
+        <label>Verso</label>
+        <select id="orderType">
+            <option value="alfabetico">A → Z</option>
+            <option value="antialfabetico">Z → A</option>
+        </select>
+    </div>
+    <div class="switch-group">
+        <label>Colori per tipologia</label>
+        <label class="switch"><input type="checkbox" id="colorizeSwitch" checked><span class="slider"></span></label>
+    </div>
+    <div class="switch-group">
+        <label>Raggruppamento automatico</label>
+        <label class="switch"><input type="checkbox" id="groupSwitch" checked><span class="slider"></span></label>
+    </div>
+    <div class="info-text" style="margin-top:-6px;">Raggruppa serie, artisti, registi e autori. Clicca ▶ per espandere.</div>
+
+    <hr class="sep">
+    <button class="btn-full" onclick="downloadPDF()">📄 Scarica PDF</button>
+    <button class="btn-full sec" onclick="copyCatalog()">📋 Copia catalogo</button>
+
+    <hr class="sep">
+    <button class="btn-full" onclick="exportCIC()">💾 Esporta .cic</button>
+    <button class="btn-full sec" onclick="document.getElementById('importFile').click()">📥 Importa .cic</button>
+    <input type="file" id="importFile" accept=".cic" style="display:none;" onchange="importCIC(event)">
+    <div class="info-text">File .cic criptati AES-256, protetti da password</div>
+
+    <hr class="sep">
+    <a href="oc.html" class="btn-full" style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:20px;">🌐</span>
+        <span><strong>Open Cataloghoo</strong><br><span style="font-size:10.5px;opacity:.7;">Catalogo condiviso — presto disponibile</span></span>
+    </a>
+
+    <hr class="sep">
+    <button class="btn-full sec" onclick="openProfileModal()">👤 Profilo utente</button>
+
+    <div class="btn-row">
+        <button class="btn-secondary" onclick="closeModal('settingsModal')">Annulla</button>
+        <button class="btn-primary" onclick="applySettings()">Applica e chiudi</button>
+    </div>
+</div>
+</div>
+
+<!-- FILTRO -->
+<div id="filterModal" class="modal">
+<div class="modal-content">
+    <div class="modal-header">🔍 Filtra catalogo</div>
+    <div class="fg">
+        <label>Campo</label>
+        <select id="filterCriteria">
+            <option value="ID">ID</option><option value="titolo">Titolo</option>
+            <option value="autore">Autore / Artista</option><option value="anno">Anno</option>
+            <option value="tipologia">Tipologia</option><option value="casa">Editore / Etichetta</option>
+        </select>
+    </div>
+    <div class="fg"><label>Valore</label><input type="text" id="filterValue"></div>
+    <div class="btn-row">
+        <button class="btn-secondary" onclick="closeModal('filterModal'); resetFilter()">Mostra tutti</button>
+        <button class="btn-primary" onclick="applyFilter()">Applica</button>
+    </div>
+</div>
+</div>
+
+<!-- PASSWORD generica -->
+<div id="passwordModal" class="modal">
+<div class="modal-content">
+    <div class="modal-header" id="passwordTitle">Password</div>
+    <div class="fg">
+        <label id="passwordLabel">Password</label>
+        <div class="pwd-wrap">
+            <input type="password" id="passwordInput">
+            <span class="pwd-eye" onclick="togglePassword('passwordInput')">👁️</span>
+        </div>
+    </div>
+    <div class="fg" id="confirmPasswordGroup" style="display:none;">
+        <label>Conferma password</label>
+        <div class="pwd-wrap">
+            <input type="password" id="confirmPasswordInput">
+            <span class="pwd-eye" onclick="togglePassword('confirmPasswordInput')">👁️</span>
+        </div>
+    </div>
+    <div class="btn-row">
+        <button class="btn-secondary" onclick="closeModal('passwordModal'); cancelPasswordAction()">Annulla</button>
+        <button class="btn-primary" onclick="confirmPassword()">Conferma</button>
+    </div>
+</div>
+</div>
+
+<!-- PROFILO -->
+<div id="profileModal" class="modal">
+<div class="modal-content">
+    <div class="modal-header">👤 Profilo utente</div>
+    <div class="fg">
+        <label>Username</label>
+        <input type="text" id="profileUsername">
+    </div>
+    <div class="fg">
+        <label>Cambia password .cic</label>
+        <div class="pwd-wrap">
+            <input type="password" id="profilePassword" placeholder="Nuova password (opzionale)">
+            <span class="pwd-eye" onclick="togglePassword('profilePassword')">👁️</span>
+        </div>
+    </div>
+    <div class="warning-box">
+        <strong>⚠</strong> Cambiare la password non aggiorna i .cic già esportati.
+    </div>
+    <div class="btn-row">
+        <button class="btn-secondary" onclick="closeModal('profileModal')">Annulla</button>
+        <button class="btn-primary" onclick="saveProfile()">Salva</button>
+    </div>
+</div>
+</div>
+
+<!-- EASTER EGG -->
+<div id="easterEggModal" class="modal">
+<div class="modal-content" style="max-width:380px;text-align:center;">
+    <div class="modal-header">🈚 Easter Egg</div>
+    <div style="font-size:90px;padding:24px 0;">😈</div>
+    <p style="color:#dc2626;font-weight:bold;font-size:26px;margin-bottom:16px;">666</p>
+    <button class="btn-secondary" onclick="closeModal('easterEggModal')" style="width:100%;padding:9px;">Chiudi</button>
+</div>
+</div>
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+// ─── CAMPI PER TIPOLOGIA ──────────────────────────────────────
+const TIPO_FIELDS = {
+    Libro:[
+        {key:'titolo',label:'Titolo',type:'text',required:true},
+        {key:'autore',label:'Autore',type:'text',required:true},
+        {key:'anno',label:'Anno',type:'anno',required:false},
+        {key:'casa',label:'Casa editrice',type:'text',required:false},
+        {key:'isbn',label:'ISBN',type:'text',required:false,hint:'10 o 13 cifre'},
+        {key:'genere',label:'Genere',type:'text',required:false},
+        {key:'pagine',label:'Pagine',type:'numero',required:false},
+        {key:'lingua',label:'Lingua',type:'text',required:false},
+        {key:'stato',label:'Stato',type:'select',required:false,options:['','Nuovo','Ottimo','Buono','Discreto','Consumato']},
+        {key:'note',label:'Note',type:'textarea',required:false},
+    ],
+    Fumetto:[
+        {key:'titolo',label:'Titolo serie',type:'text',required:true},
+        {key:'autore',label:'Autore',type:'text',required:true},
+        {key:'numeri',label:'Numeri posseduti (batch)',type:'numeri',required:false,
+            hint:'Inserisci più numeri per creare tanti albi in batch.\nEsempi:\n• 1-15,17-19  →  crea 17 albi (dal 1 al 15, poi 17,18,19)\n• 1,3,5,7  →  crea 4 albi (numeri 1,3,5,7)\n\n⚠ Se compili questo campo, "Numero albo" e "Titolo albo" vengono ignorati.'},
+        {key:'numero',label:'Numero albo',type:'numero',required:false,hint:'Per inserire un singolo albo (es. 5). Lascia vuoto se usi "Numeri posseduti".'},
+        {key:'titoloAlbo',label:'Titolo albo',type:'text',required:false,hint:'Es. "L\'alba dei morti viventi". Lascia vuoto se usi batch.'},
+        {key:'anno',label:'Anno pubblicazione',type:'anno',required:false},
+        {key:'casa',label:'Casa editrice',type:'text',required:false},
+        {key:'genere',label:'Genere',type:'text',required:false},
+        {key:'lingua',label:'Lingua originale',type:'text',required:false},
+        {key:'stato',label:'Stato',type:'select',required:false,options:['','Nuovo','Ottimo','Buono','Discreto','Consumato']},
+        {key:'note',label:'Note',type:'textarea',required:false},
+    ],
+    Rivista:[
+        {key:'titolo',label:'Nome rivista',type:'text',required:true},
+        {key:'autore',label:'Autore / Redazione',type:'text',required:false},
+        {key:'numeri',label:'Numeri posseduti (batch)',type:'numeri',required:false,
+            hint:'Inserisci più numeri per creare tanti numeri in batch.\nEsempi:\n• 1-15,17-19  →  crea 17 numeri (dal 1 al 15, poi 17,18,19)\n• 1,3,5,7  →  crea 4 numeri (1,3,5,7)\n\n⚠ Se compili questo campo, "Numero" e "Titolo numero" vengono ignorati.'},
+        {key:'numero',label:'Numero',type:'numero',required:false,hint:'Per inserire un singolo numero (es. 5). Lascia vuoto se usi "Numeri posseduti".'},
+        {key:'titoloAlbo',label:'Titolo numero',type:'text',required:false,hint:'Titolo specifico di questo numero. Lascia vuoto se usi batch.'},
+        {key:'anno',label:'Anno pubblicazione',type:'anno',required:false},
+        {key:'casa',label:'Casa editrice',type:'text',required:false},
+        {key:'genere',label:'Genere / Tema',type:'text',required:false},
+        {key:'lingua',label:'Lingua',type:'text',required:false},
+        {key:'stato',label:'Stato',type:'select',required:false,options:['','Nuovo','Ottimo','Buono','Discreto','Consumato']},
+        {key:'note',label:'Note',type:'textarea',required:false},
+    ],
+    CD:[
+        {key:'titolo',label:'Album',type:'text',required:true},
+        {key:'autore',label:'Artista',type:'text',required:true},
+        {key:'anno',label:'Anno',type:'anno',required:false},
+        {key:'casa',label:'Etichetta discografica',type:'text',required:false},
+        {key:'genere',label:'Genere musicale',type:'text',required:false},
+        {key:'tracks',label:'Numero tracce',type:'numero',required:false},
+        {key:'durata',label:'Durata (min)',type:'numero',required:false},
+        {key:'lingua',label:'Lingua',type:'text',required:false},
+        {key:'stato',label:'Stato',type:'select',required:false,options:['','Nuovo','Ottimo','Buono','Discreto','Consumato']},
+        {key:'note',label:'Note',type:'textarea',required:false},
+    ],
+    DVD:[
+        {key:'titolo',label:'Titolo',type:'text',required:true},
+        {key:'autore',label:'Regista',type:'text',required:true},
+        {key:'anno',label:'Anno',type:'anno',required:false},
+        {key:'casa',label:'Studio / Distributore',type:'text',required:false},
+        {key:'genere',label:'Genere',type:'text',required:false},
+        {key:'durata',label:'Durata (min)',type:'numero',required:false},
+        {key:'lingua',label:'Lingua originale',type:'text',required:false},
+        {key:'attori',label:'Attori principali',type:'text',required:false},
+        {key:'stato',label:'Stato',type:'select',required:false,options:['','Nuovo','Ottimo','Buono','Discreto','Consumato']},
+        {key:'note',label:'Note',type:'textarea',required:false},
+    ],
+    Videocassetta:[
+        {key:'titolo',label:'Titolo',type:'text',required:true},
+        {key:'autore',label:'Regista',type:'text',required:true},
+        {key:'anno',label:'Anno',type:'anno',required:false},
+        {key:'casa',label:'Studio / Distributore',type:'text',required:false},
+        {key:'genere',label:'Genere',type:'text',required:false},
+        {key:'durata',label:'Durata (min)',type:'numero',required:false},
+        {key:'lingua',label:'Lingua originale',type:'text',required:false},
+        {key:'attori',label:'Attori principali',type:'text',required:false},
+        {key:'stato',label:'Stato',type:'select',required:false,options:['','Nuovo','Ottimo','Buono','Discreto','Consumato']},
+        {key:'note',label:'Note',type:'textarea',required:false},
+    ],
+    Musicassetta:[
+        {key:'titolo',label:'Album',type:'text',required:true},
+        {key:'autore',label:'Artista',type:'text',required:true},
+        {key:'anno',label:'Anno',type:'anno',required:false},
+        {key:'casa',label:'Etichetta discografica',type:'text',required:false},
+        {key:'genere',label:'Genere musicale',type:'text',required:false},
+        {key:'tracks',label:'Numero tracce',type:'numero',required:false},
+        {key:'durata',label:'Durata (min)',type:'numero',required:false},
+        {key:'lingua',label:'Lingua',type:'text',required:false},
+        {key:'stato',label:'Stato',type:'select',required:false,options:['','Nuovo','Ottimo','Buono','Discreto','Consumato']},
+        {key:'note',label:'Note',type:'textarea',required:false},
+    ],
+    Altro:[
+        {key:'titolo',label:'Titolo',type:'text',required:true},
+        {key:'autore',label:'Autore / Creatore',type:'text',required:false},
+        {key:'anno',label:'Anno',type:'anno',required:false},
+        {key:'casa',label:'Editore / Produttore',type:'text',required:false},
+        {key:'genere',label:'Genere / Tipo',type:'text',required:false},
+        {key:'lingua',label:'Lingua',type:'text',required:false},
+        {key:'stato',label:'Stato',type:'select',required:false,options:['','Nuovo','Ottimo','Buono','Discreto','Consumato']},
+        {key:'note',label:'Note',type:'textarea',required:false},
+    ]
+};
+
+const MAGIC_STRING = '5EBAF12E';
+const PDF_COLORS = {
+    Libro:[13,13,13],Fumetto:[204,76,76],Rivista:[25,102,25],
+    CD:[38,38,115],DVD:[115,115,38],Videocassetta:[38,115,115],
+    Musicassetta:[115,38,115],Altro:[64,64,64]
+};
+
+// ─── STATE ────────────────────────────────────────────────────
+let catalog   = [];
+let settings  = { orderField:'titolo', orderType:'alfabetico', colorize:true, theme:'dark', groupBy:true };
+let userProfile = { username:'', password:'' };
+let currentItem  = null;
+let editingItem  = null;
+let filterActive = false;
+let pendingPasswordAction = null;
+let pendingPasswordData   = null;
+let groupOpenState = {};   // { "chiaveGruppo": true/false }
+let selectionMode = false;
+let selectedItems = new Set();  // Set di ID elementi selezionati
+let longPressTimer = null;
+
+// ─── ID a 14 CIFRE ────────────────────────────────────────────
+// Schema: RR YY R DDD RR HH SS
+function generateID(){
+    const rand = n => String(Math.floor(Math.random()*Math.pow(10,n))).padStart(n,'0');
+    const now  = new Date();
+    const YY   = String(now.getFullYear()).slice(-2);
+    const DDD  = String(Math.floor((now - new Date(now.getFullYear(),0,0))/86400000)).padStart(3,'0');
+    const HH   = String(now.getHours()).padStart(2,'0');
+    const SS   = String(now.getSeconds()).padStart(2,'0');
+    return rand(2)+YY+rand(1)+DDD+rand(2)+HH+SS;
+}
+
+// ─── VALIDAZIONE NUMERI (1-15,17-19) ─────────────────────────
+// Accetta: singoli (5), intervalli (1-15), misto (1-10,15,20-25)
+// Spazi attorno a virgole/trattini sono tollerati
+function validateNumeri(str){
+    if(!str||!str.trim()) return true; // campo opzionale, vuoto ok
+    const parts = str.split(',').map(s=>s.trim()).filter(Boolean);
+    if(!parts.length) return true;
+    for(const p of parts){
+        if(p.includes('-')){
+            const sides = p.split('-').map(s=>s.trim());
+            if(sides.length!==2) return false;
+            const a=Number(sides[0]), b=Number(sides[1]);
+            if(!Number.isInteger(a)||!Number.isInteger(b)||a<1||b<1||a>b) return false;
+        } else {
+            const n = Number(p);
+            if(!Number.isInteger(n)||n<1) return false;
+        }
+    }
+    return true;
+}
+// Conta quanti numeri totali rappresenta la stringa
+function countNumeri(str){
+    if(!str||!str.trim()) return 0;
+    let tot=0;
+    str.split(',').map(s=>s.trim()).filter(Boolean).forEach(p=>{
+        if(p.includes('-')){
+            const [a,b]=p.split('-').map(s=>Number(s.trim()));
+            tot+=(b-a+1);
+        } else { tot+=1; }
+    });
+    return tot;
+}
+// Espande la stringa "1-9,12" in array [1,2,3,4,5,6,7,8,9,12]
+function parseNumeriString(str){
+    const result = [];
+    str.split(',').map(s=>s.trim()).filter(Boolean).forEach(p=>{
+        if(p.includes('-')){
+            const [a,b]=p.split('-').map(s=>Number(s.trim()));
+            for(let i=a; i<=b; i++) result.push(i);
+        } else {
+            result.push(Number(p));
+        }
+    });
+    return result;
+}
+
+// ─── TEMA ─────────────────────────────────────────────────────
+function setTheme(t){
+    settings.theme = t;
+    document.body.classList.toggle('light-theme', t==='light');
+    document.getElementById('darkBtn').classList.toggle('active', t==='dark');
+    document.getElementById('lightBtn').classList.toggle('active', t==='light');
+    saveSettings();
+}
+
+// ─── PERSISTENZA ──────────────────────────────────────────────
+function loadData(){
+    try {
+        const s = localStorage.getItem('catalogatore_settings');
+        if(s) settings = {...settings, ...JSON.parse(s)};
+        const c = localStorage.getItem('catalogatore_data');
+        if(c) catalog = JSON.parse(c);
+        const u = localStorage.getItem('catalogatore_user');
+        if(u) userProfile = JSON.parse(u);
+    } catch(e){ console.error(e); }
+    setTheme(settings.theme||'dark');
+    updateSettingsUI();
+    updateFooterUser();
+    refreshTable();
+    if(!userProfile.username) setTimeout(()=> openModal('setupModal'), 400);
+}
+function saveData(){
+    localStorage.setItem('catalogatore_data', JSON.stringify(catalog));
+    saveSettings();
+}
+function saveSettings(){
+    localStorage.setItem('catalogatore_settings', JSON.stringify(settings));
+}
+function saveUser(){
+    localStorage.setItem('catalogatore_user', JSON.stringify(userProfile));
+    updateFooterUser();
+}
+function updateFooterUser(){
+    document.getElementById('footerUsername').textContent = userProfile.username || '—';
+}
+
+// ─── SETUP ────────────────────────────────────────────────────
+function confirmSetup(){
+    const user = document.getElementById('setupUsername').value.trim();
+    const pwd  = document.getElementById('setupPassword').value;
+    const pwd2 = document.getElementById('setupPasswordConfirm').value;
+    if(!user){ alert('Inserisci un username.'); return; }
+    if(!pwd) { alert('Inserisci una password.'); return; }
+    if(pwd!==pwd2){ alert('Le password non coincidono.'); return; }
+    userProfile = { username: user, password: pwd };
+    saveUser();
+    closeModal('setupModal');
+}
+
+// ─── PROFILO ──────────────────────────────────────────────────
+function openProfileModal(){
+    closeModal('settingsModal');
+    document.getElementById('profileUsername').value = userProfile.username;
+    document.getElementById('profilePassword').value = '';
+    openModal('profileModal');
+}
+function saveProfile(){
+    const u = document.getElementById('profileUsername').value.trim();
+    if(!u){ alert('Username non vuoto.'); return; }
+    userProfile.username = u;
+    const p = document.getElementById('profilePassword').value;
+    if(p) userProfile.password = p;
+    saveUser();
+    closeModal('profileModal');
+}
+
+// ─── UTILITÀ ──────────────────────────────────────────────────
+function togglePassword(id){ const e=document.getElementById(id); e.type=e.type==='password'?'text':'password'; }
+function openModal(id){ document.getElementById(id).classList.add('active'); }
+function closeModal(id){ document.getElementById(id).classList.remove('active'); if(id==='editModal') editingItem=null; }
+window.onclick = e => { if(e.target.classList.contains('modal')) e.target.classList.remove('active'); };
+
+// ─── ORDINAMENTO ──────────────────────────────────────────────
+function sortCatalog(arr){
+    const f=settings.orderField, rev=settings.orderType==='antialfabetico';
+    return arr.slice().sort((a,b)=>{
+        let va=(a[f]||'').toString().toLowerCase(), vb=(b[f]||'').toString().toLowerCase();
+        if(f==='anno'){va=parseInt(va)||0; vb=parseInt(vb)||0;}
+        return va<vb?(rev?1:-1):va>vb?(rev?-1:1):0;
+    });
+}
+
+// ─── CHIAVE DI RAGGRUPPAMENTO ─────────────────────────────────
+// Restituisce { key, label, tipo } per ogni tipologia
+function getGroupKey(item){
+    const t = item.tipologia;
+    if(t==='Libro')         return item.autore||'—';
+    if(t==='Fumetto')       return item.titolo||'—';   // serie
+    if(t==='Rivista')       return item.titolo||'—';   // nome rivista
+    if(t==='CD'||t==='Musicassetta') return item.autore||'—';  // artista
+    if(t==='DVD'||t==='Videocassetta') return item.autore||'—'; // regista
+    return item.titolo||'—';
+}
+
+// ─── TABELLA ──────────────────────────────────────────────────
+function refreshTable(items){
+    const container = document.getElementById('catalogContainer');
+    container.innerHTML = '';
+    const data = items || sortCatalog(catalog);
+
+    if(!settings.groupBy){
+        // ── modalità PIATTA ──
+        document.getElementById('tableHeader').style.display='grid';
+        data.forEach(item => container.appendChild(makeRow(item)));
+        return;
+    }
+
+    // ── modalità RAGGRUPPATA ──
+    document.getElementById('tableHeader').style.display='none';
+
+    // raggruppa: { "Fumetto:::Dragonball": [item,...], ... }
+    const groups = {};
+    const groupOrder = [];
+    data.forEach(item=>{
+        const gk = item.tipologia + ':::' + getGroupKey(item);
+        if(!groups[gk]){ groups[gk]=[]; groupOrder.push(gk); }
+        groups[gk].push(item);
+    });
+
+    groupOrder.forEach(gk=>{
+        const [tipo, nome] = gk.split(':::');
+        const members = groups[gk];
+
+        // ── se c'è un solo elemento, mostralo direttamente senza header ──
+        if(members.length === 1){
+            container.appendChild(makeRow(members[0]));
+            return;
+        }
+
+        // ── altrimenti crea header espandibile ──
+        const isOpen = groupOpenState[gk] !== false; // default aperto
+
+        const header = document.createElement('div');
+        header.className = 'group-header tipo-' + tipo.toLowerCase();
+        if(!settings.colorize) header.className = 'group-header no-color';
+
+        header.innerHTML =
+            `<span class="group-arrow ${isOpen?'open':''}">▶</span>` +
+            `<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${nome}</span>` +
+            `<span class="group-tipo-badge">${tipo}</span>` +
+            `<span class="group-badge">${members.length} elem.</span>`;
+
+        header.onclick = ()=>{
+            groupOpenState[gk] = !groupOpenState[gk];
+            refreshTable(items); // re-render
+        };
+        container.appendChild(header);
+
+        // ── figli (rows) ──
+        if(isOpen){
+            const wrap = document.createElement('div');
+            wrap.className = 'group-children';
+            wrap.style.paddingLeft = '12px';
+            members.forEach(item => wrap.appendChild(makeRow(item)));
+            container.appendChild(wrap);
+        }
+    });
+}
+
+// Costruisce una singola riga
+function makeRow(item){
+    const row = document.createElement('div');
+    row.className = 'catalog-row ' + (settings.colorize && item.tipologia ? 'tipo-'+item.tipologia.toLowerCase() : 'no-color');
+    row.style.position = 'relative';
+    if(selectedItems.has(item.ID)) row.classList.add('selected');
+    
+    const anno = (item.anno||'')+(item.ac?' a.C.':'');
+    
+    // Formato titolo per Fumetto/Rivista: "Serie #N - Titolo Albo"
+    let displayTitolo = item.titolo||'';
+    if((item.tipologia==='Fumetto'||item.tipologia==='Rivista') && item.numero){
+        displayTitolo = `${item.titolo} #${item.numero}`;
+        if(item.titoloAlbo) displayTitolo += ` - ${item.titoloAlbo}`;
+    }
+    
+    row.innerHTML = `<div>${displayTitolo}</div><div>${item.autore||''}</div><div>${anno}</div><div>${item.casa||''}</div><div>${item.tipologia||''}</div><span class="selection-checkbox"></span>`;
+    
+    // ── Eventi touch per long press ──
+    row.addEventListener('touchstart', (e)=>{
+        longPressTimer = setTimeout(()=>{
+            if(!selectionMode){
+                enterSelectionMode();
+                toggleSelection(item.ID);
+            }
+        }, 500); // 500ms = long press
+    });
+    row.addEventListener('touchend', ()=>{
+        clearTimeout(longPressTimer);
+    });
+    row.addEventListener('touchmove', ()=>{
+        clearTimeout(longPressTimer);
+    });
+    
+    // ── Click ──
+    row.onclick = (e)=>{
+        e.stopPropagation();
+        if(selectionMode){
+            toggleSelection(item.ID);
+        } else {
+            showDetail(item);
+        }
+    };
+    
+    return row;
+}
+
+// ─── DETTAGLI ─────────────────────────────────────────────────
+function showDetail(item){
+    currentItem=item;
+    const fields=TIPO_FIELDS[item.tipologia]||TIPO_FIELDS.Altro;
+    let html=`<div class="detail-row"><strong>ID:</strong><span>${item.ID}</span></div>`;
+    fields.forEach(f=>{
+        if(f.key==='numeri') return; // skip: non esiste più come campo
+        let v=item[f.key]||'';
+        if(f.key==='anno'&&item.ac) v+=' a.C.';
+        if(v||f.required) html+=`<div class="detail-row"><strong>${f.label}:</strong><span>${v}</span></div>`;
+    });
+    document.getElementById('detailInfo').innerHTML=html;
+    openModal('detailModal');
+}
+function deleteCurrentItem(){
+    if(!currentItem) return;
+    if(confirm('Eliminare questo elemento?')){ catalog=catalog.filter(i=>i.ID!==currentItem.ID); saveData(); refreshTable(); closeModal('detailModal'); }
+}
+function editCurrentItem(){ editingItem=currentItem; closeModal('detailModal'); openAddModal(); }
+
+// ─── FORM DINAMICA ────────────────────────────────────────────
+function rebuildForm(){
+    const tipo=document.getElementById('inputTipologia').value;
+    const fields=TIPO_FIELDS[tipo]||TIPO_FIELDS.Altro;
+    const container=document.getElementById('dynamicFields');
+    container.innerHTML='';
+    let optOpen=false;
+    fields.forEach(f=>{
+        if(!f.required&&!optOpen){
+            optOpen=true;
+            container.innerHTML+=`<div class="optional-section"><div class="section-label">Campi opzionali</div>`;
+        }
+        if(f.type==='anno'){
+            container.innerHTML+=`<div class="fg"><label>${f.label}</label>
+                <input type="text" id="field_anno" inputmode="numeric" maxlength="10" value="${editingItem?editingItem.anno||'':''}"></div>
+                <div class="fg"><div class="checkbox-row">
+                <input type="checkbox" id="field_ac" ${editingItem&&editingItem.ac?'checked':''}><label for="field_ac" style="margin:0;">a.C.</label></div></div>`;
+            return;
+        }
+        if(f.type==='numeri'){
+            // campo batch: solo in creazione, non in modifica
+            if(editingItem) return; // skip in modifica
+            container.innerHTML+=`<div class="fg"><label>${f.label}</label>
+                <input type="text" id="field_numeri" placeholder="Es. 1-15,17-19" value="">
+                <div class="hint" style="white-space:pre-line;">${f.hint}</div>
+                <div class="hint" id="numeri_count" style="color:var(--accent);margin-top:4px;"></div>
+            </div>`;
+            return;
+        }
+        let inp='';
+        if(f.type==='numero') inp=`<input type="text" id="field_${f.key}" inputmode="numeric" value="${editingItem?editingItem[f.key]||'':''}">`;
+        else if(f.type==='select') inp=`<select id="field_${f.key}">${(f.options||[]).map(o=>`<option${editingItem&&editingItem[f.key]===o?' selected':''}>${o}</option>`).join('')}</select>`;
+        else if(f.type==='textarea') inp=`<textarea id="field_${f.key}">${editingItem?editingItem[f.key]||'':''}</textarea>`;
+        else inp=`<input type="text" id="field_${f.key}" value="${editingItem?(editingItem[f.key]||'').replace(/"/g,'&quot;'):''}" ${f.required?'required':''}>`;
+        container.innerHTML+=`<div class="fg"><label>${f.label}${f.required?' *':''}</label>${inp}${f.hint&&f.type!=='numeri'?`<div class="hint">${f.hint}</div>`:''}</div>`;
+    });
+    if(optOpen) container.innerHTML+='</div>';
+
+    // filtri input
+    const annoEl=document.getElementById('field_anno');
+    if(annoEl) annoEl.oninput=function(){ this.value=this.value.replace(/[^0-9?~]/g,''); };
+    fields.filter(f=>f.type==='numero').forEach(f=>{
+        const el=document.getElementById('field_'+f.key);
+        if(el) el.oninput=function(){ this.value=this.value.replace(/[^0-9]/g,''); };
+    });
+    // validazione live campo numeri
+    const numeriEl = document.getElementById('field_numeri');
+    if(numeriEl){
+        const updateCount = ()=>{
+            const v = numeriEl.value.trim();
+            const cEl = document.getElementById('numeri_count');
+            if(!v){ cEl.textContent=''; numeriEl.classList.remove('input-error'); return; }
+            if(validateNumeri(v)){
+                numeriEl.classList.remove('input-error');
+                cEl.textContent = countNumeri(v) + ' numero' + (countNumeri(v)!==1?'i':'') + ' totali';
+            } else {
+                numeriEl.classList.add('input-error');
+                cEl.textContent = '⚠ formato non valido';
+                cEl.style.color = 'var(--danger)';
+            }
+            if(validateNumeri(v)) cEl.style.color = 'var(--accent)';
+        };
+        numeriEl.oninput = updateCount;
+        updateCount(); // aggiorna subito se c'è un valore
+    }
+}
+function openAddModal(){
+    document.getElementById('modalTitle').textContent=editingItem?'Modifica elemento':'Aggiungi elemento';
+    document.getElementById('inputTipologia').value=editingItem?editingItem.tipologia||'Libro':'Libro';
+    rebuildForm();
+    openModal('editModal');
+}
+document.getElementById('editForm').onsubmit=function(e){
+    e.preventDefault();
+    const tipo=document.getElementById('inputTipologia').value;
+    const fields=TIPO_FIELDS[tipo]||TIPO_FIELDS.Altro;
+    const titoloEl=document.getElementById('field_titolo');
+    if(!titoloEl||!titoloEl.value.trim()){ alert('Il titolo non può essere vuoto.'); return; }
+    const annoEl=document.getElementById('field_anno');
+    if(annoEl&&annoEl.value.trim()&&!/^[0-9?~]*$/.test(annoEl.value.trim())){ alert('Anno non valido.'); return; }
+    if(annoEl&&annoEl.value.trim()==='666') openModal('easterEggModal');
+
+    // validazione numeri
+    const numeriEl = document.getElementById('field_numeri');
+    const numeroEl = document.getElementById('field_numero');
+    const numeriValue = numeriEl ? numeriEl.value.trim() : '';
+    const numeroValue = numeroEl ? numeroEl.value.trim() : '';
+    
+    // ── VALIDAZIONE FUMETTO/RIVISTA ──
+    if((tipo==='Fumetto'||tipo==='Rivista') && !editingItem){
+        if(numeriValue && !validateNumeri(numeriValue)){
+            alert('Formato numeri batch non valido.\nUsa: 1-15,17-19\nTrattino per intervalli, virgola per separare.');
+            return;
+        }
+
+    }
+    // ── BATCH: crea N albi ──
+    const isBatch = (tipo==='Fumetto'||tipo==='Rivista') && numeriValue && !editingItem;
+    
+    if(isBatch){
+        const numeriList = parseNumeriString(numeriValue);
+        const titoloSerie = titoloEl.value.trim();
+        const baseAnno = annoEl ? annoEl.value.trim() : '';
+        const baseAc = document.getElementById('field_ac')?.checked || false;
+        
+        const baseData = { tipologia:tipo };
+        fields.forEach(f=>{
+            if(['titolo','numeri','numero','titoloAlbo','anno'].includes(f.key)) return;
+            const el=document.getElementById('field_'+f.key);
+            if(el) baseData[f.key]=el.value.trim();
+        });
+        
+        numeriList.forEach(num => {
+            catalog.push({
+                ID: generateID(),
+                ...baseData,
+                titolo: titoloSerie,
+                numero: num,
+                titoloAlbo: '',
+                anno: baseAnno,
+                ac: baseAc
+            });
+        });
+        
+        alert(`Creati ${numeriList.length} albi per "${titoloSerie}".\nNumeri: ${numeriValue}\n\nModifica ogni albo per aggiungere il titolo specifico.`);
+    } else {
+        // ── SINGOLO: 1 elemento ──
+        const item={ ID:editingItem?editingItem.ID:generateID(), tipologia:tipo };
+        fields.forEach(f=>{
+            if(f.key==='anno'||f.key==='numeri') return;
+            const el=document.getElementById('field_'+f.key);
+            if(el) item[f.key]=el.value.trim();
+        });
+        if(annoEl) item.anno=annoEl.value.trim();
+        const acEl=document.getElementById('field_ac');
+        item.ac=acEl?acEl.checked:false;
+
+        if(editingItem){ const idx=catalog.findIndex(i=>i.ID===editingItem.ID); if(idx!==-1) catalog[idx]=item; editingItem=null; }
+        else catalog.push(item);
+    }
+    
+    saveData(); refreshTable(); closeModal('editModal');
+};
+
+// ─── IMPOSTAZIONI ─────────────────────────────────────────────
+function openSettingsModal(){ updateSettingsUI(); openModal('settingsModal'); }
+function updateSettingsUI(){
+    document.getElementById('orderField').value=settings.orderField;
+    document.getElementById('orderType').value=settings.orderType;
+    document.getElementById('colorizeSwitch').checked=settings.colorize;
+    document.getElementById('groupSwitch').checked=settings.groupBy;
+}
+function applySettings(){
+    settings.orderField=document.getElementById('orderField').value;
+    settings.orderType=document.getElementById('orderType').value;
+    settings.colorize=document.getElementById('colorizeSwitch').checked;
+    settings.groupBy=document.getElementById('groupSwitch').checked;
+    saveSettings(); refreshTable(); closeModal('settingsModal');
+}
+
+// ─── FILTRO ───────────────────────────────────────────────────
+function openFilterModal(){ document.getElementById('filterValue').value=''; openModal('filterModal'); }
+function applyFilter(){
+    const crit=document.getElementById('filterCriteria').value;
+    const val=document.getElementById('filterValue').value.trim().toLowerCase();
+    if(val){
+        const key=crit==='ID'?'ID':crit.toLowerCase();
+        refreshTable(sortCatalog(catalog.filter(i=>(i[key]||'').toString().toLowerCase().includes(val))));
+        filterActive=true;
+    } else { refreshTable(); filterActive=false; }
+    closeModal('filterModal');
+}
+function resetFilter(){ refreshTable(); filterActive=false; closeModal('filterModal'); }
+
+// ─── COPIA ────────────────────────────────────────────────────
+function copyCatalog(){
+    let t='';
+    sortCatalog(catalog).forEach(i=>{ t+=[i.titolo||'',i.autore||'',(i.anno||'')+(i.ac?' a.C.':''),i.casa||'',i.tipologia||'',i.ID].join('\t')+'\n'; });
+    navigator.clipboard.writeText(t).then(()=>alert('Catalogo copiato!')).catch(e=>alert('Errore: '+e));
+}
+
+// ─── PDF ──────────────────────────────────────────────────────
+function downloadPDF(){
+    console.log('downloadPDF chiamato');
+    
+    try {
+        if(!catalog.length){ 
+            alert('Catalogo vuoto.'); 
+            return; 
+        }
+        
+        // Check jsPDF
+        if(!window.jspdf || !window.jspdf.jsPDF){ 
+            alert('❌ Libreria PDF non caricata.\n\nRicarica la pagina (F5) e riprova.'); 
+            return; 
+        }
+        
+        console.log('Creazione PDF...');
+        const {jsPDF} = window.jspdf;
+        const doc = new jsPDF();
+        const pageWidth = doc.internal.pageSize.width;
+        const pageHeight = doc.internal.pageSize.height;
+        
+        // Ordina catalogo
+        const items = catalog.slice().sort((a,b)=>{
+            const ta = (a.titolo||'').toLowerCase();
+            const tb = (b.titolo||'').toLowerCase();
+            return ta < tb ? -1 : ta > tb ? 1 : 0;
+        });
+        
+        let y = 20;
+        
+        // Titolo
+        doc.setFontSize(20);
+        doc.setTextColor(30,30,30);
+        doc.text('CATALOGHOO', pageWidth/2, y, {align:'center'});
+        y += 10;
+        
+        // Info
+        doc.setFontSize(9);
+        doc.setTextColor(100,100,100);
+        doc.text(`${userProfile.username||'Utente'}  |  ${items.length} elementi  |  ${new Date().toLocaleDateString('it-IT')}`, pageWidth/2, y, {align:'center'});
+        y += 10;
+        
+        // Linea
+        doc.setDrawColor(180);
+        doc.line(15, y, pageWidth-15, y);
+        y += 10;
+        
+        // Elementi
+        items.forEach((item, idx) => {
+            console.log(`PDF: elemento ${idx+1}/${items.length}`);
+            
+            // Raccogli tutti i campi con valore
+            const fields = TIPO_FIELDS[item.tipologia] || TIPO_FIELDS.Altro;
+            const filledFields = [];
+            fields.forEach(f => {
+                if(f.key === 'titolo') return; // skip, già nel titolo
+                let val = item[f.key] || '';
+                if(f.key === 'anno' && item.ac) val += ' a.C.';
+                if(val) filledFields.push({label: f.label, value: val});
+            });
+            
+            // Altezza box dinamica in base a quanti campi
+            const boxHeight = Math.max(25, 15 + (filledFields.length * 5));
+            
+            // Controllo spazio
+            if(y + boxHeight + 5 > pageHeight - 15){
+                doc.addPage();
+                y = 20;
+            }
+            
+            // Colore box in base a tipologia (SOLO se colorize attivo)
+            if(settings.colorize && item.tipologia){
+                const colors = {
+                    'Libro': [13,13,13],
+                    'Fumetto': [204,76,76],
+                    'Rivista': [25,102,25],
+                    'CD': [38,38,115],
+                    'DVD': [115,115,38],
+                    'Videocassetta': [38,115,115],
+                    'Musicassetta': [115,38,115],
+                    'Altro': [64,64,64]
+                };
+                const color = colors[item.tipologia] || [64,64,64];
+                doc.setFillColor(color[0], color[1], color[2]);
+            } else {
+                doc.setFillColor(240, 240, 240);
+            }
+            
+            // Box elemento
+            doc.roundedRect(15, y, pageWidth-30, boxHeight, 3, 3, 'F');
+            
+            // Testo (bianco se colorato, nero se grigio)
+            const textColor = (settings.colorize && item.tipologia) ? [255,255,255] : [30,30,30];
+            doc.setTextColor(textColor[0], textColor[1], textColor[2]);
+            
+            // Titolo
+            doc.setFontSize(11);
+            doc.setFont('helvetica','bold');
+            doc.text(item.titolo || '—', 20, y+8);
+            
+            // Tutti gli altri campi
+            doc.setFontSize(8);
+            doc.setFont('helvetica','normal');
+            let line = y+14;
+            
+            filledFields.forEach(field => {
+                doc.setFont('helvetica','bold');
+                doc.text(field.label + ': ', 20, line);
+                doc.setFont('helvetica','normal');
+                const labelWidth = doc.getTextWidth(field.label + ': ');
+                doc.text(String(field.value), 20 + labelWidth, line);
+                line += 4.5;
+            });
+            
+            y += boxHeight + 4;
+        });
+        
+        // Numeri pagina
+        const totalPages = doc.getNumberOfPages();
+        for(let i=1; i<=totalPages; i++){
+            doc.setPage(i);
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text(`${i} / ${totalPages}`, pageWidth/2, pageHeight-10, {align:'center'});
+        }
+        
+        console.log('Salvataggio PDF...');
+        doc.save('cataloghoo.pdf');
+        console.log('✅ PDF salvato!');
+        
+    } catch(error) {
+        console.error('❌ ERRORE PDF:', error);
+        alert('Errore durante la creazione del PDF:\n\n' + error.message);
+    }
+}
+
+// ─── ESPORTA / IMPORTA .cic ───────────────────────────────────
+function exportCIC(){
+    if(!catalog.length){ alert('Catalogo vuoto.'); return; }
+    pendingPasswordAction='export';
+    document.getElementById('passwordTitle').textContent='Esporta .cic — Password';
+    document.getElementById('passwordLabel').textContent='Password (default: quella del profilo)';
+    document.getElementById('confirmPasswordGroup').style.display='block';
+    document.getElementById('passwordInput').value=userProfile.password||'';
+    document.getElementById('confirmPasswordInput').value=userProfile.password||'';
+    openModal('passwordModal');
+}
+function importCIC(event){
+    const file=event.target.files[0]; if(!file) return;
+    const reader=new FileReader();
+    reader.onload=function(e){
+        pendingPasswordData=e.target.result;
+        pendingPasswordAction='import';
+        document.getElementById('passwordTitle').textContent='Importa .cic — Password';
+        document.getElementById('passwordLabel').textContent='Password';
+        document.getElementById('confirmPasswordGroup').style.display='none';
+        document.getElementById('passwordInput').value='';
+        openModal('passwordModal');
+    };
+    reader.readAsText(file);
+    event.target.value='';
+}
+function confirmPassword(){
+    const pwd=document.getElementById('passwordInput').value;
+    if(!pwd){ alert('Inserisci una password.'); return; }
+    if(pendingPasswordAction==='export'){
+        if(pwd!==document.getElementById('confirmPasswordInput').value){ alert('Password non coincidono.'); return; }
+        performExport(pwd);
+    } else if(pendingPasswordAction==='import'){
+        performImport(pwd);
+    }
+    closeModal('passwordModal');
+}
+function cancelPasswordAction(){ pendingPasswordAction=null; pendingPasswordData=null; }
+function performExport(pwd){
+    try {
+        const enc=CryptoJS.AES.encrypt(JSON.stringify({catalog}),pwd).toString();
+        const blob=new Blob([MAGIC_STRING+enc],{type:'application/octet-stream'});
+        const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='cataloghoo.cic';
+        a.click(); URL.revokeObjectURL(a.href);
+        alert('File .cic esportato!');
+    } catch(e){ alert('Errore: '+e); }
+}
+function performImport(pwd){
+    try {
+        if(!pendingPasswordData.startsWith(MAGIC_STRING)){ alert('File non valido.'); return; }
+        const dec=CryptoJS.AES.decrypt(pendingPasswordData.substring(MAGIC_STRING.length),pwd);
+        const str=dec.toString(CryptoJS.enc.Utf8);
+        if(!str){ alert('Password errata o file corrotto.'); return; }
+        catalog=JSON.parse(str).catalog||[];
+        saveData(); refreshTable(); alert('Catalogo importato!');
+    } catch(e){ alert('Password errata o file corrotto.'); }
+    finally { pendingPasswordData=null; }
+}
+
+// ─── SELEZIONE MULTIPLA ───────────────────────────────────────
+function enterSelectionMode(){
+    selectionMode = true;
+    document.getElementById('catalogContainer').classList.add('selection-mode');
+    document.getElementById('selectionBar').classList.add('active');
+    updateSelectionUI();
+}
+function exitSelectionMode(){
+    selectionMode = false;
+    selectedItems.clear();
+    document.getElementById('catalogContainer').classList.remove('selection-mode');
+    document.getElementById('selectionBar').classList.remove('active');
+    refreshTable();
+}
+function toggleSelection(itemId){
+    if(selectedItems.has(itemId)){
+        selectedItems.delete(itemId);
+    } else {
+        selectedItems.add(itemId);
+    }
+    updateSelectionUI();
+    refreshTable();
+}
+function selectAll(){
+    catalog.forEach(i => selectedItems.add(i.ID));
+    updateSelectionUI();
+    refreshTable();
+}
+function deselectAll(){
+    exitSelectionMode();
+}
+function deleteSelected(){
+    if(selectedItems.size===0){ alert('Nessun elemento selezionato.'); return; }
+    if(confirm(`Eliminare ${selectedItems.size} elementi selezionati?`)){
+        catalog = catalog.filter(i => !selectedItems.has(i.ID));
+        saveData();
+        exitSelectionMode();
+    }
+}
+function updateSelectionUI(){
+    document.getElementById('selectionCount').textContent = `${selectedItems.size} selezionat${selectedItems.size===1?'o':'i'}`;
+}
+// Chiudi selezione con tasto back/escape
+window.addEventListener('keydown', e=>{
+    if(e.key==='Escape' && selectionMode) exitSelectionMode();
+});
+
+// ─── INIT ─────────────────────────────────────────────────────
+loadData();
+</script>
+</body>
+</html>
