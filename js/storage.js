@@ -7,10 +7,12 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 let supabaseClient = null;
 
+/*
 // ── Utente cachato ────────────────────────────────────────────
 // Viene aggiornato da onAuthStateChange non appena il client
 // e' pronto, senza chiamate di rete aggiuntive.
 let _cachedUser = null;
+*/
 
 function getSupabaseClient() {
   if (supabaseClient) return supabaseClient;
@@ -18,6 +20,7 @@ function getSupabaseClient() {
 
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+  /*
   // onAuthStateChange viene chiamato SUBITO con la sessione corrente
   // letta dal localStorage (zero rete). E' il modo corretto per
   // sapere se l'utente e' loggato gia' al caricamento della pagina.
@@ -25,12 +28,14 @@ function getSupabaseClient() {
     _cachedUser = session?.user ?? null;
     console.log('[Sceglitu] auth:', event, _cachedUser?.email ?? 'guest');
   });
+  */
 
   return supabaseClient;
 }
 
 // Restituisce l'utente corrente usando solo la cache + getSession().
 // getSession() legge dal localStorage, nessuna chiamata di rete.
+/*
 async function getSupabaseUser() {
   const client = getSupabaseClient();
   if (!client) return null;
@@ -43,6 +48,11 @@ async function getSupabaseUser() {
   }
 
   return _cachedUser;
+}
+*/
+
+async function getSupabaseUser() {
+  return null;
 }
 
 // ── Stories ───────────────────────────────────────────────────
@@ -136,7 +146,9 @@ function clearProgress(title) {
   salvaProgresso(title, 1);
 }
 
+/*
 // ── Avvia subito il client per popolare la cache ───────────────
 // Cosi' onAuthStateChange viene registrato appena lo script
 // e' caricato, prima di qualsiasi interazione utente.
 getSupabaseClient();
+*/
