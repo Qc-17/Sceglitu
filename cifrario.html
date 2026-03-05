@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMMA CIPHER</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080a08;--bg2:#0d110d;--bg3:#111611;
+    --amber:#c8a93c;--amber-dim:#7a6520;--amber-glow:#e8c84a;
+    --green:#4caf6a;--green-dim:#2a6040;
+    --red:#c84c4c;--red-dim:#6a2020;
+    --text:#c8c4b0;--text-dim:#5a5648;
+    --border:#1e2a1e;--border-bright:#2e4a2e;
+    --mono:'Share Tech Mono',monospace;
+    --display:'Rajdhani',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--mono);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999;}
+
+  .header{border-bottom:1px solid var(--border-bright);padding:18px 32px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,#0a120a 0%,var(--bg) 100%);position:relative;}
+  .header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),var(--amber),var(--amber-dim),transparent);}
+  .logo-main{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:12px;color:var(--amber-glow);text-shadow:0 0 20px rgba(200,169,60,.4),0 0 40px rgba(200,169,60,.15);line-height:1;}
+  .logo-sub{font-size:9px;letter-spacing:6px;color:var(--amber-dim);text-transform:uppercase;margin-top:3px;}
+  .header-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+  .version-tag{font-size:10px;color:var(--green);letter-spacing:2px;border:1px solid var(--green-dim);padding:2px 8px;}
+  .magic-display{font-size:11px;color:var(--text-dim);letter-spacing:1px;}
+  .magic-display span{color:var(--amber-dim);}
+
+  .nav{display:flex;border-bottom:1px solid var(--border);background:var(--bg2);padding:0 32px;}
+  .tab-btn{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:4px;padding:14px 24px;cursor:pointer;text-transform:uppercase;transition:all .2s;position:relative;}
+  .tab-btn:hover{color:var(--amber);}
+  .tab-btn.active{color:var(--amber-glow);border-bottom-color:var(--amber);text-shadow:0 0 12px rgba(200,169,60,.4);}
+  .tab-btn::after{content:attr(data-num);position:absolute;top:10px;right:10px;font-size:8px;font-family:var(--mono);color:var(--text-dim);opacity:.5;}
+
+  .content{max-width:1100px;margin:0 auto;padding:32px;}
+  .panel{display:none;}.panel.active{display:block;}
+
+  .cipher-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px;}
+  @media(max-width:700px){.cipher-grid{grid-template-columns:1fr;}.content{padding:16px;}.header{padding:14px 16px;}.nav{padding:0 16px;}.tab-btn{padding:12px 14px;font-size:11px;letter-spacing:2px;}.password-row{grid-template-columns:1fr;}}
+  .password-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px;}
+  .field-group{display:flex;flex-direction:column;gap:8px;}
+  .field-label{font-size:10px;letter-spacing:3px;color:var(--amber-dim);text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+  .field-label::before{content:'';display:inline-block;width:12px;height:1px;background:var(--amber-dim);}
+
+  textarea,input[type=text],input[type=password]{background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--amber-dim);color:var(--text);font-family:var(--mono);font-size:13px;padding:12px 14px;resize:vertical;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;}
+  textarea:focus,input:focus{border-color:var(--amber);border-left-color:var(--amber-glow);box-shadow:0 0 0 1px rgba(200,169,60,.15),inset 0 0 20px rgba(200,169,60,.03);}
+  textarea{min-height:180px;}
+  input[type=text],input[type=password]{resize:none;}
+
+  .output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+  .output-label{font-size:10px;letter-spacing:3px;color:var(--green);text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+  .output-label::before{content:'';display:inline-block;width:12px;height:1px;background:var(--green);}
+  textarea.output{border-left-color:var(--green-dim);color:#7aba8a;min-height:160px;}
+  textarea.output:focus{border-left-color:var(--green);}
+
+  .action-bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px;}
+  .btn{background:none;border:1px solid var(--amber-dim);color:var(--amber);font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:4px;text-transform:uppercase;padding:10px 24px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+  .btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);}
+  .btn:hover{background:rgba(200,169,60,.08);border-color:var(--amber-glow);color:var(--amber-glow);box-shadow:0 0 16px rgba(200,169,60,.15);}
+  .btn:active{transform:scale(.98);}
+  .btn.primary{background:rgba(200,169,60,.1);border-color:var(--amber);}
+  .btn.danger{border-color:var(--red-dim);color:var(--red);}
+  .btn.danger::before{background:var(--red);}
+  .btn.danger:hover{background:rgba(200,60,60,.08);border-color:var(--red);box-shadow:0 0 16px rgba(200,60,60,.15);}
+  .btn.success{border-color:var(--green-dim);color:var(--green);}
+  .btn.success::before{background:var(--green);}
+  .btn.success:hover{background:rgba(60,180,100,.08);border-color:var(--green);}
+
+  .status-bar{display:flex;align-items:center;gap:16px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-left:3px solid transparent;font-size:12px;letter-spacing:1px;min-height:42px;transition:all .3s;}
+  .status-bar.ok{border-left-color:var(--green);color:var(--green);}
+  .status-bar.error{border-left-color:var(--red);color:var(--red);}
+  .status-bar.info{border-left-color:var(--amber);color:var(--amber);}
+  .status-dot{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;flex-shrink:0;}
+
+  .stats-row{display:flex;gap:24px;flex-wrap:wrap;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--amber-dim);}
+  .stat{display:flex;flex-direction:column;gap:2px;}
+  .stat-label{font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+  .stat-value{font-size:18px;font-family:var(--display);font-weight:600;color:var(--amber);}
+
+  .hex-accent{font-size:9px;color:var(--text-dim);letter-spacing:2px;}
+
+  .file-drop{border:1px dashed var(--border-bright);padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg2);position:relative;font-size:12px;color:var(--text-dim);letter-spacing:1px;}
+  .file-drop:hover,.file-drop.drag-over{border-color:var(--amber-dim);background:rgba(200,169,60,.04);color:var(--amber);}
+  .file-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+
+  .fname-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  .fname-wrap{display:flex;align-items:center;flex:1;min-width:200px;max-width:380px;background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--amber-dim);}
+  .fname-wrap input{border:none;background:none;flex:1;padding:9px 12px;font-family:var(--mono);font-size:13px;color:var(--text);outline:none;}
+  .fname-ext{padding:0 12px 0 0;color:var(--amber-dim);font-size:12px;letter-spacing:1px;flex-shrink:0;}
+
+  /* Manual */
+  .manual-container{display:grid;grid-template-columns:200px 1fr;gap:0;border:1px solid var(--border);min-height:580px;}
+  @media(max-width:700px){.manual-container{grid-template-columns:1fr;}}
+  .manual-toc{border-right:1px solid var(--border);background:var(--bg2);padding:16px 0;}
+  .toc-title{font-size:9px;letter-spacing:4px;color:var(--amber-dim);padding:0 16px 12px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+  .toc-item{display:block;padding:8px 16px;font-size:11px;color:var(--text-dim);cursor:pointer;letter-spacing:1px;transition:all .15s;border-left:2px solid transparent;background:none;border-top:none;border-right:none;border-bottom:none;width:100%;text-align:left;font-family:var(--mono);}
+  .toc-item:hover{color:var(--amber);background:rgba(200,169,60,.04);}
+  .toc-item.active{color:var(--amber-glow);border-left-color:var(--amber);background:rgba(200,169,60,.07);}
+  .toc-num{color:var(--text-dim);margin-right:8px;font-size:10px;}
+  .manual-body{padding:32px;overflow-y:auto;max-height:580px;}
+  .manual-section{display:none;}.manual-section.active{display:block;animation:fadeIn .2s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .section-title{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:6px;color:var(--amber-glow);margin-bottom:6px;text-transform:uppercase;}
+  .section-num{font-size:10px;color:var(--amber-dim);letter-spacing:3px;margin-bottom:20px;}
+  .section-body{font-size:13px;line-height:1.8;color:var(--text);}
+  .section-body p{margin-bottom:12px;}
+  .section-body code{background:var(--bg2);border:1px solid var(--border);padding:1px 6px;color:var(--amber);font-family:var(--mono);font-size:12px;}
+  .section-body pre{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--amber-dim);padding:14px;margin:14px 0;font-family:var(--mono);font-size:12px;color:var(--amber);overflow-x:auto;line-height:1.6;}
+  .section-body ul{padding-left:20px;margin-bottom:12px;}
+  .section-body li{margin-bottom:6px;}
+  .section-body li::marker{color:var(--amber-dim);}
+  .encoding-table{display:flex;flex-wrap:wrap;gap:4px;margin:14px 0;}
+  .enc-cell{background:var(--bg2);border:1px solid var(--border);padding:4px 6px;font-family:var(--mono);font-size:11px;min-width:44px;text-align:center;}
+  .enc-cell .idx{color:var(--text-dim);font-size:9px;display:block;}
+  .enc-cell .chr{color:var(--amber);}
+  @keyframes processing{0%,100%{opacity:1}50%{opacity:.4}}
+  .processing{animation:processing .8s ease infinite;}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="logo">
+    <div class="logo-main">SOMMA<span style="color:var(--amber-dim)"> ·</span> CIPHER</div>
+    <div class="logo-sub">Modular Text Encryption System</div>
+  </div>
+  <div class="header-meta">
+    <div class="version-tag">SPEC v0.2</div>
+    <div class="magic-display">MAGIC: <span>5E BA F1 2E</span></div>
+  </div>
+</header>
+<nav class="nav">
+  <button class="tab-btn active" data-tab="encrypt" data-num="01">CIFRA</button>
+  <button class="tab-btn" data-tab="decrypt" data-num="02">DECIFRA</button>
+  <button class="tab-btn" data-tab="manual" data-num="03">MANUALE</button>
+</nav>
+<main class="content">
+
+<!-- ENCRYPT -->
+<div class="panel active" id="panel-encrypt">
+  <div class="password-row">
+    <div class="field-group">
+      <label class="field-label">Password</label>
+      <input type="password" id="enc-password" placeholder="Inserisci la password…" autocomplete="off">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Statistiche</label>
+      <div class="stats-row">
+        <div class="stat"><span class="stat-label">Caratteri</span><span class="stat-value" id="enc-stat-len">0</span></div>
+        <div class="stat"><span class="stat-label">Intervallo base</span><span class="stat-value" id="enc-stat-bi">—</span></div>
+        <div class="stat"><span class="stat-label">Junk est.</span><span class="stat-value" id="enc-stat-junk">—</span></div>
+        <div class="stat"><span class="stat-label">m</span><span class="stat-value" id="enc-stat-m">—</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cipher-grid">
+    <div class="field-group">
+      <label class="field-label">Testo in chiaro</label>
+      <textarea id="enc-input" placeholder="Scrivi il testo da cifrare…"></textarea>
+    </div>
+    <div class="field-group">
+      <div class="output-header">
+        <label class="output-label">Output cifrato</label>
+        <div class="hex-accent" id="enc-num-count"></div>
+      </div>
+      <textarea class="output" id="enc-output" readonly placeholder="Il testo cifrato apparirà qui…"></textarea>
+    </div>
+  </div>
+  <div class="fname-row">
+    <label class="field-label" style="flex-shrink:0;">Nome file</label>
+    <div class="fname-wrap">
+      <input type="text" id="enc-filename" placeholder="nome_file" autocomplete="off">
+      <span class="fname-ext">.seba</span>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn primary" onclick="runEncrypt()">▶  CIFRA</button>
+    <button class="btn success" onclick="downloadSeba()">↓  SCARICA .seba</button>
+    <button class="btn" onclick="copyOutput('enc-output')">⎘  COPIA</button>
+    <button class="btn danger" onclick="clearAll('enc')">✕  PULISCI</button>
+  </div>
+  <div class="status-bar" id="enc-status"><div class="status-dot"></div><span>In attesa di input…</span></div>
+</div>
+
+<!-- DECRYPT -->
+<div class="panel" id="panel-decrypt">
+  <div class="password-row">
+    <div class="field-group">
+      <label class="field-label">Password</label>
+      <input type="password" id="dec-password" placeholder="Inserisci la password…" autocomplete="off">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Carica file .seba</label>
+      <div class="file-drop" id="file-drop">
+        <input type="file" accept=".seba,.txt" id="seba-file" onchange="loadSebaFile(this)">
+        <span>↑ Clicca o trascina un file <strong>.seba</strong></span>
+      </div>
+    </div>
+  </div>
+  <div class="cipher-grid">
+    <div class="field-group">
+      <label class="field-label">Testo cifrato</label>
+      <textarea id="dec-input" placeholder="Incolla qui il testo cifrato (con magic string)…"></textarea>
+    </div>
+    <div class="field-group">
+      <div class="output-header">
+        <label class="output-label">Testo decifrato</label>
+      </div>
+      <textarea class="output" id="dec-output" readonly placeholder="Il testo decifrato apparirà qui…"></textarea>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn primary" onclick="runDecrypt()">▶  DECIFRA</button>
+    <button class="btn" onclick="copyOutput('dec-output')">⎘  COPIA</button>
+    <button class="btn danger" onclick="clearAll('dec')">✕  PULISCI</button>
+  </div>
+  <div class="status-bar" id="dec-status"><div class="status-dot"></div><span>In attesa di input…</span></div>
+</div>
+
+<!-- MANUAL -->
+<div class="panel" id="panel-manual">
+  <div class="manual-container">
+    <div class="manual-toc">
+      <div class="toc-title">INDICE</div>
+      <button class="toc-item active" data-section="0"><span class="toc-num">—</span>Overview</button>
+      <button class="toc-item" data-section="1"><span class="toc-num">01</span>Magic String</button>
+      <button class="toc-item" data-section="2"><span class="toc-num">02</span>Encoding</button>
+      <button class="toc-item" data-section="3"><span class="toc-num">03</span>Cifratura</button>
+      <button class="toc-item" data-section="4"><span class="toc-num">04</span>Password</button>
+      <button class="toc-item" data-section="5"><span class="toc-num">05</span>Junk Letters</button>
+      <button class="toc-item" data-section="6"><span class="toc-num">06</span>Frequenza Junk</button>
+      <button class="toc-item" data-section="7"><span class="toc-num">07</span>Struttura File</button>
+      <button class="toc-item" data-section="8"><span class="toc-num">08</span>Decifratura</button>
+      <button class="toc-item" data-section="9"><span class="toc-num">09</span>Proprietà</button>
+      <button class="toc-item" data-section="10"><span class="toc-num">10</span>Encoding Table</button>
+    </div>
+    <div class="manual-body">
+      <div class="manual-section active" id="sec-0">
+        <div class="section-title">Somma Cipher</div>
+        <div class="section-num">SPEC v0.2 — PANORAMICA</div>
+        <div class="section-body">
+          <p>Somma Cipher è un algoritmo di cifratura testuale basato su quattro principi:</p>
+          <ul>
+            <li><strong>Codifica modulare</strong> — ogni carattere diventa N tale che <code>N mod m = indice</code></li>
+            <li><strong>Numeri pseudo-casuali</strong> — lo stesso carattere produce numeri diversi ogni volta</li>
+            <li><strong>Junk letters</strong> — numeri extra aumentano l'entropia e mascherano la struttura</li>
+            <li><strong>Posizione rumore = password</strong> — solo chi conosce la chiave sa cosa ignorare</li>
+          </ul>
+          <p>Versione 0.2: encoding estesa a <strong>617 caratteri</strong> (alfabeto greco, cirillico, emoji, simboli). Il flusso dati è continuo, senza separatori — ogni token è esattamente 4 cifre decimali.</p>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-1">
+        <div class="section-title">Magic String</div>
+        <div class="section-num">SEZIONE 01</div>
+        <div class="section-body">
+          <p>Ogni file inizia con:</p><pre>5EBAF12E</pre>
+          <p>Identifica il file come Somma Cipher e previene decifrature su dati non validi.</p>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-2">
+        <div class="section-title">Encoding</div>
+        <div class="section-num">SEZIONE 02</div>
+        <div class="section-body">
+          <p>Lista ordinata di <strong>617 caratteri</strong>. L'indice è il valore numerico del carattere. Include ASCII, accenti latini, greco completo, cirillico completo, simboli matematici, emoji.</p>
+          <pre>N mod 617 = indice del carattere</pre>
+          <p>N è sempre un numero a 4 cifre (0000–9999). Non viene usato alcun separatore.</p>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-3">
+        <div class="section-title">Cifratura</div>
+        <div class="section-num">SEZIONE 03</div>
+        <div class="section-body">
+          <pre>1) n = index(c) in ENCODING
+2) N casuale tale che N mod m = n, con 0 ≤ N ≤ 9999
+3) N scritto come 4 cifre decimali (0000–9999)</pre>
+          <p>Il flusso è la concatenazione di tutti i numeri a 4 cifre, senza alcun delimitatore:</p>
+          <pre>0004019841230004889201280634...</pre>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-4">
+        <div class="section-title">Password</div><div class="section-num">SEZIONE 04</div>
+        <div class="section-body">
+          <p>La password agisce su <strong>due livelli indipendenti</strong>:</p>
+          <p><strong>1 — Shift dell'indice (keystream Vigenère)</strong></p>
+          <p>Per ogni carattere reale alla posizione <code>ci</code>:</p>
+          <pre>k0 = index(P[ ci      mod Lp ])
+k1 = index(P[(ci+1)  mod Lp ])
+k2 = index(P[(ci+2)  mod Lp ])
+shift = (k0×3 + k1×7 + k2 + (k0 XOR k1 XOR k2)) mod m
+
+cifra:   N codifica  (n + shift) mod m
+decifra: n = (N mod m − shift + m) mod m</pre>
+          <p>Senza la password corretta <code>N mod m</code> restituisce un indice sbagliato → carattere sbagliato → testo incomprensibile.</p>
+          <p><strong>2 — Posizione delle junk letters</strong></p>
+          <p>Controlla il <code>junk_interval</code> come descritto nella sezione 06. Tutti i caratteri della password devono essere presenti nell'ENCODING.</p>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-5">
+        <div class="section-title">Junk Letters</div><div class="section-num">SEZIONE 05</div>
+        <div class="section-body">
+          <p>Numeri casuali 0000–9999 senza vincolo modulare. Indistinguibili dai dati reali senza la password.</p>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-6">
+        <div class="section-title">Frequenza Junk</div><div class="section-num">SEZIONE 06</div>
+        <div class="section-body">
+          <pre>base_interval = max(4, floor(sqrt(L)))
+offset = (index(P[i mod Lp]) + index(P[(i+1) mod Lp])) mod 7
+junk_interval = base_interval + offset</pre>
+          <p>Ricalcolato ad ogni junk inserita.</p>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-7">
+        <div class="section-title">Struttura File</div><div class="section-num">SEZIONE 07</div>
+        <div class="section-body">
+          <pre>5EBAF12E
+{L}
+{STREAM 4 cifre senza separatori}</pre>
+          <p>Esempio:</p><pre>5EBAF12E
+42
+0312051900280634...</pre>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-8">
+        <div class="section-title">Decifratura</div><div class="section-num">SEZIONE 08</div>
+        <div class="section-body">
+          <pre>1) Verifica "5EBAF12E"
+2) Leggi L
+3) Ricostruisci sequenza junk_interval dalla password
+4) Leggi stream a blocchi di 4 cifre
+5) Salta le posizioni junk
+6) n = N mod m → c = ENCODING[n]</pre>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-9">
+        <div class="section-title">Proprietà</div><div class="section-num">SEZIONE 09</div>
+        <div class="section-body">
+          <ul>
+            <li>Ridondanza numerica — stesso carattere, numeri diversi</li>
+            <li>Distribuzione modulare — frequenza mascherata</li>
+            <li>Rumore password-dipendente</li>
+            <li>Flusso continuo senza blocchi espliciti</li>
+            <li>Nessun separatore — nessun carattere è "speciale"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="manual-section" id="sec-10">
+        <div class="section-title">Encoding Table</div><div class="section-num">SEZIONE 10 — 617 CARATTERI</div>
+        <div class="section-body" id="enc-table-container"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+<script>
+const ENCODING = [
+  '←','😅','—','Ş','°','🙄','🎰','р','Ђ','9',
+  'K','F','🐹','🙃','à','🍷','🦊','😚','Ï','💔',
+  '🐱','🎵','ж','🤙','Υ','Í','🍫','😲','Р','¿',
+  'u','🐼','ф','🦉','Ψ','m','ê','ц','.','😼',
+  '🤞','Я','Ω','æ','🍋','ϴ','🤗','Ы','👃','√',
+  '🌿','1','a','🫁','З','ў','🌮','S','🎺','џ',
+  'Ç','Á','%','👈','і','γ','ќ','θ','ω','p',
+  '×','∉','2','ø','й','ъ','🔥','📷','💜','🙏',
+  '👀','ü','😦','🤑','–','Ο','Φ','e','Ý','🏠',
+  'Ā','в','с','🤓','🎻','🐸',';','ã','φ','Ö',
+  '😋','Н','∂','🫀','#','ö','🚂','🌊','🦎','э',
+  'ú','Ё','😯','💛','😱','5','ī','w','🌍','Ћ',
+  '∫','✨',']','🤣','ш','👏','⇔','ş','🚀','†',
+  'l','M','🤐','І','÷','🤖','Є','s','🧠','🎸',
+  '🧃','🤕','Ē','É','⇒','′','🎬','🦖','Т','*',
+  '🍕','🎮','Π',' ','Ù','8','í','↑','🍑','х',
+  '😖','😂','🎪','🎃','😻','¡','z','£','🦴','🍊',
+  '❗','м',"'",'🗼','🦁','🗽','🐻','🚗','é','щ',
+  '😳','À','α','ù','🖤','Џ','🍰','@','N','⭕',
+  'Û','🍓','¸','±','🙀','о','🤎','ē','😺','v',
+  '🍔','⭐','🦑','I','😵','🎂','👐','ι','🐛','📚',
+  '`','😤','🥝','ѓ','п','😕','😭','🤝','≠','Б',
+  't','😮','Л','∑','👂','Μ','Ї','🌱','🦋','/',
+  'Й','Ν','😠','ѕ','}','ю','😗','😥','😿','õ',
+  'h','🧡','🎊','Ð','😷','!','ÿ','Њ','ћ','🌷',
+  '🐨','🤒','🎧','ō','❌','R','🏔','🐰','😍','ğ',
+  'Δ','😽','😊','😶','Ρ','Ш','🌈','7','😹','💻',
+  '+','😄','У','🌟','Ќ','o','⚡','😉','ó','ì',
+  'q','🎉','🌹','>','👉','🧨','🏰','[','·','😈',
+  'з','L','â','🔔','🏆','ý','😩','🥁','🐭','😀',
+  '<','k','¶','А','^','ς','Ѝ','ѝ','Д','D',
+  '→','û','ß','Ь','↔','χ','H','Β','4','³',
+  'O','🍣','😏','=','О','Σ','С','Ã','☕','²',
+  'È','r','🦷','Е','Ч','¹','T','✏','Э','ā',
+  'Ц','½','δ','🍀','К','😘','Ø','🎤','Α','n',
+  '?','✅','B','Z','њ','є','Ñ','😙','🍇','∅',
+  '(','🙌','💬','Â','η','🐷','🐦','🌲','🌳','😌',
+  '🐯','\n','6','😎','Ī','≤','∞','ξ','😧','🐢',
+  '👎','😨','Γ','_','€','✋','🍺','❓','∝','🍪',
+  '🐮','b','В','✌','Λ','я','ј','😪','þ','🎨',
+  '🤟','П','π','ô','ū','🙁','🎲','Ō','🙂','ζ',
+  '🍜','🌻','J','Ü','Õ','3','😓','∈','🐙','🌺',
+  'E','🍒','‰','😰','{','🦗','ò','ν','🐶','i',
+  'Ë','ë','ы','😡','™','Θ','A','🌸','🥤','🔑',
+  '🐍','н','Η','d','😁','е','¥','ч','👇','Ф',
+  'υ','🎭','😴','Χ','W','ï','б','Ū','C','💯',
+  'j','😞','🍬','🦆','\\','ь','|','🍸','V','Þ',
+  '-','💚','≥','🎇','Å','&','μ','Ê',':','😣',
+  '👆','🍵','ё','🎹','😬','•','г','🐝','🤔','😒',
+  '👍','$','î','y','Ε','ї','~','Ў','g','Ä',
+  '‡','к','🎳','§','💙','л','🤍','💧','ç','¨',
+  'Љ','😆','😫','Ó','🐵','д','😇','Ζ','😛','и',
+  '🎆','❤','β','τ','Х','"','ε','😐','🎄','λ',
+  '😃','😜','😸','🤚','Τ','¼','Ѓ','😑','«','😟',
+  'Ю','¾','ñ','Κ','а','ρ','🍎','κ','U','ð',
+  '💭','🎶','М','Щ','љ',')','″','🥂','Ѕ','ђ',
+  '🍭','ο','Г','Ú','¢','😔','Ô','X','Ò','Ж',
+  '…','📱','😢','🚕','🍍','🌙','↓','Ј','Æ','P',
+  '🥇','»','И','≈','😝','ä','0','f','G','💡',
+  'Ξ','Y','Ì','è','🐧','у','🍩','c','ψ','x',
+  'å','Ъ','🐔','σ','🤲','Ι','Q','🫐','😾','á',
+  '💫','🎯','Î','т','©','®',',',
+];
+
+const m = ENCODING.length;
+const MAGIC = '5EBAF12E';
+
+function encIndex(c) { return ENCODING.indexOf(c); }
+
+function generateN(n) {
+  const maxMult = Math.floor((9999 - n) / m);
+  const mult = Math.floor(Math.random() * (maxMult + 1));
+  return n + mult * m;
+}
+
+function pad4(n) { return n.toString().padStart(4, '0'); }
+
+function computeJunkInterval(junkIdx, password, baseInterval) {
+  const Lp = password.length;
+  const k1 = encIndex(password[junkIdx % Lp]);
+  const k2 = encIndex(password[(junkIdx + 1) % Lp]);
+  return baseInterval + (k1 + k2) % 7;
+}
+
+// Keystream: per ogni posizione reale ci, produce uno shift sull'indice.
+// Combina tre caratteri contigui della password per massimizzare la diffusione.
+function keyShift(charIdx, password) {
+  const Lp = password.length;
+  const k0 = encIndex(password[ charIdx       % Lp]);
+  const k1 = encIndex(password[(charIdx + 1)  % Lp]);
+  const k2 = encIndex(password[(charIdx + 2)  % Lp]);
+  // mixing non-lineare: XOR dei bit bassi + somma pesata, tutto mod m
+  return (k0 * 3 + k1 * 7 + k2 + (k0 ^ k1 ^ k2)) % m;
+}
+
+function validatePassword(pw) {
+  for (const c of pw) {
+    if (encIndex(c) === -1) return `Carattere password non supportato: '${c}'`;
+  }
+  return null;
+}
+
+function setStatus(id, type, msg) {
+  const el = document.getElementById(id);
+  el.className = 'status-bar ' + type;
+  el.innerHTML = `<div class="status-dot"></div><span>${msg}</span>`;
+}
+
+// ── ENCRYPT ──
+function runEncrypt() {
+  const text = document.getElementById('enc-input').value;
+  const pw = document.getElementById('enc-password').value;
+  if (!text) { setStatus('enc-status','error','Nessun testo da cifrare.'); return; }
+  if (!pw)   { setStatus('enc-status','error','Password mancante.'); return; }
+  const pwErr = validatePassword(pw);
+  if (pwErr) { setStatus('enc-status','error', pwErr); return; }
+
+  // Check all chars are in encoding
+  for (let i = 0; i < text.length; i++) {
+    // handle surrogate pairs (emoji)
+    const cp = text.codePointAt(i);
+    const c = String.fromCodePoint(cp);
+    if (encIndex(c) === -1) {
+      setStatus('enc-status','error',`Carattere non supportato: '${c}' (posizione ${i})`);
+      return;
+    }
+    if (cp > 0xFFFF) i++; // skip surrogate pair second unit
+  }
+
+  setStatus('enc-status','info','<span class="processing">Cifratura in corso…</span>');
+  setTimeout(() => {
+    const chars = [...text]; // proper unicode split
+    const L = chars.length;
+    const baseInterval = Math.max(4, Math.floor(Math.sqrt(L)));
+    let tokens = [], emitted = 0, junkIdx = 0, totalJunk = 0;
+    let junkInterval = computeJunkInterval(0, pw, baseInterval);
+
+    for (let ci = 0; ci < chars.length; ci++) {
+      const n = encIndex(chars[ci]);
+      const shift = keyShift(ci, pw);
+      const nShifted = (n + shift) % m;
+      tokens.push(pad4(generateN(nShifted)));
+      emitted++;
+      if (emitted >= junkInterval) {
+        tokens.push(pad4(Math.floor(Math.random() * 10000)));
+        totalJunk++; emitted = 0; junkIdx++;
+        junkInterval = computeJunkInterval(junkIdx, pw, baseInterval);
+      }
+    }
+    const stream = tokens.join('');
+    document.getElementById('enc-output').value = MAGIC + '\n' + L + '\n' + stream;
+    document.getElementById('enc-num-count').textContent = tokens.length + ' token';
+    setStatus('enc-status','ok',`✓ Completata — ${L} caratteri → ${tokens.length} token (${totalJunk} junk)`);
+  }, 10);
+}
+
+// ── DECRYPT ──
+function runDecrypt() {
+  const raw = document.getElementById('dec-input').value.trim();
+  const pw  = document.getElementById('dec-password').value;
+  if (!raw) { setStatus('dec-status','error','Nessun testo cifrato.'); return; }
+  if (!pw)  { setStatus('dec-status','error','Password mancante.'); return; }
+  const pwErr = validatePassword(pw);
+  if (pwErr) { setStatus('dec-status','error', pwErr); return; }
+
+  const lines = raw.split('\n');
+  if (lines[0].trim() !== MAGIC) {
+    setStatus('dec-status','error','Magic string non valida.'); return;
+  }
+  const L = parseInt(lines[1], 10);
+  if (isNaN(L) || L <= 0) {
+    setStatus('dec-status','error','Lunghezza testo non valida.'); return;
+  }
+
+  // Stream: concatenated 4-digit blocks, no separator
+  const stream = lines.slice(2).join('').replace(/\s/g, '');
+  if (stream.length % 4 !== 0) {
+    setStatus('dec-status','error',`Stream malformato (lunghezza ${stream.length}, non multiplo di 4).`); return;
+  }
+
+  const baseInterval = Math.max(4, Math.floor(Math.sqrt(L)));
+  let result = [], emitted = 0, junkIdx = 0;
+  let junkInterval = computeJunkInterval(0, pw, baseInterval);
+  let skipped = 0, tokenIdx = 0;
+
+  while (tokenIdx * 4 < stream.length && result.length < L) {
+    const num = parseInt(stream.slice(tokenIdx * 4, tokenIdx * 4 + 4), 10);
+    tokenIdx++;
+    emitted++;
+    if (emitted > junkInterval) {
+      skipped++; emitted = 0; junkIdx++;
+      junkInterval = computeJunkInterval(junkIdx, pw, baseInterval);
+    } else {
+      const nShifted = num % m;
+      const shift = keyShift(result.length, pw);
+      const n = (nShifted - shift + m) % m;
+      result.push(ENCODING[n]);
+    }
+  }
+
+  if (result.length < L) {
+    setStatus('dec-status','error',`Decifratura parziale: attesi ${L}, ottenuti ${result.length}. Password errata o file corrotto.`);
+  } else {
+    setStatus('dec-status','ok',`✓ Completata — ${result.length} caratteri (${skipped} junk ignorati)`);
+  }
+  document.getElementById('dec-output').value = result.join('');
+}
+
+// ── DOWNLOAD ──
+function downloadSeba() {
+  const output = document.getElementById('enc-output').value;
+  if (!output) { setStatus('enc-status','error','Cifra prima il testo.'); return; }
+  const rawName = (document.getElementById('enc-filename').value || '').trim();
+  const base = rawName.replace(/\.seba$/i,'').replace(/\.[^.]+$/,'') || 'cifrato';
+  const filename = base + '.seba';
+  const blob = new Blob([output], { type: 'application/octet-stream' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+  setStatus('enc-status','ok','✓ Scaricato: ' + filename);
+}
+
+function loadSebaFile(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('dec-input').value = e.target.result;
+    setStatus('dec-status','info','File caricato: ' + file.name);
+  };
+  reader.readAsText(file);
+}
+
+function copyOutput(id) {
+  const val = document.getElementById(id).value; if (!val) return;
+  navigator.clipboard.writeText(val).then(() => {
+    const btn = event.target, orig = btn.textContent;
+    btn.textContent = '✓  COPIATO';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+function clearAll(prefix) {
+  if (prefix === 'enc') {
+    ['enc-input','enc-output','enc-password','enc-filename'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('enc-num-count').textContent = '';
+    ['enc-stat-len','enc-stat-bi','enc-stat-junk'].forEach(id => document.getElementById(id).textContent = id==='enc-stat-len'?'0':'—');
+    setStatus('enc-status','','In attesa di input…');
+  } else {
+    ['dec-input','dec-output','dec-password'].forEach(id => document.getElementById(id).value = '');
+    setStatus('dec-status','','In attesa di input…');
+  }
+}
+
+// Live stats
+document.getElementById('enc-input').addEventListener('input', function() {
+  const chars = [...this.value];
+  const L = chars.length;
+  document.getElementById('enc-stat-len').textContent = L;
+  document.getElementById('enc-stat-m').textContent = m;
+  if (L > 0) {
+    const bi = Math.max(4, Math.floor(Math.sqrt(L)));
+    document.getElementById('enc-stat-bi').textContent = bi + '–' + (bi+6);
+    document.getElementById('enc-stat-junk').textContent = '~' + Math.floor(L/(bi+3));
+  } else {
+    document.getElementById('enc-stat-bi').textContent = '—';
+    document.getElementById('enc-stat-junk').textContent = '—';
+  }
+});
+
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', function() {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  this.classList.add('active');
+  document.getElementById('panel-' + this.dataset.tab).classList.add('active');
+}));
+
+// TOC
+document.querySelectorAll('.toc-item').forEach(item => item.addEventListener('click', function() {
+  document.querySelectorAll('.toc-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.manual-section').forEach(s => s.classList.remove('active'));
+  this.classList.add('active');
+  document.getElementById('sec-' + this.dataset.section).classList.add('active');
+}));
+
+// Encoding table
+(function() {
+  const c = document.getElementById('enc-table-container');
+  const t = document.createElement('div'); t.className = 'encoding-table';
+  ENCODING.forEach((ch, i) => {
+    const cell = document.createElement('div'); cell.className = 'enc-cell';
+    const disp = ch === '\n' ? '\\n' : ch === ' ' ? '·' : ch;
+    cell.innerHTML = `<span class="idx">${i}</span><span class="chr">${disp}</span>`;
+    t.appendChild(cell);
+  });
+  c.innerHTML = `<p style="margin-bottom:12px">Tabella completa — <strong>${m}</strong> caratteri (v0.2). Nessun separatore nel flusso cifrato.</p>`;
+  c.appendChild(t);
+})();
+
+// Drag over
+const fd = document.getElementById('file-drop');
+fd.addEventListener('dragover', e => { e.preventDefault(); fd.classList.add('drag-over'); });
+fd.addEventListener('dragleave', () => fd.classList.remove('drag-over'));
+fd.addEventListener('drop', e => { e.preventDefault(); fd.classList.remove('drag-over'); });
+</script>
+</body>
+</html>
