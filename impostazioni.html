@@ -58,6 +58,8 @@
       <p data-i18n="backup.description">Esporta i tuoi progressi locali in un file cifrato .seba usando il cifrario interno.</p>
       <div class="settings-actions">
         <button class="settings-btn" type="button" onclick="downloadEncryptedProgress()" data-i18n="backup.downloadBtn">🔐 Scarica progressi cifrati</button>
+        <button class="settings-btn" type="button" onclick="document.getElementById('progress-file-input').click()" data-i18n="backup.importBtn">📥 Importa progressi (.seba)</button>
+        <input type="file" id="progress-file-input" accept=".seba,.txt" style="display:none" onchange="importEncryptedProgress(this)">
       </div>
     </section>
 
@@ -95,11 +97,16 @@
           title: 'Backup progressi',
           description: 'Esporta i tuoi progressi locali in un file cifrato .seba usando il cifrario interno.',
           downloadBtn: '🔐 Scarica progressi cifrati',
+          importBtn: '📥 Importa progressi (.seba)',
           empty: 'Nessun progresso da esportare.',
           prompt: 'Inserisci una password per cifrare il backup progressi:',
+          importPrompt: 'Inserisci la password del file .seba da importare:',
           cancelled: 'Operazione annullata: password mancante.',
           saved: 'Backup cifrato scaricato.',
-          failed: 'Impossibile cifrare il backup: '
+          imported: 'Progressi importati correttamente.',
+          invalidFile: 'File di backup non valido.',
+          failed: 'Impossibile cifrare il backup: ',
+          importFailed: 'Impossibile importare il backup: '
         },
         warningLog: {
           title: '⚠️ Avviso login / sign in',
@@ -121,11 +128,16 @@
           title: 'Progress backup',
           description: 'Export your local progress into an encrypted .seba file using the built-in cipher.',
           downloadBtn: '🔐 Download encrypted progress',
+          importBtn: '📥 Import progress (.seba)',
           empty: 'No progress found to export.',
           prompt: 'Enter a password to encrypt your progress backup:',
+          importPrompt: 'Enter the password for the .seba file to import:',
           cancelled: 'Operation cancelled: missing password.',
           saved: 'Encrypted backup downloaded.',
-          failed: 'Unable to encrypt backup: '
+          imported: 'Progress imported successfully.',
+          invalidFile: 'Invalid backup file.',
+          failed: 'Unable to encrypt backup: ',
+          importFailed: 'Unable to import backup: '
         },
         warningLog: {
           title: '⚠️ Login / sign in warning',
@@ -255,9 +267,58 @@
       }
     }
 
+
+    async function importEncryptedProgress(inputEl) {
+      const file = inputEl?.files?.[0];
+      inputEl.value = '';
+      if (!file) return;
+
+      const password = window.prompt(t('backup.importPrompt'), '');
+      if (!password) {
+        alert(t('backup.cancelled'));
+        return;
+      }
+
+      try {
+        const encrypted = await file.text();
+        const frame = await ensureCipherFrame();
+        const decrypt = frame.contentWindow?.decryptWithSommaCipher;
+        if (typeof decrypt !== 'function') throw new Error('Funzione decifrario non trovata');
+
+        const plain = decrypt(encrypted, password);
+        let parsed;
+        try {
+          parsed = JSON.parse(plain);
+        } catch {
+          throw new Error(t('backup.invalidFile'));
+        }
+
+        const progress = parsed?.progress;
+        if (!progress || typeof progress !== 'object' || Array.isArray(progress)) {
+          throw new Error(t('backup.invalidFile'));
+        }
+
+        const sanitized = {};
+        for (const [title, page] of Object.entries(progress)) {
+          if (typeof title !== 'string' || !title.trim()) continue;
+          const n = Number(page);
+          if (!Number.isFinite(n) || n < 1) continue;
+          sanitized[title] = Math.floor(n);
+        }
+
+        if (Object.keys(sanitized).length === 0) throw new Error(t('backup.invalidFile'));
+
+        localStorage.setItem('sceglitu_progress_v1', JSON.stringify(sanitized));
+        alert(t('backup.imported'));
+      } catch (err) {
+        alert(t('backup.importFailed') + (err?.message || String(err)));
+      }
+    }
+
     const savedTheme = localStorage.getItem('sceglitu_theme') || 'dark';
     setLanguage(currentLang);
     applyTheme(savedTheme);
   </script>
+  <script src="js/external-links.js"></script>
 </body>
 </html>
