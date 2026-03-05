@@ -465,6 +465,46 @@ function setStatus(id, type, msg) {
   el.innerHTML = `<div class="status-dot"></div><span>${msg}</span>`;
 }
 
+
+function encryptWithSommaCipher(text, pw) {
+  if (!text) throw new Error('Nessun testo da cifrare.');
+  if (!pw) throw new Error('Password mancante.');
+  const pwErr = validatePassword(pw);
+  if (pwErr) throw new Error(pwErr);
+
+  for (let i = 0; i < text.length; i++) {
+    const cp = text.codePointAt(i);
+    const c = String.fromCodePoint(cp);
+    if (encIndex(c) === -1) {
+      throw new Error(`Carattere non supportato: "${c}" (posizione ${i})`);
+    }
+    if (cp > 0xFFFF) i++;
+  }
+
+  const chars = [...text];
+  const L = chars.length;
+  const baseInterval = Math.max(4, Math.floor(Math.sqrt(L)));
+  let tokens = [], emitted = 0, junkIdx = 0;
+  let junkInterval = computeJunkInterval(0, pw, baseInterval);
+
+  for (let ci = 0; ci < chars.length; ci++) {
+    const n = encIndex(chars[ci]);
+    const shift = keyShift(ci, pw);
+    const nShifted = (n + shift) % m;
+    tokens.push(pad4(generateN(nShifted)));
+    emitted++;
+    if (emitted >= junkInterval) {
+      tokens.push(pad4(Math.floor(Math.random() * 10000)));
+      emitted = 0;
+      junkIdx++;
+      junkInterval = computeJunkInterval(junkIdx, pw, baseInterval);
+    }
+  }
+
+  return MAGIC + '\n' + L + '\n' + tokens.join('');
+}
+
+window.encryptWithSommaCipher = encryptWithSommaCipher;
 // ── ENCRYPT ──
 function runEncrypt() {
   const text = document.getElementById('enc-input').value;
@@ -488,28 +528,19 @@ function runEncrypt() {
 
   setStatus('enc-status','info','<span class="processing">Cifratura in corso…</span>');
   setTimeout(() => {
-    const chars = [...text]; // proper unicode split
-    const L = chars.length;
-    const baseInterval = Math.max(4, Math.floor(Math.sqrt(L)));
-    let tokens = [], emitted = 0, junkIdx = 0, totalJunk = 0;
-    let junkInterval = computeJunkInterval(0, pw, baseInterval);
-
-    for (let ci = 0; ci < chars.length; ci++) {
-      const n = encIndex(chars[ci]);
-      const shift = keyShift(ci, pw);
-      const nShifted = (n + shift) % m;
-      tokens.push(pad4(generateN(nShifted)));
-      emitted++;
-      if (emitted >= junkInterval) {
-        tokens.push(pad4(Math.floor(Math.random() * 10000)));
-        totalJunk++; emitted = 0; junkIdx++;
-        junkInterval = computeJunkInterval(junkIdx, pw, baseInterval);
-      }
+    try {
+      const encrypted = encryptWithSommaCipher(text, pw);
+      const lines = encrypted.split('\n');
+      const L = parseInt(lines[1], 10);
+      const tokenCount = Math.floor(lines.slice(2).join('').length / 4);
+      const baseInterval = Math.max(4, Math.floor(Math.sqrt(L)));
+      const approxJunk = Math.max(0, tokenCount - L);
+      document.getElementById('enc-output').value = encrypted;
+      document.getElementById('enc-num-count').textContent = tokenCount + ' token';
+      setStatus('enc-status','ok',`✓ Completata — ${L} caratteri → ${tokenCount} token (~${approxJunk} junk, base ${baseInterval})`);
+    } catch (err) {
+      setStatus('enc-status','error', err.message || 'Errore in cifratura.');
     }
-    const stream = tokens.join('');
-    document.getElementById('enc-output').value = MAGIC + '\n' + L + '\n' + stream;
-    document.getElementById('enc-num-count').textContent = tokens.length + ' token';
-    setStatus('enc-status','ok',`✓ Completata — ${L} caratteri → ${tokens.length} token (${totalJunk} junk)`);
   }, 10);
 }
 
