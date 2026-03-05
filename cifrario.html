@@ -544,41 +544,38 @@ function runEncrypt() {
   }, 10);
 }
 
-// ── DECRYPT ──
-function runDecrypt() {
-  const raw = document.getElementById('dec-input').value.trim();
-  const pw  = document.getElementById('dec-password').value;
-  if (!raw) { setStatus('dec-status','error','Nessun testo cifrato.'); return; }
-  if (!pw)  { setStatus('dec-status','error','Password mancante.'); return; }
+function decryptWithSommaCipher(raw, pw) {
+  if (!raw) throw new Error('Nessun testo cifrato.');
+  if (!pw) throw new Error('Password mancante.');
   const pwErr = validatePassword(pw);
-  if (pwErr) { setStatus('dec-status','error', pwErr); return; }
+  if (pwErr) throw new Error(pwErr);
 
-  const lines = raw.split('\n');
+  const lines = String(raw).trim().split('\n');
   if (lines[0].trim() !== MAGIC) {
-    setStatus('dec-status','error','Magic string non valida.'); return;
+    throw new Error('Magic string non valida.');
   }
   const L = parseInt(lines[1], 10);
   if (isNaN(L) || L <= 0) {
-    setStatus('dec-status','error','Lunghezza testo non valida.'); return;
+    throw new Error('Lunghezza testo non valida.');
   }
 
-  // Stream: concatenated 4-digit blocks, no separator
   const stream = lines.slice(2).join('').replace(/\s/g, '');
   if (stream.length % 4 !== 0) {
-    setStatus('dec-status','error',`Stream malformato (lunghezza ${stream.length}, non multiplo di 4).`); return;
+    throw new Error(`Stream malformato (lunghezza ${stream.length}, non multiplo di 4).`);
   }
 
   const baseInterval = Math.max(4, Math.floor(Math.sqrt(L)));
   let result = [], emitted = 0, junkIdx = 0;
   let junkInterval = computeJunkInterval(0, pw, baseInterval);
-  let skipped = 0, tokenIdx = 0;
+  let tokenIdx = 0;
 
   while (tokenIdx * 4 < stream.length && result.length < L) {
     const num = parseInt(stream.slice(tokenIdx * 4, tokenIdx * 4 + 4), 10);
     tokenIdx++;
     emitted++;
     if (emitted > junkInterval) {
-      skipped++; emitted = 0; junkIdx++;
+      emitted = 0;
+      junkIdx++;
       junkInterval = computeJunkInterval(junkIdx, pw, baseInterval);
     } else {
       const nShifted = num % m;
@@ -589,11 +586,26 @@ function runDecrypt() {
   }
 
   if (result.length < L) {
-    setStatus('dec-status','error',`Decifratura parziale: attesi ${L}, ottenuti ${result.length}. Password errata o file corrotto.`);
-  } else {
-    setStatus('dec-status','ok',`✓ Completata — ${result.length} caratteri (${skipped} junk ignorati)`);
+    throw new Error(`Decifratura parziale: attesi ${L}, ottenuti ${result.length}. Password errata o file corrotto.`);
   }
-  document.getElementById('dec-output').value = result.join('');
+
+  return result.join('');
+}
+
+window.decryptWithSommaCipher = decryptWithSommaCipher;
+
+// ── DECRYPT ──
+function runDecrypt() {
+  const raw = document.getElementById('dec-input').value.trim();
+  const pw  = document.getElementById('dec-password').value;
+
+  try {
+    const plain = decryptWithSommaCipher(raw, pw);
+    document.getElementById('dec-output').value = plain;
+    setStatus('dec-status','ok',`✓ Completata — ${plain.length} caratteri`);
+  } catch (err) {
+    setStatus('dec-status','error', err.message || 'Errore in decifratura.');
+  }
 }
 
 // ── DOWNLOAD ──
