@@ -23,6 +23,7 @@
       <p data-i18n="auth.subtitle">Puoi registrarti/accedere oppure continuare senza login.</p>
     </header>
 
+    <!--
     <section class="auth-card">
       <h2 data-i18n="signup.title">Signup</h2>
       <form id="signup-form" class="auth-form">
@@ -40,6 +41,7 @@
         <button class="btn-primary" type="submit" data-i18n="login.submit">Entra</button>
       </form>
     </section>
+    -->
 
     <a class="auth-link" href="index.html" data-i18n="auth.continueGuest">Continua senza login</a>
     <p id="status" class="status-msg"></p>
@@ -97,6 +99,7 @@
       statusEl.classList.toggle('error', isError);
     }
 
+    /*
     async function redirectIfLoggedIn() {
       const { data, error } = await client.auth.getSession();
       if (error) {
@@ -145,7 +148,6 @@
 
     document.getElementById('signup-form').addEventListener('submit', async (event) => {
       event.preventDefault();
-      /*
       const email = document.getElementById('signup-email').value.trim();
       const password = document.getElementById('signup-password').value;
 
@@ -161,10 +163,6 @@
       } else {
         setStatus(t('signup.successConfirm'));
       }
-      */
-
-      alert('Azione momentaneamente bloccata dal proprietario perché in sviluppo.');
-      setStatus('Azione momentaneamente bloccata dal proprietario perché in sviluppo.', true);
     });
 
     document.getElementById('login-form').addEventListener('submit', async (event) => {
@@ -182,9 +180,10 @@
       setStatus(t('login.success'));
       window.location.replace('profilo.html');
     });
+    */
 
     applyLanguage(currentLang);
-    redirectIfLoggedIn();
+    setStatus('Funzionalità login / sign in nascosta.');
   </script>
 </body>
 </html>

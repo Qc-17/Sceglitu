@@ -16,6 +16,7 @@
   </script>
 </head>
 <body>
+  <!--
   <main class="auth-page">
     <header class="auth-header">
       <a class="back-link" href="index.html" data-i18n="header.backHome">&#8592; Torna alla home</a>
@@ -38,6 +39,17 @@
       <a class="auth-link" href="login.html" data-i18n="actions.toLogin">Vai a Login / Signup</a>
       <a class="auth-link" href="impostazioni.html" data-i18n="actions.toSettings">Apri impostazioni</a>
     </div>
+  </main>
+  -->
+
+  <main class="auth-page">
+    <header class="auth-header">
+      <a class="back-link" href="index.html">&#8592; Torna alla home</a>
+      <h1>Profilo non disponibile</h1>
+    </header>
+    <section class="auth-card">
+      <p>Le funzioni account sono state nascoste temporaneamente.</p>
+    </section>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -69,6 +81,7 @@
     let currentLang = localStorage.getItem('sceglitu_lang') || 'it';
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    /*
     function t(path) {
       return path.split('.').reduce((obj, key) => obj?.[key], I18N[currentLang])
         ?? path.split('.').reduce((obj, key) => obj?.[key], I18N.it)
@@ -195,8 +208,11 @@
       window.location.replace('login.html');
     });
 
-    applyLanguage();
-    renderSessionState();
+    */
+
+    // Funzionalità account nascoste volontariamente.
+    // applyLanguage();
+    // renderSessionState();
   </script>
 </body>
 </html>
