@@ -1,3 +1,5 @@
+<!-- Unione di a.html e aa.html -->
+<!-- Inizio contenuto originale: a.html -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -226,21 +228,47 @@ hr.sep { border:none; border-top:1px solid var(--bg-quaternary); margin:13px 0; 
 .selection-bar .btn-sel-all { background:var(--accent); }
 .selection-bar .btn-desel-all { background:var(--bg-quaternary); color:var(--text-primary) !important; }
 .selection-bar .btn-delete { background:var(--danger); }
+
+.toolbar {
+    display:flex; gap:8px; align-items:center; margin:0 10px 8px;
+}
+.toolbar input {
+    flex:1; padding:8px 10px; border-radius:6px; border:1px solid var(--bg-quaternary);
+    background:var(--bg-secondary); color:var(--text-primary);
+}
+.mode-toggle { display:flex; gap:6px; }
+.mode-toggle button {
+    padding:7px 10px; border:none; border-radius:6px; cursor:pointer;
+    background:var(--bg-tertiary); color:var(--text-primary);
+}
+.mode-toggle button.active { background:var(--accent); color:#fff; }
+.reader-only .btn-danger,
+.reader-only .btn-sel-all,
+.reader-only .btn-delete,
+.reader-only .header-btn.add-btn { display:none; }
+
 </style>
 </head>
 <body>
 
 <!-- ═══ HEADER ═══ -->
 <div class="header">
-    <button class="header-btn" onclick="openAddModal()">+ Aggiungi</button>
+    <button class="header-btn add-btn" aria-label="Aggiungi elemento" onclick="openAddModal()">+ Aggiungi</button>
     <h1>Cataloghoo</h1>
     <div style="display:flex;align-items:center;gap:8px;">
-        <button class="header-btn" onclick="openSettingsModal()">⚙ Impostazioni</button>
+        <button class="header-btn" aria-label="Apri impostazioni" onclick="openSettingsModal()">⚙ Impostazioni</button>
         <div class="theme-toggle">
             <button id="darkBtn" class="active" onclick="setTheme('dark')">🌙</button>
             <button id="lightBtn" onclick="setTheme('light')">☀️</button>
         </div>
     </div>
+</div>
+<div class="toolbar">
+    <div class="mode-toggle">
+        <button id="modeEditorBtn" class="active" onclick="setViewMode('editor')">🛠 Editor</button>
+        <button id="modeReaderBtn" onclick="setViewMode('reader')">📖 Lettore</button>
+    </div>
+    <input id="quickSearch" type="text" placeholder="Ricerca rapida: titolo, autore, editore, tipologia..." aria-label="Ricerca rapida" oninput="applyQuickSearch()">
 </div>
 
 <!-- ═══ TABELLA ═══ -->
@@ -364,6 +392,7 @@ hr.sep { border:none; border-top:1px solid var(--bg-quaternary); margin:13px 0; 
         <label class="switch"><input type="checkbox" id="groupSwitch" checked><span class="slider"></span></label>
     </div>
     <div class="info-text" style="margin-top:-6px;">Raggruppa serie, artisti, registi e autori. Clicca ▶ per espandere.</div>
+    <div class="info-text">Scorciatoie: <strong>Ctrl+N</strong> nuovo elemento, <strong>Ctrl+F</strong> filtro, <strong>Esc</strong> chiude selezione/modali.</div>
 
     <hr class="sep">
     <button class="btn-full" onclick="downloadPDF()">📄 Scarica PDF</button>
@@ -398,7 +427,7 @@ hr.sep { border:none; border-top:1px solid var(--bg-quaternary); margin:13px 0; 
     <div class="fg">
         <label>Campo</label>
         <select id="filterCriteria">
-            <option value="ID">ID</option><option value="titolo">Titolo</option>
+            <option value="all">Tutti i campi principali</option><option value="ID">ID</option><option value="titolo">Titolo</option>
             <option value="autore">Autore / Artista</option><option value="anno">Anno</option>
             <option value="tipologia">Tipologia</option><option value="casa">Editore / Etichetta</option>
         </select>
@@ -583,18 +612,33 @@ const PDF_COLORS = {
 };
 
 // ─── STATE ────────────────────────────────────────────────────
-let catalog   = [];
-let settings  = { orderField:'titolo', orderType:'alfabetico', colorize:true, theme:'dark', groupBy:true };
-let userProfile = { username:'', password:'' };
-let currentItem  = null;
-let editingItem  = null;
-let filterActive = false;
-let pendingPasswordAction = null;
-let pendingPasswordData   = null;
-let groupOpenState = {};   // { "chiaveGruppo": true/false }
-let selectionMode = false;
-let selectedItems = new Set();  // Set di ID elementi selezionati
-let longPressTimer = null;
+const state = {
+    catalog: [],
+    settings: { orderField:'titolo', orderType:'alfabetico', colorize:true, theme:'dark', groupBy:true, viewMode:'editor' },
+    userProfile: { username:'', password:'' },
+    currentItem: null,
+    editingItem: null,
+    filterActive: false,
+    pendingPasswordAction: null,
+    pendingPasswordData: null,
+    groupOpenState: {},
+    selectionMode: false,
+    selectedItems: new Set(),
+    longPressTimer: null,
+    activeQuery: ''
+};
+let catalog = state.catalog;
+let settings = state.settings;
+let userProfile = state.userProfile;
+let currentItem = state.currentItem;
+let editingItem = state.editingItem;
+let filterActive = state.filterActive;
+let pendingPasswordAction = state.pendingPasswordAction;
+let pendingPasswordData = state.pendingPasswordData;
+let groupOpenState = state.groupOpenState;
+let selectionMode = state.selectionMode;
+let selectedItems = state.selectedItems;
+let longPressTimer = state.longPressTimer;
 
 // ─── ID a 14 CIFRE ────────────────────────────────────────────
 // Schema: RR YY R DDD RR HH SS
@@ -674,9 +718,12 @@ function loadData(){
         if(u) userProfile = JSON.parse(u);
     } catch(e){ console.error(e); }
     setTheme(settings.theme||'dark');
+    setViewMode(settings.viewMode||'editor');
+    const qs=document.getElementById('quickSearch');
+    if(qs) qs.value=settings.activeQuery||'';
     updateSettingsUI();
     updateFooterUser();
-    refreshTable();
+    refreshTable(sortCatalog(getFilteredData()));
     if(!userProfile.username) setTimeout(()=> openModal('setupModal'), 400);
 }
 function saveData(){
@@ -684,6 +731,7 @@ function saveData(){
     saveSettings();
 }
 function saveSettings(){
+    settings.activeQuery=document.getElementById('quickSearch')?.value||'';
     localStorage.setItem('catalogatore_settings', JSON.stringify(settings));
 }
 function saveUser(){
@@ -730,6 +778,24 @@ function openModal(id){ document.getElementById(id).classList.add('active'); }
 function closeModal(id){ document.getElementById(id).classList.remove('active'); if(id==='editModal') editingItem=null; }
 window.onclick = e => { if(e.target.classList.contains('modal')) e.target.classList.remove('active'); };
 
+function setViewMode(mode){
+    settings.viewMode = mode;
+    document.body.classList.toggle('reader-only', mode==='reader');
+    document.getElementById('modeEditorBtn')?.classList.toggle('active', mode==='editor');
+    document.getElementById('modeReaderBtn')?.classList.toggle('active', mode==='reader');
+    saveSettings();
+}
+function getFilteredData(){
+    const q=(document.getElementById('quickSearch')?.value||'').trim().toLowerCase();
+    if(!q) return catalog;
+    const keys=['titolo','autore','casa','tipologia','anno','ID','genere','note'];
+    return catalog.filter(i=>keys.some(k=>(i[k]||'').toString().toLowerCase().includes(q)));
+}
+function applyQuickSearch(){
+    refreshTable(sortCatalog(getFilteredData()));
+    saveSettings();
+}
+
 // ─── ORDINAMENTO ──────────────────────────────────────────────
 function sortCatalog(arr){
     const f=settings.orderField, rev=settings.orderType==='antialfabetico';
@@ -756,7 +822,7 @@ function getGroupKey(item){
 function refreshTable(items){
     const container = document.getElementById('catalogContainer');
     container.innerHTML = '';
-    const data = items || sortCatalog(catalog);
+    const data = items || sortCatalog(getFilteredData());
 
     if(!settings.groupBy){
         // ── modalità PIATTA ──
@@ -980,6 +1046,35 @@ document.getElementById('editForm').onsubmit=function(e){
         }
 
     }
+
+    const maxYear = new Date().getFullYear()+1;
+    const annoRaw = (annoEl?.value||'').trim();
+    if(annoRaw){
+        const annoNum = parseInt(annoRaw,10);
+        if(Number.isNaN(annoNum) || annoNum < 1000 || annoNum > maxYear){
+            alert(`Anno non valido (1000-${maxYear}).`);
+            return;
+        }
+    }
+    const isbnEl=document.getElementById('field_isbn');
+    if(isbnEl){
+        const isbn = isbnEl.value.replace(/[-\s]/g,'');
+        if(isbn && !/^\d{10}(\d{3})?$/.test(isbn)){
+            alert('ISBN deve contenere 10 o 13 cifre.');
+            return;
+        }
+    }
+    for(const k of ['durata','tracks','pagine']){
+        const el=document.getElementById('field_'+k);
+        if(el && el.value.trim()){
+            const n=parseInt(el.value,10);
+            if(!Number.isInteger(n) || n<=0){
+                alert(`${k} deve essere un numero positivo.`);
+                return;
+            }
+        }
+    }
+
     // ── BATCH: crea N albi ──
     const isBatch = (tipo==='Fumetto'||tipo==='Rivista') && numeriValue && !editingItem;
     
@@ -1050,8 +1145,8 @@ function applyFilter(){
     const crit=document.getElementById('filterCriteria').value;
     const val=document.getElementById('filterValue').value.trim().toLowerCase();
     if(val){
-        const key=crit==='ID'?'ID':crit.toLowerCase();
-        refreshTable(sortCatalog(catalog.filter(i=>(i[key]||'').toString().toLowerCase().includes(val))));
+        const keys = crit==='all' ? ['titolo','autore','anno','tipologia','casa','ID'] : [crit==='ID'?'ID':crit.toLowerCase()];
+        refreshTable(sortCatalog(catalog.filter(i=>keys.some(k=>(i[k]||'').toString().toLowerCase().includes(val)))));
         filterActive=true;
     } else { refreshTable(); filterActive=false; }
     closeModal('filterModal');
@@ -1067,138 +1162,57 @@ function copyCatalog(){
 
 // ─── PDF ──────────────────────────────────────────────────────
 function downloadPDF(){
-    console.log('downloadPDF chiamato');
-    
     try {
-        if(!catalog.length){ 
-            alert('Catalogo vuoto.'); 
-            return; 
-        }
-        
-        // Check jsPDF
-        if(!window.jspdf || !window.jspdf.jsPDF){ 
-            alert('❌ Libreria PDF non caricata.\n\nRicarica la pagina (F5) e riprova.'); 
-            return; 
-        }
-        
-        console.log('Creazione PDF...');
+        const rows = sortCatalog(getFilteredData());
+        if(!rows.length){ alert('Catalogo vuoto.'); return; }
+        if(!window.jspdf || !window.jspdf.jsPDF){ alert('Libreria PDF non caricata.'); return; }
         const {jsPDF} = window.jspdf;
-        const doc = new jsPDF();
-        const pageWidth = doc.internal.pageSize.width;
-        const pageHeight = doc.internal.pageSize.height;
-        
-        // Ordina catalogo
-        const items = catalog.slice().sort((a,b)=>{
-            const ta = (a.titolo||'').toLowerCase();
-            const tb = (b.titolo||'').toLowerCase();
-            return ta < tb ? -1 : ta > tb ? 1 : 0;
-        });
-        
-        let y = 20;
-        
-        // Titolo
-        doc.setFontSize(20);
-        doc.setTextColor(30,30,30);
-        doc.text('CATALOGHOO', pageWidth/2, y, {align:'center'});
-        y += 10;
-        
-        // Info
-        doc.setFontSize(9);
-        doc.setTextColor(100,100,100);
-        doc.text(`${userProfile.username||'Utente'}  |  ${items.length} elementi  |  ${new Date().toLocaleDateString('it-IT')}`, pageWidth/2, y, {align:'center'});
-        y += 10;
-        
-        // Linea
-        doc.setDrawColor(180);
-        doc.line(15, y, pageWidth-15, y);
-        y += 10;
-        
-        // Elementi
-        items.forEach((item, idx) => {
-            console.log(`PDF: elemento ${idx+1}/${items.length}`);
-            
-            // Raccogli tutti i campi con valore
-            const fields = TIPO_FIELDS[item.tipologia] || TIPO_FIELDS.Altro;
-            const filledFields = [];
-            fields.forEach(f => {
-                if(f.key === 'titolo') return; // skip, già nel titolo
-                let val = item[f.key] || '';
-                if(f.key === 'anno' && item.ac) val += ' a.C.';
-                if(val) filledFields.push({label: f.label, value: val});
-            });
-            
-            // Altezza box dinamica in base a quanti campi
-            const boxHeight = Math.max(25, 15 + (filledFields.length * 5));
-            
-            // Controllo spazio
-            if(y + boxHeight + 5 > pageHeight - 15){
+        const doc = new jsPDF({orientation:'landscape'});
+        const W = doc.internal.pageSize.width;
+        const H = doc.internal.pageSize.height;
+        const margin = 10;
+        const cols = [48, 28, 40, 22, 42, W - margin*2 - 48 - 28 - 40 - 22 - 42];
+        const headers = ['Prodotto','Tipologia','Autore/Artista','Anno','Editore/Etichetta','Info'];
+        let y = 12;
+
+        const drawHeader = ()=>{
+            doc.setFillColor(37,99,235);
+            doc.rect(margin, y, W - margin*2, 8, 'F');
+            doc.setTextColor(255,255,255); doc.setFontSize(9); doc.setFont('helvetica','bold');
+            let x=margin+1;
+            headers.forEach((h,i)=>{ doc.text(h, x, y+5.5); x += cols[i]; });
+            y += 8;
+        };
+
+        doc.setFontSize(13); doc.setTextColor(20,20,20); doc.setFont('helvetica','bold');
+        doc.text('CATALOGHOO — Export tabellare', margin, y);
+        doc.setFontSize(8); doc.setFont('helvetica','normal');
+        doc.text(`${userProfile.username||'Utente'} • ${rows.length} prodotti • ${new Date().toLocaleString('it-IT')}`, W-margin, y, {align:'right'});
+        y += 6;
+        drawHeader();
+
+        doc.setTextColor(30,30,30); doc.setFont('helvetica','normal');
+        rows.forEach((item, idx)=>{
+            const prodotto = ((item.tipologia==='Fumetto' || item.tipologia==='Rivista') && item.numero) ? `${item.titolo||''} #${item.numero}` : (item.titolo||'—');
+            const info = [item.genere, item.stato, item.note].filter(Boolean).join(' | ') || '—';
+            const values = [prodotto, item.tipologia||'—', item.autore||'—', ((item.anno||'') + (item.ac?' a.C.':''))||'—', item.casa||'—', info];
+            const lines = values.map((v,i)=>doc.splitTextToSize(String(v), cols[i]-2));
+            const maxLines = Math.max(...lines.map(l=>l.length));
+            const rowH = Math.max(6, maxLines*4 + 2);
+            if(y + rowH > H - margin){
                 doc.addPage();
-                y = 20;
+                y = 10;
+                drawHeader();
             }
-            
-            // Colore box in base a tipologia (SOLO se colorize attivo)
-            if(settings.colorize && item.tipologia){
-                const colors = {
-                    'Libro': [13,13,13],
-                    'Fumetto': [204,76,76],
-                    'Rivista': [25,102,25],
-                    'CD': [38,38,115],
-                    'DVD': [115,115,38],
-                    'Videocassetta': [38,115,115],
-                    'Musicassetta': [115,38,115],
-                    'Altro': [64,64,64]
-                };
-                const color = colors[item.tipologia] || [64,64,64];
-                doc.setFillColor(color[0], color[1], color[2]);
-            } else {
-                doc.setFillColor(240, 240, 240);
-            }
-            
-            // Box elemento
-            doc.roundedRect(15, y, pageWidth-30, boxHeight, 3, 3, 'F');
-            
-            // Testo (bianco se colorato, nero se grigio)
-            const textColor = (settings.colorize && item.tipologia) ? [255,255,255] : [30,30,30];
-            doc.setTextColor(textColor[0], textColor[1], textColor[2]);
-            
-            // Titolo
-            doc.setFontSize(11);
-            doc.setFont('helvetica','bold');
-            doc.text(item.titolo || '—', 20, y+8);
-            
-            // Tutti gli altri campi
-            doc.setFontSize(8);
-            doc.setFont('helvetica','normal');
-            let line = y+14;
-            
-            filledFields.forEach(field => {
-                doc.setFont('helvetica','bold');
-                doc.text(field.label + ': ', 20, line);
-                doc.setFont('helvetica','normal');
-                const labelWidth = doc.getTextWidth(field.label + ': ');
-                doc.text(String(field.value), 20 + labelWidth, line);
-                line += 4.5;
-            });
-            
-            y += boxHeight + 4;
+            if(idx % 2 === 0){ doc.setFillColor(245,247,251); doc.rect(margin, y, W-margin*2, rowH, 'F'); }
+            doc.setDrawColor(210); doc.rect(margin, y, W-margin*2, rowH);
+            let x=margin+1;
+            lines.forEach((ln,i)=>{ doc.text(ln, x, y+4); x += cols[i]; if(i<lines.length-1){ doc.line(x, y, x, y+rowH); }});
+            y += rowH;
         });
-        
-        // Numeri pagina
-        const totalPages = doc.getNumberOfPages();
-        for(let i=1; i<=totalPages; i++){
-            doc.setPage(i);
-            doc.setFontSize(8);
-            doc.setTextColor(150);
-            doc.text(`${i} / ${totalPages}`, pageWidth/2, pageHeight-10, {align:'center'});
-        }
-        
-        console.log('Salvataggio PDF...');
-        doc.save('cataloghoo.pdf');
-        console.log('✅ PDF salvato!');
-        
+        doc.save('cataloghoo-tabellare.pdf');
     } catch(error) {
-        console.error('❌ ERRORE PDF:', error);
-        alert('Errore durante la creazione del PDF:\n\n' + error.message);
+        alert('Errore durante la creazione del PDF: ' + error.message);
     }
 }
 
@@ -1242,7 +1256,8 @@ function confirmPassword(){
 function cancelPasswordAction(){ pendingPasswordAction=null; pendingPasswordData=null; }
 function performExport(pwd){
     try {
-        const enc=CryptoJS.AES.encrypt(JSON.stringify({catalog}),pwd).toString();
+        const payload={meta:{version:2,exportedAt:new Date().toISOString(),owner:userProfile.username||''},catalog};
+        const enc=CryptoJS.AES.encrypt(JSON.stringify(payload),pwd).toString();
         const blob=new Blob([MAGIC_STRING+enc],{type:'application/octet-stream'});
         const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='cataloghoo.cic';
         a.click(); URL.revokeObjectURL(a.href);
@@ -1255,7 +1270,9 @@ function performImport(pwd){
         const dec=CryptoJS.AES.decrypt(pendingPasswordData.substring(MAGIC_STRING.length),pwd);
         const str=dec.toString(CryptoJS.enc.Utf8);
         if(!str){ alert('Password errata o file corrotto.'); return; }
-        catalog=JSON.parse(str).catalog||[];
+        const parsed=JSON.parse(str);
+        catalog=(parsed.catalog||parsed.items||[]);
+        if(parsed.meta?.owner && !userProfile.username) userProfile.username=parsed.meta.owner;
         saveData(); refreshTable(); alert('Catalogo importato!');
     } catch(e){ alert('Password errata o file corrotto.'); }
     finally { pendingPasswordData=null; }
@@ -1305,7 +1322,12 @@ function updateSelectionUI(){
 }
 // Chiudi selezione con tasto back/escape
 window.addEventListener('keydown', e=>{
-    if(e.key==='Escape' && selectionMode) exitSelectionMode();
+    if(e.key==='Escape'){
+        if(selectionMode) exitSelectionMode();
+        document.querySelectorAll('.modal.active').forEach(m=>m.classList.remove('active'));
+    }
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='n'){ e.preventDefault(); openAddModal(); }
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='f'){ e.preventDefault(); openFilterModal(); }
 });
 
 // ─── INIT ─────────────────────────────────────────────────────
