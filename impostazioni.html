@@ -52,6 +52,15 @@
       </div>
     </section>
 
+
+    <section class="settings-card">
+      <h2 data-i18n="backup.title">Backup progressi</h2>
+      <p data-i18n="backup.description">Esporta i tuoi progressi locali in un file cifrato .seba usando il cifrario interno.</p>
+      <div class="settings-actions">
+        <button class="settings-btn" type="button" onclick="downloadEncryptedProgress()" data-i18n="backup.downloadBtn">🔐 Scarica progressi cifrati</button>
+      </div>
+    </section>
+
     <section class="settings-card warning-card">
       <h2 data-i18n="warningLog.title">⚠️ Avviso login / sign in</h2>
       <p data-i18n="warningLog.message">Al momento il login / sign in non è necessario ed è sconsigliato.</p>
@@ -82,6 +91,16 @@
         appearance: { title: 'Aspetto', darkTheme: '☾ Tema scuro', lightTheme: '☀ Tema chiaro' },
         language: { title: 'Lingua' },
         help: { title: 'Aiuto', openTutorial: '? Apri tutorial' },
+        backup: {
+          title: 'Backup progressi',
+          description: 'Esporta i tuoi progressi locali in un file cifrato .seba usando il cifrario interno.',
+          downloadBtn: '🔐 Scarica progressi cifrati',
+          empty: 'Nessun progresso da esportare.',
+          prompt: 'Inserisci una password per cifrare il backup progressi:',
+          cancelled: 'Operazione annullata: password mancante.',
+          saved: 'Backup cifrato scaricato.',
+          failed: 'Impossibile cifrare il backup: '
+        },
         warningLog: {
           title: '⚠️ Avviso login / sign in',
           message: 'Al momento il login / sign in non è necessario ed è sconsigliato.'
@@ -98,6 +117,16 @@
         appearance: { title: 'Appearance', darkTheme: '☾ Dark theme', lightTheme: '☀ Light theme' },
         language: { title: 'Language' },
         help: { title: 'Help', openTutorial: '? Open tutorial' },
+        backup: {
+          title: 'Progress backup',
+          description: 'Export your local progress into an encrypted .seba file using the built-in cipher.',
+          downloadBtn: '🔐 Download encrypted progress',
+          empty: 'No progress found to export.',
+          prompt: 'Enter a password to encrypt your progress backup:',
+          cancelled: 'Operation cancelled: missing password.',
+          saved: 'Encrypted backup downloaded.',
+          failed: 'Unable to encrypt backup: '
+        },
         warningLog: {
           title: '⚠️ Login / sign in warning',
           message: 'Right now login / sign in is not required and is discouraged.'
@@ -158,6 +187,72 @@
 
     function openTutorial() {
       window.location.href = 'tutorial.html?manual=1';
+    }
+
+
+
+    function ensureCipherFrame() {
+      if (window.__cipherFramePromise) return window.__cipherFramePromise;
+      window.__cipherFramePromise = new Promise((resolve, reject) => {
+        const frame = document.createElement('iframe');
+        frame.src = 'cifrario.html';
+        frame.style.display = 'none';
+        frame.onload = () => resolve(frame);
+        frame.onerror = () => reject(new Error('cifrario.html non disponibile'));
+        document.body.appendChild(frame);
+      });
+      return window.__cipherFramePromise;
+    }
+
+    function downloadTextFile(filename, content) {
+      const blob = new Blob([content], { type: 'application/octet-stream' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    async function downloadEncryptedProgress() {
+      const rawProgress = localStorage.getItem('sceglitu_progress_v1');
+      let progress = {};
+      try {
+        progress = rawProgress ? JSON.parse(rawProgress) : {};
+      } catch {
+        progress = {};
+      }
+      if (!progress || Object.keys(progress).length === 0) {
+        alert(t('backup.empty'));
+        return;
+      }
+
+      const password = window.prompt(t('backup.prompt'), '');
+      if (!password) {
+        alert(t('backup.cancelled'));
+        return;
+      }
+
+      const payload = JSON.stringify({
+        exportedAt: new Date().toISOString(),
+        app: 'Sceglitu',
+        version: 1,
+        progress
+      }, null, 2);
+
+      try {
+        const frame = await ensureCipherFrame();
+        const encrypt = frame.contentWindow?.encryptWithSommaCipher;
+        if (typeof encrypt !== 'function') throw new Error('Funzione cifrario non trovata');
+        const encrypted = encrypt(payload, password);
+        const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+        downloadTextFile(`sceglitu-progress-${stamp}.seba`, encrypted);
+        alert(t('backup.saved'));
+      } catch (err) {
+        alert(t('backup.failed') + (err?.message || String(err)));
+      }
     }
 
     const savedTheme = localStorage.getItem('sceglitu_theme') || 'dark';
