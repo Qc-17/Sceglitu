@@ -1,127 +1,130 @@
 # 📖 Sceglitu
 
-**Sceglitu** è un'app web per leggere, creare e condividere storie interattive in formato JSON.  
-Funziona interamente nel browser — nessun server, nessuna installazione, nessun account.
+**Sceglitu** è una web app per leggere, creare e gestire storie interattive in formato JSON.
+Funziona nel browser, salva dati in locale e può sincronizzare automaticamente le storie pubblicate nella repository.
 
-🔗 **[Apri Sceglitu](https://qc-17.github.io/Sceglitu)** ← *(GitHub Pages)*
+🔗 **Demo:** https://qc-17.github.io/Sceglitu
 
 ---
 
-## Funzionalità
+## Funzionalità principali
 
-- 📚 **Libreria personale** — le storie restano salvate nel browser (localStorage)
-- 🔄 **Sincronizzazione automatica** — i file `.json` presenti in questa repo vengono importati automaticamente all'apertura del sito
-- ✍️ **Editor integrato** — crea o importa storie incollando JSON o caricando un file
-- 💾 **Salvataggio del progresso** — la lettura riprende dall'ultima pagina visitata
-- 📋 **Esporta JSON** — copia il JSON di qualsiasi storia direttamente dall'app
+- 📚 **Libreria storie locale** (localStorage)
+- 🔄 **Sync automatico da GitHub** dei file `.json` nella root della repo
+- 📖 **Reader con progresso** (riprendi dall’ultima pagina)
+- ✍️ **Import rapido JSON** (incolla o carica file)
+- 🧱 **Editor visuale dedicato** (`editor.html`) per costruire storie a blocchi
+- 🌍 **Interfaccia multilingua** (IT/EN) con filtro storie per lingua
+- 🎨 **Tema scuro/chiaro** (gestito dalle impostazioni)
+- 🧪 **Pagine accessorie**: tutorial, impostazioni, login/profilo (facoltativi)
 
 ---
 
 ## Struttura del progetto
 
-```
+```text
 Sceglitu/
-├── index.html            ← l'intera app (HTML + CSS + JS in un file solo)
-├── villa_morvell.json    ← storia inclusa di default
-├── README.md
-└── *.json                ← altre storie (vengono importate automaticamente)
+├── index.html              # Home + reader + import JSON
+├── editor.html             # Editor visuale completo
+├── tutorial.html           # Tutorial iniziale
+├── impostazioni.html       # Impostazioni app (tema, lingua, backup, link utili)
+├── login.html              # Login/signup opzionale (Supabase)
+├── profilo.html            # Profilo utente
+├── cifrario.html           # Utility separata
+├── style.css               # Stili principali
+├── dark.css                # Tema dark
+├── js/
+│   ├── app.js              # Stato globale + init
+│   ├── home.js             # Render libreria storie
+│   ├── reader.js           # Logica lettura e scelte
+│   ├── editor.js           # Import/salvataggio storie
+│   ├── storage.js          # Persistenza locale (+ hook Supabase)
+│   ├── github.js           # Sync da repository GitHub
+│   ├── i18n.js             # Traduzioni UI
+│   ├── modal.js            # Modal JSON/copia
+│   └── external-links.js   # Gestione link esterni
+├── villa_morvell.json
+├── villa_morvell_en.json
+└── README.md
 ```
-
-> Tutti i file `.json` nella root della repo vengono rilevati e importati automaticamente dal sito al primo avvio (e aggiornati se cambiano).
 
 ---
 
-## Formato delle storie
+## Formato JSON delle storie
 
-Le storie sono file `.json` con questa struttura:
+Ogni storia deve avere almeno:
 
 ```json
 {
-  "titolo": "Titolo della storia",
+  "titolo": "Titolo storia",
   "pagine": [
     {
       "numeroPagina": 1,
-      "testo": "Testo della pagina. Può essere lungo quanto vuoi.",
+      "testo": "Testo iniziale",
       "scelte": [
-        { "testo": "Prima scelta", "vaiAllaPagina": 2 },
-        { "testo": "Seconda scelta", "vaiAllaPagina": 3 }
+        { "testo": "Vai avanti", "vaiAllaPagina": 2 }
       ]
     },
     {
       "numeroPagina": 2,
-      "testo": "Hai scelto la prima via. Qui finisce questo percorso.",
+      "testo": "Fine percorso",
       "scelte": []
-    },
-    {
-      "numeroPagina": 3,
-      "testo": "Hai scelto la seconda via. La storia continua...",
-      "scelte": [
-        { "testo": "Torna all'inizio", "vaiAllaPagina": 1 }
-      ]
     }
   ]
 }
 ```
 
-### Regole
+Campi opzionali supportati e mostrati in UI:
 
-| Campo | Tipo | Obbligatorio | Note |
-|---|---|---|---|
-| `titolo` | stringa | ✅ | Deve essere unico tra le storie |
-| `pagine` | array | ✅ | Almeno una pagina |
-| `numeroPagina` | intero | ✅ | Non deve essere sequenziale, ma deve essere unico |
-| `testo` | stringa | ✅ | Nessun limite di lunghezza |
-| `scelte` | array | ✅ | Array vuoto `[]` = fine del percorso |
-| `scelte[].testo` | stringa | ✅ | Testo del pulsante di scelta |
-| `scelte[].vaiAllaPagina` | intero | ✅ | Deve corrispondere a un `numeroPagina` esistente |
+- `autore`
+- `anno`
+- `genere`
+- `lingua`
 
-### Consigli
+### Regole minime
 
-- Le pagine **non devono** essere in ordine numerico nell'array — l'app le cerca per `numeroPagina`
-- Una pagina può rimandare a **se stessa** (loop)
-- Puoi avere **più pagine finali** (con `scelte: []`) per percorsi diversi
-- Il `numeroPagina` della prima pagina da cui parte la storia è sempre **1**
+- `titolo`: stringa univoca
+- `pagine`: array non vuoto
+- `numeroPagina`: intero univoco per ogni pagina
+- `scelte[].vaiAllaPagina`: deve puntare a una pagina esistente
+- `scelte: []` indica una fine narrativa
 
 ---
 
-## Come contribuire con una storia
+## Avvio in locale
 
-1. **Forka** questa repository
-2. Crea il tuo file `nome_storia.json` nella root seguendo il formato sopra
-3. Apri una **Pull Request** con una breve descrizione della storia
-
-Oppure, se non vuoi usare Git:
-
-1. Apri una **Issue** con il titolo `[STORIA] Nome della tua storia`
-2. Incolla il JSON nel corpo dell'issue
-
----
-
-## Come usare il sito in locale
-
-Basta aprire `index.html` in un browser moderno. Non servono server o dipendenze.
+Puoi aprire i file direttamente nel browser, ma per avere il comportamento più vicino alla demo (fetch/sync), è consigliato un server locale.
 
 ```bash
 git clone https://github.com/Qc-17/Sceglitu.git
 cd Sceglitu
-# apri index.html con il tuo browser preferito
+python3 -m http.server 8000
 ```
 
-> **Nota:** la sincronizzazione automatica da GitHub richiede una connessione internet e non funziona tramite il protocollo `file://` a causa delle restrizioni CORS. Usa un server locale (`python3 -m http.server`) oppure apri direttamente il sito su GitHub Pages.
+Poi apri: `http://localhost:8000`
+
+---
+
+## Sincronizzazione storie da GitHub
+
+All’avvio, l’app controlla i `.json` nella root della repository `Qc-17/Sceglitu` (branch `main`) e importa/aggiorna quelli cambiati.
+
+- Chiave locale usata per tracciare gli SHA sincronizzati: `sceglitu_github_synced_v1`
+- Le storie sincronizzate vengono salvate in `sceglitu_stories_v1`
 
 ---
 
 ## Storie incluse
 
-| File | Titolo | Pagine | Note |
-|---|---|---|---|
-| `villa_morvell.json` | Il Labirinto di Villa Morvell | 100 | Una sola fine possibile, 179 scelte |
+| File | Titolo | Lingua | Pagine |
+|---|---|---|---:|
+| `villa_morvell.json` | Il Labirinto di Villa Morvell | italiano | 100 |
+| `villa_morvell_en.json` | The Labyrinth of Villa Morvell | english | 100 |
 
 ---
 
 ## Licenza
 
-Distribuito sotto licenza **GPL 3.0**.  
-© [Qc-17](https://github.com/Qc-17)
+Progetto distribuito sotto **GPL-3.0**.
 
-Le storie incluse nella repository sono distribuite sotto la stessa licenza, salvo diversa indicazione nel file stesso.
+© [Qc-17](https://github.com/Qc-17)
